@@ -1,27 +1,50 @@
 import Head  from 'next/head'
-// import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Header from '../components/Header'
-import List from '../components/List'
-import Map from '../components/Map'
 
+import Header from '../components/Header'
+import Content from '../components/Content'
+import ListMapControl from '../components/ListMapControl'
+import Footer from '../components/Footer'
+
+import { useState, useEffect } from 'react'
 
 export default function Home() {
 
+  const [ mapToggle, setMapToggle] = useState(false);
+
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    fetch('/api/hello')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [data])
+
   return (
-    <div className={styles.container}>
+    <div>
+      {console.log('rerender main')}
       <Head>
         <title>Airbnb Clone</title>
         <meta name="description" content="Airbnb clone created with NextJS" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main  className={styles.main}>
-        <Header></Header>
-        <List></List>
-        {/* <Map /> */}
-      </main>
+      <main>
 
+        <Header/>
+
+        <Content data={data} isLoading={isLoading} showMap={mapToggle} />
+ 
+        <div className='fixed bottom-0 w-full z-10 flex flex-col items-center '>
+            <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
+            { !mapToggle && <Footer  />  }
+        </div>
+
+      </main>
     </div>
   )
 }

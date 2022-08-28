@@ -19,7 +19,9 @@ function Google() {
     const center = useMemo(() => ({lat:44, lng: -80}))
     
     return (
+        
         <GoogleMap zoom={10} center={center} mapContainerClassName='map-container' >
+            {console.log('rerender Map')}
             <Marker position={center}></Marker>
         </GoogleMap>
     );
