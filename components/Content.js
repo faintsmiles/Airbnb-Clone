@@ -3,10 +3,10 @@ import List from '../components/List'
 import Map from '../components/Map'
 
 
-export default function Content({data, isLoading, showMap}) {
+export default function Content({data , showMap}) {
 
-    if(!showMap) return <List data={data} isLoading={isLoading} />
-    if(showMap) return <Map data={data} isLoading={isLoading}  />
+    if(!showMap) return <List data={data} />
+    if(showMap) return <Map data={data}   />
     
     return null;
 }

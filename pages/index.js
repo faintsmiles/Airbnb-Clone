@@ -10,19 +10,18 @@ import { useState, useEffect } from 'react'
 export default function Home() {
 
   const [ mapToggle, setMapToggle] = useState(false);
-
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState(null);
+  // const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
+    // setLoading(true)
     fetch('/api/hello')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
-        setLoading(false)
+        // setLoading(false)
       })
-  }, [data])
+  }, [])
 
   return (
     <div>
@@ -37,7 +36,7 @@ export default function Home() {
 
         <Header/>
 
-        <Content data={data} isLoading={isLoading} showMap={mapToggle} />
+        <Content data={data}  showMap={mapToggle} />
  
         <div className='fixed bottom-0 w-full z-10 flex flex-col items-center '>
             <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
