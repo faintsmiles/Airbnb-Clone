@@ -41,18 +41,28 @@ a {
   max-height: calc(100vh - 4.6rem) !important;
 }
 /* Controls InfoWindowF */
-
-/* .gm-style-iw-c {
-  padding: 4px !important;
-  width: 400px !important;
-  height: 300px !important;
-  min-width: 400px !important;
-  min-height: 300px !important;
-  max-width: 400px !important;
-  max-height: 300px !important;
-} */
-
+.gm-style-iw-c {
+  padding: 0 !important;
+}
 /* Controls InfoWindowF pointer under container */
 .gm-style-iw-tc {
   display: none !important;
+}
+/* Controls the 'x' close button  */
+.gm-ui-hover-effect {
+  right:none !important;
+  top: 1rem !important;
+  left: 1rem !important;
+  background-color: black !important;
+  border-radius: 36px !important;
+  opacity: .4 !important;
+} 
+/* close/ 'x' image color */
+.gm-ui-hover-effect > span {
+  background-color: white !important;
+  height: 1rem !important;
+  width: 1rem !important;
+  background-size: 2rem !important;
+  /* margin: 8px !important; */
+  /* padding: 4px !important; */
 }
