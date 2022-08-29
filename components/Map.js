@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
-import { GoogleMap, useLoadScript , MarkerF } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import Marker from "./Marker";
 
 export default function Map({data}) {
 
@@ -19,26 +20,12 @@ export default function Map({data}) {
 function Google({data}) {
     const center = useMemo(() => ({lat: 52.370216, lng: 4.895168 }));
 
-    // const [ mapData, setMapData] = useState(data);
-
-    // useEffect(() => { 
-    //     console.log('MAP USEEFFECT')
-    //     setMapData(data)
-    // });
-
     return (
                 
         <GoogleMap id="map" zoom={10} center={center} mapContainerClassName='map-container' >
-            { data.data.map( (item) => ( 
-                <MarkerF
-                    key={item.recordid}
-                    position={{ lat: item.fields.geolocation[0], lng: item.fields.geolocation[1] }}
-                    icon={{
-                        
-                    }}
-                />
-                ))}
-                <MarkerF key={111} position={{ lat: 52.370216, lng: 4.895168   }}></MarkerF>
+            { 
+                data.data.map( item => <Marker key={item.recordid} item={ item } />)
+            }
         </GoogleMap>
-    );
+    )
 }

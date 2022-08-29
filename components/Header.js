@@ -8,7 +8,7 @@ export default function Header() {
     <div className="text-xs my-4 px-8 md:px-15 lg:px-24 2xl:px-48">
       <header className="flex flex-col sm:flex-row justify-between items-center h-auto">
         <div className="hidden sm:flex sm:pr-4">
-          <Image width={102} height={32} src='/airbnb.svg'></Image>
+          <a href="/"><Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image" ></Image></a>
         </div>
         <form className="search-container flex items-center w-full  md:max-w-xs ">
           <label htmlFor="simple-search" className="sr-only">Search</label>

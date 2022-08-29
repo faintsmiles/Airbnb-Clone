@@ -32,9 +32,27 @@ a {
 } */
 
 
+/*** MAP STYYLING ***/
+
 .map-container {
   display:block;
   width: 100vw !important;
   height: 100vh !important;
   max-height: calc(100vh - 4.6rem) !important;
+}
+/* Controls InfoWindowF */
+
+/* .gm-style-iw-c {
+  padding: 4px !important;
+  width: 400px !important;
+  height: 300px !important;
+  min-width: 400px !important;
+  min-height: 300px !important;
+  max-width: 400px !important;
+  max-height: 300px !important;
+} */
+
+/* Controls InfoWindowF pointer under container */
+.gm-style-iw-tc {
+  display: none !important;
 }
