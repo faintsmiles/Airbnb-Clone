@@ -22,7 +22,7 @@ function Google({data}) {
 
     return (
                 
-        <GoogleMap id="map" zoom={10} center={center} mapContainerClassName='map-container' >
+        <GoogleMap id="map" zoom={12} center={center} mapContainerClassName='map-container' >
             { 
                 data.data.map( item => <Marker key={item.recordid} item={ item } />)
             }

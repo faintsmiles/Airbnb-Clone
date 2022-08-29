@@ -21,7 +21,6 @@ export default function List({data, isLoading}) {
             listingData={result.fields} 
             location={result.geometry} 
             key={result.recordid} 
-            className='relative items-stretch h-full flex-col group'
             />
           }) 
         }

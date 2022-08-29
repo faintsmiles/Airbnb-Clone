@@ -12,7 +12,7 @@ const viewControl = (isMapActive, toggleMap ) => {
 
 const viewMapButton = ( isMapActive, toggleMap ) => {
   return (
-    <div className="m-10 z-50" >
+    <div className="fixed left-1/2 -translate-x-1/2  bottom-20 z-50 " >
       <button onClick={() => viewControl( isMapActive, toggleMap )} className=" p-4 rounded-full bg-black text-white">
         <span className="flex items-center font-semibold">
           Show Map &nbsp;
@@ -33,7 +33,7 @@ const viewMapButton = ( isMapActive, toggleMap ) => {
 
 const viewlistButton = ( isMapActive, toggleMap ) => {
   return (
-    <div className="mb-10">
+    <div className="fixed left-1/2 -translate-x-1/2  bottom-20 z-50 ">
       <button onClick={() => viewControl( isMapActive, toggleMap )} className=" p-4 rounded-full bg-black text-white">
         <span className="flex items-center font-semibold">
           Show List &nbsp;

@@ -2,11 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 
 
-export default function Thumbnail({ listingData }) {
-
-    if(!listingData.xl_picture_url) return;
-    return (
-    <div>
+export default function MapThumbnail({listingData}) {
+    // Exactly the same as  thumbnail with slight styling differences
+  return (
+    <div className=' h-full w-96 ' >
         <div className='relative' >
             <button className='absolute top-4 right-4 z-10' >
             <svg className='h-6 fill-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -18,17 +17,17 @@ export default function Thumbnail({ listingData }) {
                 src={listingData.xl_picture_url}
                 layout='responsive'
                 objectFit="cover"
-                width={200}
-                height={200}
-                className='rounded-lg'
+                width={300}
+                height={160}
+                className=''
                 priority={true}
                 alt='Image could not be loaded'
             />
-
+            
         </div>
-        <div className='text-sm' >
+        <div className='text-sm p-4' >
             <div className='mt-2 flex justify-between'>
-                <div className='font-bold'> {listingData.smart_location} </div>
+                <div className='font-bold pr-4'> {listingData.smart_location} </div>
                         {/* If rating doesnt exist assign ** New ** */}
                 {   
                     listingData.review_scores_rating 

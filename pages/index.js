@@ -38,10 +38,10 @@ export default function Home({data}) {
 
         <Content data={data}  showMap={mapToggle} />
  
-        <div className='fixed bottom-0 w-full flex flex-col items-center bg-grey'>
-          <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
-          { !mapToggle && <Footer  />  }
-        </div>
+        {/* <div className='fixed bottom-0 w-full flex flex-col items-center bg-grey'> */}
+        <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
+        { !mapToggle && <Footer  />  }
+        {/* </div>  */}
 
       </main>
     </div>

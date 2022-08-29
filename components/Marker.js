@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { MarkerF, InfoWindowF } from '@react-google-maps/api'
-import Thumbnail from "./Thumbnail";
-
+// import Thumbnail from "./Thumbnail";
+import MapThumbnail from './MapThumbnail';
 
 export default function Marker({item}) {
     const [ showInfoWindow, setShowInfoWindow] = useState(false);
+
+    if( !item.fields.geolocation  ) return;
+    if(!item.fields.price  ) return ;
+    if(!item.fields.xl_picture_url) return;
+    if (!item.fields.smart_location ) return ;
+    
     return (    
             <MarkerF 
                 key={item.recordid} 
@@ -28,7 +34,7 @@ export default function Marker({item}) {
                         id='infoWindowF'
                         onCloseClick={() => setShowInfoWindow(false)}
                     >   
-                            <Thumbnail listingData={item.fields} />                        
+                            <MapThumbnail listingData={item.fields} />                        
                     </InfoWindowF>
                 }
             </MarkerF>
