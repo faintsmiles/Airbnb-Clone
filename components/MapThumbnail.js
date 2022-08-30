@@ -5,7 +5,7 @@ import Image from 'next/image'
 export default function MapThumbnail({listingData}) {
     // Exactly the same as  thumbnail with slight styling differences
   return (
-    <div className=' h-full w-96 ' >
+    <div className='h-48 w-48 md:h-full md:w-96  ' >
         <div className='relative' >
             <button className='absolute top-4 right-4 z-10' >
             <svg className='h-6 fill-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -17,15 +17,15 @@ export default function MapThumbnail({listingData}) {
                 src={listingData.xl_picture_url}
                 layout='responsive'
                 objectFit="cover"
-                width={300}
-                height={160}
+                width={340}
+                height={220}
                 className=''
                 priority={true}
                 alt='Image could not be loaded'
             />
             
         </div>
-        <div className='text-sm p-4' >
+        <div className='text-sm px-2 md:p-4' >
             <div className='mt-2 flex justify-between'>
                 <div className='font-bold pr-4'> {listingData.smart_location} </div>
                         {/* If rating doesnt exist assign ** New ** */}
@@ -51,8 +51,8 @@ export default function MapThumbnail({listingData}) {
                     </div>
                 }
             </div>
-            <div className='text-gray-500'>Calculate curr distance ?</div>
-            <div className='text-gray-500'>Dates Available</div>
+            <div className='hidden md:block text-gray-500'>Calculate curr distance ?</div>
+            <div className='hidden md:block text-gray-500'>Dates Available</div>
             <div> <span className='font-bold mt-2'>${listingData.price}</span> night</div>
         </div>
     </div>

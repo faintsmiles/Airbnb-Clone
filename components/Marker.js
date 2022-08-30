@@ -3,9 +3,11 @@ import { MarkerF, InfoWindowF } from '@react-google-maps/api'
 // import Thumbnail from "./Thumbnail";
 import MapThumbnail from './MapThumbnail';
 
-export default function Marker({item}) {
-    const [ showInfoWindow, setShowInfoWindow] = useState(false);
+export default function Marker({item , index, showInfo, setShowInfoIndex }) {
+    // Displays info window when marker is clicked
+    // const [ showInfoWindow, setShowInfoWindow] = useState(showInfo);
 
+    // Fields used in thumbnail
     if( !item.fields.geolocation  ) return;
     if(!item.fields.price  ) return ;
     if(!item.fields.xl_picture_url) return;
@@ -13,7 +15,6 @@ export default function Marker({item}) {
     
     return (    
             <MarkerF 
-                key={item.recordid} 
                 position={{ lat: item.fields.geolocation[0], lng: item.fields.geolocation[1] }}
                 icon={{
                     url: '/icon.png',
@@ -25,14 +26,14 @@ export default function Marker({item}) {
                     fontWeight: 'bold'
                 }}
                 clickable
-                onClick={() => setShowInfoWindow(true)}
+                onClick={() => setShowInfoIndex(index)}
             >
-                {   showInfoWindow &&
+                {   showInfo &&
+                
                     <InfoWindowF 
-                        key={item.recordid} 
                         position={{ lat: item.fields.geolocation[0], lng: item.fields.geolocation[1] }}
                         id='infoWindowF'
-                        onCloseClick={() => setShowInfoWindow(false)}
+                        onCloseClick={() => setShowInfoIndex(null) }
                     >   
                             <MapThumbnail listingData={item.fields} />                        
                     </InfoWindowF>

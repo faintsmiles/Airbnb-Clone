@@ -18,13 +18,35 @@ export default function Map({data}) {
 
 
 function Google({data}) {
+
     const center = useMemo(() => ({lat: 52.370216, lng: 4.895168 }));
+
+    // Controls which marker is set to display it's show InfoWindow
+    // Done this specific way so that only 1 show info window is shown at any singular point. 
+    const [ showInfoIndex, setShowInfoIndex] = useState('');
 
     return (
                 
-        <GoogleMap id="map" zoom={12} center={center} mapContainerClassName='map-container' >
+        <GoogleMap id="map" zoom={12} center={center}
+            options={{
+                streetViewControl:false,
+                mapTypeControl: false,
+                fullscreenControl: false
+            }}
+            mapContainerClassName='map-container' 
+        >
             { 
-                data.data.map( item => <Marker key={item.recordid} item={ item } />)
+            data.data.map( (item, index) => {
+                    let showInfo = false;
+                    if (index === showInfoIndex ) { showInfo = true }
+
+                    return <Marker 
+                        index={index}  
+                        showInfo={showInfo} 
+                        setShowInfoIndex={setShowInfoIndex}
+                        key={item.recordid}
+                        item={ item } /> 
+                })
             }
         </GoogleMap>
     )
