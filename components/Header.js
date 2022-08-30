@@ -1,8 +1,19 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 import Image from 'next/image'
 
+import { Autocomplete } from "@react-google-maps/api";
 
-export default function Header() {
+export default function Header({ setSearchLocation }) {
+
+  // Ref to accesss the search input value
+  const searchInputValue = useRef();
+
+  // Submit handler for search input 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchInputValue.current.value)
+    setSearchLocation(searchInputValue.current.value);
+  }
 
   return (
     <div className="text-xs my-4 px-8 md:px-15 lg:px-24 2xl:px-48">
@@ -10,10 +21,17 @@ export default function Header() {
         <div className="hidden sm:flex sm:pr-4">
           <a href="/"><Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image" ></Image></a>
         </div>
-        <form className="search-container flex items-center w-full  md:max-w-xs ">
+        <form className="search-container flex items-center w-full  md:max-w-xs" onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="simple-search" className="sr-only">Search</label>
           <div className="relative w-full">
-            <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg" placeholder="Start your search" required />
+            <Autocomplete>
+              <input type="text" id="simple-search" 
+                className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg" 
+                placeholder="Start your search" 
+                ref={searchInputValue}
+                required 
+              />
+            </Autocomplete>
             <div className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
               <div className=" bg-brand-color rounded-3xl p-1.5 ">
                 <svg aria-hidden="true" className="w-5 h-5" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>

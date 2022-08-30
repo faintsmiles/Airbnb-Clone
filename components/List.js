@@ -4,8 +4,6 @@ import Thumbnail from './Thumbnail'
 
 
 export default function List({data, isLoading}) {
-  
-  
     // if (isLoading) return <p>Loading...</p>
     if (!data) return <p>Data could not be fetched. Please try refreshing</p>
 

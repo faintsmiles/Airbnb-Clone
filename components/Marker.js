@@ -4,6 +4,7 @@ import { MarkerF, InfoWindowF } from '@react-google-maps/api'
 import MapThumbnail from './MapThumbnail';
 
 export default function Marker({item , index, showInfo, setShowInfoIndex }) {
+    
     // Displays info window when marker is clicked
     // const [ showInfoWindow, setShowInfoWindow] = useState(showInfo);
 

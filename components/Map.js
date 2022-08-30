@@ -1,25 +1,41 @@
 import { useMemo, useState, useEffect } from "react";
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap } from '@react-google-maps/api'
 import Marker from "./Marker";
 
-export default function Map({data}) {
+export default function Map({data, searchLocation }) {
+    
+    const [ center, setCenter] = useState({lat: 52.370216, lng: 4.895168 })
+
+    // WORKS BUT CURRENTLY DISABLING TO PREVENT INCREMENTING COSTS
+    // // User requested location change, only runs when search location has been changed
+    // useEffect(() => {
+    //     const geocoder = new google.maps.Geocoder();
+
+    //     geocoder.geocode( { address: searchLocation}, (results, status) => {
+    //         if(status === google.maps.GeocoderStatus.OK){
+    //             console.log(results)
+    //             const lat = results[0].geometry.location.lat()
+    //             const lng = results[0].geometry.location.lng()
+    //             setCenter({lat : lat, lng: lng})
+    //         }
+    //         else {
+    //             alert('Geocode returned with the following error: ' + status)
+    //         }
+    //     })
+
+    // }, [searchLocation])
+    
 
 
-    const { isLoaded } = useLoadScript({
-        // This needs to be hidden in the future, currently visible in network
-        // May need to do SSR in future to prevent leaking or calling to API on server
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    })
 
-    if(!isLoaded) return <div>Loading...</div>
-
-    return <Google data={data} />
+    return <Google data={data} searchLocation={searchLocation} center={center} />
 }
 
 
-function Google({data}) {
+function Google({ data, center, searchLocation}) {
 
-    const center = useMemo(() => ({lat: 52.370216, lng: 4.895168 }));
+    // const center = useMemo(() => ({lat: 52.370216, lng: 4.895168 }));
+
 
     // Controls which marker is set to display it's show InfoWindow
     // Done this specific way so that only 1 show info window is shown at any singular point. 

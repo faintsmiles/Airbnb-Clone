@@ -1,27 +1,32 @@
-import Head  from 'next/head'
 
+// Components
+import Head  from 'next/head'
 import Header from '../components/Header'
 import Content from '../components/Content'
 import ListMapControl from '../components/ListMapControl'
 import Footer from '../components/Footer'
 
-import { useState, useEffect } from 'react'
+// React hooks
+import { useState } from 'react'
+
+// Utility library for google maps API
+import { useLoadScript  } from '@react-google-maps/api'
+
 
 export default function Home({data}) {
+  
+  // Are we connected to google's api
+  const { isLoaded } = useLoadScript({
+    // This needs to be hidden in the future, currently visible in network
+    // May need to do SSR in future to prevent leaking or calling to API on server
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: ['places']
+})
 
   const [ mapToggle, setMapToggle] = useState(false);
-  // const [data, setData] = useState(null);
-  // const [isLoading, setLoading] = useState(false);
+  const [searchLocation, setSearchLocation] = useState('');
 
-  // useEffect(() => {
-  //   // setLoading(true)
-  //   fetch('/api/hello')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data)
-  //       // setLoading(false)
-  //     })
-  // }, [])
+  if(!isLoaded) return <h1> Loading ... </h1>
 
   return (
     <div>
@@ -34,14 +39,12 @@ export default function Home({data}) {
 
       <main>
 
-        <Header/>
+        <Header setSearchLocation={setSearchLocation} />
 
-        <Content data={data}  showMap={mapToggle} />
+        <Content data={data} showMap={mapToggle} searchLocation={searchLocation} />
  
-        {/* <div className='fixed bottom-0 w-full flex flex-col items-center bg-grey'> */}
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
         { !mapToggle && <Footer  />  }
-        {/* </div>  */}
 
       </main>
     </div>
