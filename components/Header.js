@@ -7,25 +7,33 @@ export default function Header({ setSearchLocation, setResults }) {
 
   // Ref to accesss the search input value
   const searchInputValue = useRef();
+  var searchOptions = {
+    types: ["(cities)"],
+   };
 
   // Submit handler for search input 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     
     console.log("handle search submission")
-
-    fetch('/api/hello')
+    setSearchLocation(searchInputValue.current.value);
+    
+    const tempHelper = searchInputValue.current.value.split(',');
+    
+    fetch('/api/hello', {
+      method: 'POST',
+      body: {
+        CITY:  tempHelper[0],
+        COUNTRY: tempHelper[tempHelper.length - 1] 
+      }
+    } )
     .then(response => response.json())
     .then( result => {
       console.log(result)
       setResults(result) 
     })
     .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
-
-    setSearchLocation(searchInputValue.current.value);
-    
-
-  }
+  } 
 
   // Prevents fetching during the initial render
   // const isInitialMount = useRef(true);
@@ -58,7 +66,7 @@ export default function Header({ setSearchLocation, setResults }) {
         <form className="search-container flex items-center w-full  md:max-w-xs" onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="simple-search" className="sr-only">Search</label>
           <div className="relative w-full">
-            <Autocomplete>
+            <Autocomplete options={searchOptions} >
               <input type="text" id="simple-search" 
                 className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg" 
                 placeholder="Start your search" 

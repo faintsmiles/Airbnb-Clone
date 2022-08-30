@@ -20,7 +20,7 @@ export default function Home({data}) {
     // This needs to be hidden in the future, currently visible in network
     // May need to do SSR in future to prevent leaking or calling to API on server
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ['places']
+    libraries: ['places'],
 })
 
   const [ mapToggle, setMapToggle] = useState(false);
