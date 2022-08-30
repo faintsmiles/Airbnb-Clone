@@ -11,9 +11,9 @@ export default function Header({ setSearchLocation, setResults }) {
   // Submit handler for search input 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("handle search submission")
-    setSearchLocation(searchInputValue.current.value);
     
+    console.log("handle search submission")
+
     fetch('/api/hello')
     .then(response => response.json())
     .then( result => {
@@ -21,6 +21,10 @@ export default function Header({ setSearchLocation, setResults }) {
       setResults(result) 
     })
     .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
+
+    setSearchLocation(searchInputValue.current.value);
+    
+
   }
 
   // Prevents fetching during the initial render
