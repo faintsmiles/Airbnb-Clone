@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { GoogleMap } from '@react-google-maps/api'
 import Marker from "./Marker";
 
-export default function Map({data, searchLocation }) {
+export default function Map({results, searchLocation }) {
     
     const [ center, setCenter] = useState({lat: 52.370216, lng: 4.895168 })
 
@@ -28,11 +28,11 @@ export default function Map({data, searchLocation }) {
 
 
 
-    return <Google data={data} searchLocation={searchLocation} center={center} />
+    return <Google results={results} searchLocation={searchLocation} center={center} />
 }
 
 
-function Google({ data, center, searchLocation}) {
+function Google({ results, center, searchLocation}) {
 
     // const center = useMemo(() => ({lat: 52.370216, lng: 4.895168 }));
 
@@ -43,7 +43,10 @@ function Google({ data, center, searchLocation}) {
 
     return (
                 
-        <GoogleMap id="map" zoom={12} center={center}
+        <GoogleMap 
+            id="map"
+            zoom={12} 
+            center={center}
             options={{
                 streetViewControl:false,
                 mapTypeControl: false,
@@ -52,7 +55,7 @@ function Google({ data, center, searchLocation}) {
             mapContainerClassName='map-container' 
         >
             { 
-            data.data.map( (item, index) => {
+            results.data.map( (item, index) => {
                     let showInfo = false;
                     if (index === showInfoIndex ) { showInfo = true }
 

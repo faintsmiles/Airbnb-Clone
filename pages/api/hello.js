@@ -2,6 +2,20 @@
 // const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=20&facet=host_response_time&facet=host_response_rate&facet=host_verifications&facet=city&facet=country&facet=property_type&facet=room_type&facet=bed_type&facet=amenities&facet=availability_365&facet=cancellation_policy&facet=features'
 const apiURL ='https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&facet=city&facet=country&facet=property_type&facet=room_type&facet=bed_type&facet=amenities&facet=availability_365&facet=cancellation_policy&facet=features&refine.country=Netherlands&refine.city=Amsterdam'
 export default async function handler(req, res) {
+
+   require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+      console.log('addr: ' + add );
+    })
+
+
+   // const forwarded = req.headers["x-forwarded-for"]
+   // const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
+   // console.log(ip)
+
+   // var ip_addr = req.headers['X-FORWARDED-FOR'] || req.connection.remoteAddress;
+   // console.log(ip_addr)
+
+
     return fetch(apiURL)
     .then((response) => response.json())
     .then((data) => {

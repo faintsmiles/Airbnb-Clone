@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Autocomplete } from "@react-google-maps/api";
 
-export default function Header({ setSearchLocation }) {
+export default function Header({ setSearchLocation, setResults }) {
 
   // Ref to accesss the search input value
   const searchInputValue = useRef();
@@ -11,9 +11,39 @@ export default function Header({ setSearchLocation }) {
   // Submit handler for search input 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(searchInputValue.current.value)
+    console.log("handle search submission")
     setSearchLocation(searchInputValue.current.value);
+    
+    fetch('/api/hello')
+    .then(response => response.json())
+    .then( result => {
+      console.log(result)
+      setResults(result) 
+    })
+    .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
   }
+
+  // Prevents fetching during the initial render
+  // const isInitialMount = useRef(true);
+  // useEffect(() => {
+
+  //   console.log('fired')
+  //   if (isInitialMount.current) {
+  //     isInitialMount.current = false;
+  //     return;
+  //   }
+  //   else {
+  //     console.log("WTF????" + searchLocation)
+  //     fetch('/hello/api')
+  //     .then(response => response.json())
+  //     .then( (result) => setResults(result))
+  //     .then(console.log(data))
+  //     .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
+  //   }
+
+  // }, [searchLocation]);
+
+
 
   return (
     <div className="text-xs my-4 px-8 md:px-15 lg:px-24 2xl:px-48">

@@ -24,8 +24,10 @@ export default function Home({data}) {
 })
 
   const [ mapToggle, setMapToggle] = useState(false);
-  const [searchLocation, setSearchLocation] = useState('');
+  const [searchLocation, setSearchLocation] = useState();
+  const [ results, setResults ] = useState(data);
 
+  
   if(!isLoaded) return <h1> Loading ... </h1>
 
   return (
@@ -39,9 +41,9 @@ export default function Home({data}) {
 
       <main>
 
-        <Header setSearchLocation={setSearchLocation} />
+        <Header setResults={setResults} setSearchLocation={setSearchLocation} />
 
-        <Content data={data} showMap={mapToggle} searchLocation={searchLocation} />
+        <Content results={results} showMap={mapToggle} searchLocation={searchLocation} />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
         { !mapToggle && <Footer  />  }
