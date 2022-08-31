@@ -5,10 +5,10 @@ import Image from 'next/image'
 export default function Thumbnail({ results }) {
 
     // Fields used in thumbnail
-    if( !item.fields.geolocation  ) return;
-    if(!item.fields.price  ) return ;
-    if(!item.fields.xl_picture_url) return;
-    if (!item.fields.smart_location ) return ;
+    if( !results.geolocation  ) return;
+    if(!results.price  ) return ;
+    if(!results.xl_picture_url) return;
+    if (!results.smart_location ) return ;
     return (
     <div>
         <div className='relative' >

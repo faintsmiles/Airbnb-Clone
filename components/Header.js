@@ -17,10 +17,11 @@ export default function Header({ setSearchLocation, setResults }) {
     
     console.log("handle search submission")
     setSearchLocation(searchInputValue.current.value);
-    
-    let tempHelper = searchInputValue.current.value.toLowerCase().split(',');
-    tempHelper = tempHelper.map( element => element[0] + element.substring(1))
 
+    let tempHelper =  searchInputValue.current.value.toLowerCase().split(',');
+
+    tempHelper = tempHelper.map( element => element[0] + element.substring(1))
+    
     const body = { 
       city: tempHelper[0], 
       country: tempHelper[tempHelper.length - 1] 
