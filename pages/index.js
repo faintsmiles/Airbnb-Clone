@@ -41,9 +41,9 @@ export default function Home({data}) {
 
       <main>
 
-        <Header setResults={setResults} setSearchLocation={setSearchLocation} />
+        <Header setSearchLocation={setSearchLocation} />
 
-        <Content results={results} showMap={mapToggle} searchLocation={searchLocation} />
+        <Content results={results} setResults={setResults} searchLocation={searchLocation} showMap={mapToggle} />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
         { !mapToggle && <Footer  />  }

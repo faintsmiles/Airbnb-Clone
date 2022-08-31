@@ -3,12 +3,11 @@ import List from '../components/List'
 import Map from '../components/Map'
 
 
-export default function Content({results, showMap, searchLocation}) {
+export default function Content({ results, setResults, searchLocation, showMap }) {
 
+    // Default center
     const [ center, setCenter] = useState({lat: 52.370216, lng: 4.895168 })
-
-    console.log(searchLocation)
-    // WORKS BUT CURRENTLY DISABLING TO PREVENT INCREMENTING COSTS
+   
     // User requested location change, only runs when search location has been changed
     useEffect(() => {
 
@@ -18,10 +17,12 @@ export default function Content({results, showMap, searchLocation}) {
 
         geocoder.geocode( { address: searchLocation}, (results, status) => {
             if(status === google.maps.GeocoderStatus.OK){
+                console.log("Geocoding: ")
                 console.log(results)
                 const lat = results[0].geometry.location.lat()
                 const lng = results[0].geometry.location.lng()
                 setCenter({lat : lat, lng: lng})
+                fetchNewResults(setResults)
             }
             else {
                 alert('Geocode returned with the following error: ' + status)
@@ -35,4 +36,25 @@ export default function Content({results, showMap, searchLocation}) {
     if(showMap) return <Map results={results} center={center} />
     
     return null;
+}
+
+const fetchNewResults = ({ setResults }) => {
+    let tempHelper = searchLocation.split(',');
+    
+    const body = { 
+      city: tempHelper[0], 
+      country: tempHelper[tempHelper.length - 1] 
+    }
+
+    fetch('/api/hello', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then( result => {
+      console.log("Fetching new results...")
+      console.log(result)
+      setResults(result ) 
+    })
+    .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
 }

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Autocomplete } from "@react-google-maps/api";
 
-export default function Header({ setSearchLocation, setResults }) {
+export default function Header({ setSearchLocation }) {
 
   // Ref to accesss the search input value
   const searchInputValue = useRef();
@@ -14,29 +14,8 @@ export default function Header({ setSearchLocation, setResults }) {
   // Submit handler for search input 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    
     console.log("handle search submission")
     setSearchLocation(searchInputValue.current.value);
-
-    let tempHelper =  searchInputValue.current.value.toLowerCase().split(',');
-
-    tempHelper = tempHelper.map( element => element[0] + element.substring(1))
-    
-    const body = { 
-      city: tempHelper[0], 
-      country: tempHelper[tempHelper.length - 1] 
-    }
-
-    fetch('/api/hello', {
-      method: 'POST',
-      body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then( result => {
-      console.log(result)
-      setResults(result ) 
-    })
-    .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
   } 
 
   return (
