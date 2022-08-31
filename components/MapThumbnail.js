@@ -4,7 +4,8 @@ import Image from 'next/image'
 
 export default function MapThumbnail({listingData}) {
     // Exactly the same as  thumbnail with slight styling differences
-  return (
+    // We checked for missing properties 1 layer up inside of marker.
+    return (
     <div className='h-48 w-48 md:h-full md:w-96  ' >
         <div className='relative' >
             <button className='absolute top-4 right-4 z-10' >
@@ -21,7 +22,7 @@ export default function MapThumbnail({listingData}) {
                 height={220}
                 className=''
                 priority={true}
-                alt='Image could not be loaded'
+                alt='Loading'
             />
             
         </div>

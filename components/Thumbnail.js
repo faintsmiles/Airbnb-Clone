@@ -4,7 +4,11 @@ import Image from 'next/image'
 
 export default function Thumbnail({ results }) {
 
-    if(!results.xl_picture_url) return;
+    // Fields used in thumbnail
+    if( !item.fields.geolocation  ) return;
+    if(!item.fields.price  ) return ;
+    if(!item.fields.xl_picture_url) return;
+    if (!item.fields.smart_location ) return ;
     return (
     <div>
         <div className='relative' >
@@ -22,7 +26,7 @@ export default function Thumbnail({ results }) {
                 height={200}
                 className='rounded-lg'
                 priority={true}
-                alt='Image could not be loaded'
+                alt='Loading...'
             />
 
         </div>

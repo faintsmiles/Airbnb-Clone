@@ -6,24 +6,28 @@ export default function Map({results, searchLocation }) {
     
     const [ center, setCenter] = useState({lat: 52.370216, lng: 4.895168 })
 
+    console.log(searchLocation)
     // WORKS BUT CURRENTLY DISABLING TO PREVENT INCREMENTING COSTS
-    // // User requested location change, only runs when search location has been changed
-    // useEffect(() => {
-    //     const geocoder = new google.maps.Geocoder();
+    // User requested location change, only runs when search location has been changed
+    useEffect(() => {
 
-    //     geocoder.geocode( { address: searchLocation}, (results, status) => {
-    //         if(status === google.maps.GeocoderStatus.OK){
-    //             console.log(results)
-    //             const lat = results[0].geometry.location.lat()
-    //             const lng = results[0].geometry.location.lng()
-    //             setCenter({lat : lat, lng: lng})
-    //         }
-    //         else {
-    //             alert('Geocode returned with the following error: ' + status)
-    //         }
-    //     })
+        if(!searchLocation) { return}
 
-    // }, [searchLocation])
+        const geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode( { address: searchLocation}, (results, status) => {
+            if(status === google.maps.GeocoderStatus.OK){
+                console.log(results)
+                const lat = results[0].geometry.location.lat()
+                const lng = results[0].geometry.location.lng()
+                setCenter({lat : lat, lng: lng})
+            }
+            else {
+                alert('Geocode returned with the following error: ' + status)
+            }
+        })
+
+    }, [searchLocation])
     
 
 

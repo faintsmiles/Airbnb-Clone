@@ -12,50 +12,31 @@ export default function Header({ setSearchLocation, setResults }) {
    };
 
   // Submit handler for search input 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     
     console.log("handle search submission")
     setSearchLocation(searchInputValue.current.value);
     
-    const tempHelper = searchInputValue.current.value.split(',');
-    
+    let tempHelper = searchInputValue.current.value.toLowerCase().split(',');
+    tempHelper = tempHelper.map( element => element[0] + element.substring(1))
+
+    const body = { 
+      city: tempHelper[0], 
+      country: tempHelper[tempHelper.length - 1] 
+    }
+
     fetch('/api/hello', {
       method: 'POST',
-      body: {
-        CITY:  tempHelper[0],
-        COUNTRY: tempHelper[tempHelper.length - 1] 
-      }
-    } )
+      body: JSON.stringify(body)
+    })
     .then(response => response.json())
     .then( result => {
       console.log(result)
-      setResults(result) 
+      setResults(result ) 
     })
-    .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
+    .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
   } 
-
-  // Prevents fetching during the initial render
-  // const isInitialMount = useRef(true);
-  // useEffect(() => {
-
-  //   console.log('fired')
-  //   if (isInitialMount.current) {
-  //     isInitialMount.current = false;
-  //     return;
-  //   }
-  //   else {
-  //     console.log("WTF????" + searchLocation)
-  //     fetch('/hello/api')
-  //     .then(response => response.json())
-  //     .then( (result) => setResults(result))
-  //     .then(console.log(data))
-  //     .catch(alert('There was a problem getting listing data. Please try again, or change destination'))
-  //   }
-
-  // }, [searchLocation]);
-
-
 
   return (
     <div className="text-xs my-4 px-8 md:px-15 lg:px-24 2xl:px-48">
