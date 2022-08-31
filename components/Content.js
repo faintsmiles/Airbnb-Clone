@@ -22,7 +22,7 @@ export default function Content({ results, setResults, searchLocation, showMap }
                 const lat = results[0].geometry.location.lat()
                 const lng = results[0].geometry.location.lng()
                 setCenter({lat : lat, lng: lng})
-                fetchNewResults(setResults)
+                fetchNewResults( results, setResults )
             }
             else {
                 alert('Geocode returned with the following error: ' + status)
@@ -38,12 +38,19 @@ export default function Content({ results, setResults, searchLocation, showMap }
     return null;
 }
 
-const fetchNewResults = ({ setResults }) => {
-    let tempHelper = searchLocation.split(',');
+const fetchNewResults = ( results, setResults ) => {
     
+    let tempCityHelper = results[0].formatted_address.split(',');
+    let tempCountryHelper;
+    results[0].address_components.map(element => {
+        if(element.types.includes('country'))
+            tempCountryHelper = element.long_name;
+    })
+
+    // .trim().replace(/\s/g, "+") - removes leading/trailing whitespaces and then replaces remaining with '+' symbol
     const body = { 
-      city: tempHelper[0], 
-      country: tempHelper[tempHelper.length - 1] 
+      city: tempCityHelper[0].trim().replace(/\s/g, "+"), 
+      country: tempCountryHelper ? tempCountryHelper.trim().replace(/\s/g, "+") : tempCityHelper[tempHelper.length - 1].trim().replace(/\s/g, "+"),
     }
 
     fetch('/api/hello', {
