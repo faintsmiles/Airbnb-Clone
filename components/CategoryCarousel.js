@@ -6,24 +6,27 @@ export default function CategoryCarousel() {
     const ref = useRef()
 
     const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden")
-    const [rightButtonVisibility, setRightButtonVisibility] = useState("block")
+    const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block")
 
     //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
     const scroll = (scrollOffset) => {
+
+        console.log(ref.current)
+      
         ref.current.scrollLeft += scrollOffset;
         buttonVisibility(ref.current.scrollLeft += scrollOffset)
       }
 
       const buttonVisibility = (scrollPosition ) => {
 
-        if(scrollPosition > 0) 
-          setLeftButtonVisibility('block')
+        if(scrollPosition > 0 ) 
+          setLeftButtonVisibility('hidden md:block')
         else 
           setLeftButtonVisibility('hidden')
         if(scrollPosition >= ref.current.scrollLeftMax) 
           setRightButtonVisibility('hidden')
         else 
-          setRightButtonVisibility('block')
+          setRightButtonVisibility('hidden md:block')
       }
 
   return (
@@ -37,7 +40,7 @@ export default function CategoryCarousel() {
 
         <button className={`${leftButtonVisibility} h-full px-2 absolute left-0 bg-black text-white rounded`} onClick={() => scroll(-400)} > arrowleft </button>
         
-        <button className={`${rightButtonVisibility} h-full px-2 absolute right-0 bg-black text-white rounded`} onClick={() => scroll(400)} > arrowright </button>
+        <button className={`${rightButtonVisibility}  h-full px-2 absolute right-0 bg-black text-white rounded`} onClick={() => scroll(400)} > arrowright </button>
     </div>
   )
 
