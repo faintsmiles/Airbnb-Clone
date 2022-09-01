@@ -5,20 +5,17 @@ export default function CategoryCarousel() {
 
     const ref = useRef()
 
-
     const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden")
     const [rightButtonVisibility, setRightButtonVisibility] = useState("block")
-    //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
 
+    //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
     const scroll = (scrollOffset) => {
-        console.log('scroll')
-        console.log(ref.current.scrollLeft)
         ref.current.scrollLeft += scrollOffset;
         buttonVisibility(ref.current.scrollLeft += scrollOffset)
       }
 
       const buttonVisibility = (scrollPosition ) => {
-        console.log("butttons")
+
         if(scrollPosition > 0) 
           setLeftButtonVisibility('block')
         else 
@@ -27,18 +24,18 @@ export default function CategoryCarousel() {
           setRightButtonVisibility('hidden')
         else 
           setRightButtonVisibility('block')
-
       }
 
   return (
     <div  className='carousel relative border flex h-max text-xs whitespace-nowrap overflow-scroll '>
+        
         <div ref={ref} className='carousel mx-4 relative flex h-max text-xs text-center whitespace-nowrap overflow-scroll no-scrollbar'>
-        {   categories.map(element => {
-            return <CarouselItem element={element}/>
-        })}
+          {   categories.map(element => {
+              return <CarouselItem element={element}/>
+          })}
         </div>
 
-          <button className={`${leftButtonVisibility} h-full px-2 absolute left-0 bg-black text-white rounded`} onClick={() => scroll(-400)} > arrowleft </button>
+        <button className={`${leftButtonVisibility} h-full px-2 absolute left-0 bg-black text-white rounded`} onClick={() => scroll(-400)} > arrowleft </button>
         
         <button className={`${rightButtonVisibility} h-full px-2 absolute right-0 bg-black text-white rounded`} onClick={() => scroll(400)} > arrowright </button>
     </div>
