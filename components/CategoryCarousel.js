@@ -10,8 +10,6 @@ export default function CategoryCarousel() {
 
     //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
     const scroll = (scrollOffset) => {
-
-        console.log(ref.current)
       
         ref.current.scrollLeft += scrollOffset;
         buttonVisibility(ref.current.scrollLeft += scrollOffset)
