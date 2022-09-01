@@ -31,6 +31,30 @@ a {
   }
 } */
 
+/* Class to hide scrollbar where needed */
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Carousel */
+.carousel {
+  scroll-behavior: smooth;
+}
+/* .carousel {
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 24px;
+}
+
+.carousel .carouselItem {
+  scroll-snap-align: start;
+} */
 
 /*** MAP STYYLING ***/
 
@@ -44,6 +68,12 @@ a {
 .gm-style-iw-c {
   padding: 0 !important;
 }
+
+/* Prevents a random whitespace, inside of info windows specifically on chrome */
+.gm-style-iw-d {
+  overflow: hidden !important;
+}
+
 /* Controls InfoWindowF pointer under container */
 .gm-style-iw-tc {
   display: none !important;
@@ -66,3 +96,5 @@ a {
   /* margin: 8px !important; */
   /* padding: 4px !important; */
 }
+
+

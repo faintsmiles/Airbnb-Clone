@@ -13,11 +13,43 @@ function Google({ results, center }) {
     // Done this specific way so that only 1 show info window is shown at any singular point. 
     const [ showInfoIndex, setShowInfoIndex] = useState('');
 
+     if(!results || !results.data)  {
+       return <GoogleMap 
+        id="map"
+        zoom={10} 
+        center={center}
+        options={{
+            streetViewControl:false,
+            mapTypeControl: false,
+            fullscreenControl: false
+        }}
+        mapContainerClassName='map-container' 
+    >
+        <div className="absolute p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto ">Results could not be fetched. Please try refreshing</div>
+    </GoogleMap>
+    }
+     if(results.data.length === 0) {
+       return <GoogleMap 
+        id="map"
+        zoom={10} 
+        center={center}
+        options={{
+            streetViewControl:false,
+            mapTypeControl: false,
+            fullscreenControl: false
+        }}
+        mapContainerClassName='map-container' 
+    >
+          <div className="absolute p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto  ">No results found</div>
+    </GoogleMap>
+
+     }
+
     return (
                 
         <GoogleMap 
             id="map"
-            zoom={12} 
+            zoom={10} 
             center={center}
             options={{
                 streetViewControl:false,
@@ -26,7 +58,6 @@ function Google({ results, center }) {
             }}
             mapContainerClassName='map-container' 
         >
-            {   results.data.length === 0 && <div className="absolute p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto  ">No results found</div>}
             { 
                 results.data.map( (item, index) => {
                     let showInfo = false;

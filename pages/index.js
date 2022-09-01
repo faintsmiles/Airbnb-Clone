@@ -2,6 +2,7 @@
 // Components
 import Head  from 'next/head'
 import Header from '../components/Header'
+import Category from '../components/Category'
 import Content from '../components/Content'
 import ListMapControl from '../components/ListMapControl'
 import Footer from '../components/Footer'
@@ -42,6 +43,8 @@ export default function Home({data}) {
       <main>
 
         <Header setSearchLocation={setSearchLocation} />
+
+        <Category />
 
         <Content results={results} setResults={setResults} searchLocation={searchLocation} showMap={mapToggle} />
  
