@@ -64,8 +64,8 @@ export default function FilterModal({setShowFilterModal}) {
 
             {/* Rooms and beds filter  */}
             <section className=' w-auto mx-8 py-8 border-b'>
+              <div className='text-lg  font-semibold' >Rooms and beds</div>
               <div>
-                <div className='text-lg  font-semibold' >Rooms and beds</div>
                   
                   {/* Number of bedrooms selection */}
                   <div className='mt-4 ml-2'>Bedrooms</div>
@@ -203,6 +203,59 @@ export default function FilterModal({setShowFilterModal}) {
               </div>          
             </section>
 
+            <section className=' w-auto mx-8 py-8 border-b'>
+              <div className='text-lg  font-semibold' >Amenities</div>
+              <div className='mt-4'>
+
+                <div className='py-4 font-bold'>Essentials</div>
+                  <ul className='grid grid-cols-2 gap-6 font-extralight'>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Wifi</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Kitchen</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Washer</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Dryer</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Air conditioning</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Heating</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Dedicated workspace</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >TV</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Hair dryer</div>
+                    </li>
+                    <li className='flex gap-2'>
+                      <input type="checkbox" className='w-6 h-6' />
+                      <div >Iron</div>
+                    </li>
+
+
+
+                  </ul>
+
+              </div>
+            </section>
 
         </div>
     </div>
