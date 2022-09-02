@@ -3,6 +3,7 @@
 import Head  from 'next/head'
 import Header from '../components/Header'
 import Category from '../components/Category'
+import FilterModal from '../components/FilterModal'
 import Content from '../components/Content'
 import ListMapControl from '../components/ListMapControl'
 import Footer from '../components/Footer'
@@ -24,10 +25,10 @@ export default function Home({data}) {
     libraries: ['places'],
 })
 
-  const [ mapToggle, setMapToggle] = useState(false);
-  const [searchLocation, setSearchLocation] = useState();
   const [ results, setResults ] = useState(data);
-
+  const [searchLocation, setSearchLocation] = useState();
+  const [ mapToggle, setMapToggle] = useState(false);
+  const [ showFilterModal, setShowFilterModal] = useState(false);
   
   if(!isLoaded) return <h1> Loading ... </h1>
 
@@ -44,12 +45,16 @@ export default function Home({data}) {
 
         <Header setSearchLocation={setSearchLocation} />
 
-        <Category />
+        <Category setShowFilterModal={setShowFilterModal} />
 
         <Content results={results} setResults={setResults} searchLocation={searchLocation} showMap={mapToggle} />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
+
+        {/* Footer only shows on list view  */}
         { !mapToggle && <Footer  />  }
+        {/* Filter Modal only shows when filter button inside of Category component is clicked */}
+        { showFilterModal && <FilterModal setShowFilterModal={setShowFilterModal}/> }
 
       </main>
     </div>
