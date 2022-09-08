@@ -97,4 +97,7 @@ a {
   /* padding: 4px !important; */
 }
 
-
+.heart {
+  stroke:white !important;
+  stroke-width: 40px !important;
+}

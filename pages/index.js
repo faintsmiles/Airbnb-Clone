@@ -64,7 +64,7 @@ export default function Home({data}) {
 export async function getServerSideProps (context) {
   // inefficient to call the nextjs api which then calls supporting API, but we're aiming to hide the OpenData API url 
   // Check this later in network tab. may also need to reduce data size in the future or modify api url
-  const res = await fetch ( 'http://localhost:3000' + '/api/hello')
+  const res = await fetch ( 'http://localhost:3000/api/hello')
   const data = await res.json();
   console.log('API CALL');
   return { props: { data } }
