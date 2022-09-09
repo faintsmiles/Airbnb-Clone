@@ -62,7 +62,6 @@ function Google({ results, center }) {
                 results.data.map( (item, index) => {
                     let showInfo = false;
                     if (index === showInfoIndex ) { showInfo = true }
-
                     return <Marker 
                         index={index}  
                         showInfo={showInfo} 

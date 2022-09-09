@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import Thumbnail from './Thumbnail'
 
@@ -15,10 +16,11 @@ export default function List({results, isLoading}) {
           {   
               results.data.map((element) => {
               return <Thumbnail 
-              results={element.fields} 
-              location={element.geometry} 
-              key={element.recordid} 
-              />
+                  results={element.fields} 
+                  location={element.geometry} 
+                  key={element.recordid} 
+                  listingID={element.recordid}
+                /> 
             }) 
           }
         </div>

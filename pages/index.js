@@ -29,6 +29,8 @@ export default function Home({data}) {
   const [searchLocation, setSearchLocation] = useState();
   const [ mapToggle, setMapToggle] = useState(false);
   const [ showFilterModal, setShowFilterModal] = useState(false);
+
+  const [ wishList, setWishList] = useState({});
   
   if(!isLoaded) return <h1> Loading ... </h1>
 

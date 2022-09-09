@@ -3,7 +3,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <div className='fixed bottom-0 h-24 sm:h-14 p-4 md:px-15 lg:px-24 2xl:px-48 w-full flex
-    justify-between  items-center text-sm bg-slate-100 z-90'>
+    justify-between  items-center text-sm bg-slate-100 z-50'>
         {console.log('rerender footer')}
         <div className='space-x-1 whitespace-nowrap flex w-full flex-wrap'>
             <span>© 2022 Airbnb, Inc.</span>

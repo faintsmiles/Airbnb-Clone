@@ -83,6 +83,8 @@ a {
   right:none !important;
   top: 1rem !important;
   left: 1rem !important;
+  max-height: 2rem;
+  max-width: 2rem;
   background-color: black !important;
   border-radius: 36px !important;
   opacity: .4 !important;
@@ -90,11 +92,7 @@ a {
 /* close/ 'x' image color */
 .gm-ui-hover-effect > span {
   background-color: white !important;
-  height: 1rem !important;
-  width: 1rem !important;
-  
-  /* margin: 8px !important; */
-  /* padding: 4px !important; */
+
 }
 
 .heart {

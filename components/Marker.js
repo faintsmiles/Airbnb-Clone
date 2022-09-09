@@ -36,7 +36,7 @@ export default function Marker({item , index, showInfo, setShowInfoIndex }) {
                         id='infoWindowF'
                         onCloseClick={() => setShowInfoIndex(null) }
                     >   
-                            <MapThumbnail listingData={item.fields} />                        
+                            <MapThumbnail listingData={item.fields} listingID={item.recordid}  />                        
                     </InfoWindowF>
                 }
             </MarkerF>
