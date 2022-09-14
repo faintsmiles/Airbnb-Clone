@@ -99,3 +99,10 @@ a {
   stroke:white !important;
   stroke-width: 40px !important;
 }
+
+
+/* Listing page container */
+.listing-page-container{
+  max-height: 560px !important;
+  max-width: 1120px !important;
+}

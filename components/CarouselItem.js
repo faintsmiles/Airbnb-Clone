@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function CarouselItem({element}) {
   return (
-    <div className='h-max w-max carouselItem flex flex-col justify-end py-2 px-4 hover:font-bold hover:border-b-2 hover:cursor-pointer'>
+    <div className='carouselItem h-max w-max flex flex-col justify-end py-2 px-4 text-gray-400 font-bold hover:text-black hover:border-b-2 hover:cursor-pointer'>
         <div className='relative h-8'>
             <Image 
               src={element.icon}

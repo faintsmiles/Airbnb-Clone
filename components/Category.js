@@ -4,7 +4,7 @@ import FilterButton from './common/FilterButton'
 
 export default function Category({setShowFilterModal}) {
   return (
-    <div className='flex gap-4 w-full py-8 px-8 pb-5 lg:px-24 2xl:px-44 border-b'  >
+    <div className='flex gap-4 w-full pt-8 pb-2 px-8 lg:px-24 2xl:px-44 '  >
         <CategoryCarousel />
         {/* <button className='hidden md:flex p-4 border '>Filter</button> */}
         <FilterButton setShowFilterModal={setShowFilterModal} />
