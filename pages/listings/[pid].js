@@ -8,6 +8,7 @@ import { useLoadScript  } from '@react-google-maps/api'
 // Components
 import Header from '../../components/Header'
 import ListingPageContent from '../../components/ListingPageContent';
+import ListingPageForm from '../../components/ListingPageForm'
 
 export default function listingPage() {
   const router = useRouter();
@@ -38,6 +39,9 @@ export default function listingPage() {
       <main>
         <Header />  
         <ListingPageContent roomData={roomData} />
+        {/* <div className='md:hidden'>
+          <ListingPageForm />
+        </div> */}
       </main>
     </>
   )

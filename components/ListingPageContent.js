@@ -9,7 +9,7 @@ export default function ListingPageContent({roomData}) {
         <ListingPageTitle roomData={roomData} />
         <div className='flex p-8'>
           <ListingPageDescription roomData={roomData} />
-          <ListingPageForm />
+          <ListingPageForm  roomData={roomData} />
         </div>
     </div>
   )
