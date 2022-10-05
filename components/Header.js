@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Header({ setSearchLocation }) {
 
+
   // Ref to accesss the search input value
   const searchInputValue = useRef();
   var searchOptions = {
@@ -25,6 +26,17 @@ export default function Header({ setSearchLocation }) {
     console.log("handle search submission")
     setSearchLocation(searchInputValue.current.value);
   } 
+
+  // User Menu State & Controls
+  const [showMenu,  setShowMenu] = useState(false)
+  // Detects if user clicks outside of the menu and if so, closes said menu
+  const userMenu = useRef(null)
+  const closeUserMenu = (e) => {
+    if(userMenu.current && showMenu && !userMenu.current.contains(e.target)){
+      setShowMenu(false)
+    }
+  }
+  document.addEventListener('mousedown', closeUserMenu)
 
   return (
     <div className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
@@ -51,11 +63,14 @@ export default function Header({ setSearchLocation }) {
           </div>
         </form>
         <div className="hidden md:flex justify-between gap-1 " >
+          {/* 'Become a Host link */}
           <div className=" py-3 px-4 hover:bg-gray-100 rounded-full text-sm font-semibold ">Become a Host</div>
+          {/* Globe Icon */}
           <button className="p-3 flex hover:bg-gray-100 rounded-full text-base">
             <FontAwesomeIcon icon={faGlobe} />
           </button>
-          <div className="p-2 ml-2 border hover:shadow-xl rounded-full">
+          {/* Bars + User Icon */}
+          <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" onClick={()=> setShowMenu(true) }>
             <span className="flex px-2 py-1 align-baseline gap-3 ">
               <span>
                 <FontAwesomeIcon icon={faBars} />
@@ -64,6 +79,17 @@ export default function Header({ setSearchLocation }) {
                 <FontAwesomeIcon icon={faUser} />
               </span>
             </span>
+            {/* Expanded onclick menu for bars + user */}
+            { showMenu &&
+              <div ref={userMenu} className="absolute mt-5 right-0 w-64 py-2 text-base z-50 bg-white shadow-[0_0px_16px_rgba(0,0,0,0.1)] rounded-lg ">  
+                  <div className="px-4 py-2 hover:bg-gray-100">Sign Up</div>
+                  <div className="px-4 py-2 hover:bg-gray-100">Log in</div>
+                  <div className="w-full my-2 border-b"></div>
+                  <div className="px-4 py-2 hover:bg-gray-100">Host your home</div>
+                  <div className="px-4 py-2 hover:bg-gray-100">Host an experience</div>
+                  <div className="px-4 py-2 hover:bg-gray-100">Help</div>
+              </div>
+            }
           </div>
         </div> 
       </header>
