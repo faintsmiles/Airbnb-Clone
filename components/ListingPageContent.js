@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import ListingPageTitle from './ListingPageTitle'
 import ListingPageDescription from './ListingPageDescription'
 import ListingPageForm from './ListingPageForm'
-import Calender from './common/Calender'
+import Calender from './common/Calendar'
 
 export default function ListingPageContent({roomData}) {
 
