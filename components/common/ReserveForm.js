@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { faStar, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import Calendar from './Calendar';
 
 export default function ReserveForm({roomData, checkInDay, checkOutDay}) {
 
@@ -15,6 +16,8 @@ export default function ReserveForm({roomData, checkInDay, checkOutDay}) {
   const serviceFee = parseInt((pricePerNight * nightsSelected * .10).toFixed());
   const totalCost = (basePrice + cleaningFee + serviceFee); 
 
+
+  const [displayCalendar, setDisplayCalendar] = useState(false)
 
   return (
     <form className='w-9/12 absolute right-0 border rounded-lg shadow-lg'>
@@ -37,8 +40,8 @@ export default function ReserveForm({roomData, checkInDay, checkOutDay}) {
 
         {/* Check in/out  container */}
         <div className='mx-6 my-4 border rounded-lg'>
-          <div className='flex'>
-            <div id='check-in' className='p-2 w-1/2 border-r'>
+          <div className='flex hover:cursor-pointer'>
+            <div id='check-in' className='p-2 w-1/2 border-r '>
               <div className=' text-xs font-bold'>CHECK-IN</div>
               <div>{checkInDay}</div>
             </div>
