@@ -3,7 +3,7 @@ import { faStar, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function ReserveForm({roomData, checkIn, checkOut}) {
+export default function ReserveForm({roomData, checkInDay, checkOutDay}) {
 
   // in the event we add functionality for choosing # of nights
   const pricePerNight = parseInt(roomData.price);
@@ -40,11 +40,11 @@ export default function ReserveForm({roomData, checkIn, checkOut}) {
           <div className='flex'>
             <div id='check-in' className='p-2 w-1/2 border-r'>
               <div className=' text-xs font-bold'>CHECK-IN</div>
-              <div>{checkIn}</div>
+              <div>{checkInDay}</div>
             </div>
             <div id='check-out' className='p-2 w-1/2'>
               <div className=' text-xs font-bold'>CHECK-OUT</div>
-              <div>{checkOut}</div>
+              <div>{checkOutDay}</div>
             </div>
           </div>
           <div className='flex w-full border-t'>

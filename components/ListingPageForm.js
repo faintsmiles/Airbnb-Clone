@@ -1,27 +1,29 @@
 import React from 'react'
 import ReserveForm from './common/ReserveForm'
 
+import moment from 'moment'
+moment.locale('en')
 
-export default function ListingPageForm({roomData}) {
+export default function ListingPageForm({roomData, checkInDay, checkOutDay}) {
   return (
     <div 
         className='w-full fixed left-0 bottom-0 right-0 
-        md:sticky md:top-8
+        md:sticky md:top-8 z-50
     '>
-        <form className='h-20 px-4 flex justify-between items-center bg-white border-t md:hidden'>
+        <form className='h-20 px-4 flex justify-between items-center bg-white border-t md:hidden z-50'>
             <div>
                 <div>
                     <span className='font-bold'>{'$' + roomData.price}</span>
                     <span className='font-extralight'> night</span>
                 </div>
-                <div className=' underline'>Date</div>
+                <div className='text-sm font-bold underline'>{moment(checkInDay).format("MMM D") + ' – ' + moment(checkOutDay).format("MMM D")}</div>
             </div>
             <button type='button' className='py-2 px-6 rounded font-bold text-white bg-pink-500'>
                 Reserve
             </button>
         </form>
         <div className='hidden md:block md:sticky md:top-16'>
-            <ReserveForm roomData={roomData} />
+            <ReserveForm roomData={roomData} checkInDay={checkInDay} checkOutDay={checkOutDay} />
         </div>
     </div>
   )

@@ -1,32 +1,38 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ListingPageTitle from './ListingPageTitle'
 import ListingPageDescription from './ListingPageDescription'
 import ListingPageForm from './ListingPageForm'
 import Calender from './common/Calendar'
 
+
+
 export default function ListingPageContent({roomData}) {
 
-
-  const [ daysToReserve, setDaysToReserve ] = useState(parseInt(roomData.minimum_nights) || 0)
-  // Current date + check out date according to nights selected
-  // Also allows the option to add user functionality in changing the check in date in the future if we wish to add that functionality
-  // by simply changing the date object to that specific day we want via  "new Date('yyyy-mm-ddT03:24:00')""
+  // Create a date object for initial dates to reserve
   let date = new Date();
-  let checkIn = date.toLocaleDateString();
+  const [ checkInDay, setCheckInDay] = useState(date.toLocaleDateString())
+  // On initial load we'll use minimum days required, also using it with calendar component
+  const minimumNights = parseInt(roomData.minimum_nights) || 0
+  const [ daysToReserve, setDaysToReserve ] = useState(minimumNights)
   date.setDate(date.getDate() + daysToReserve);
-  let checkOut = date.toLocaleDateString()
-
-  console.log(daysToReserve)
+  const [ checkOutDay, setCheckOutDay] = useState(date.toLocaleDateString())
 
   return (
     <div className='listing-page-container my-0 mx-auto'>
         <ListingPageTitle roomData={roomData} />
         <div className='flex p-8'>
           <ListingPageDescription roomData={roomData} />
-          <ListingPageForm  roomData={roomData} checkIn={checkIn} checkOut={checkOut}   />
+          <ListingPageForm  roomData={roomData} checkInDay={checkInDay} checkOutDay={checkOutDay}   />
         </div>
-        <div className='p-8'>
-          <Calender checkIn={checkIn} checkOut={checkOut} daysToReserve={ daysToReserve} setDaysToReserve={setDaysToReserve}  />
+        {/* Calendar x2 --- calendar size changes depending on screen width and hides the opposing. only difference */}
+        <div className='p-8 block'>
+          { }
+          <Calender  
+            checkInDay={checkInDay} setCheckInDay={setCheckInDay} 
+            checkOutDay={checkOutDay} setCheckOutDay={setCheckOutDay} 
+            minimumNights={roomData.minimum_nights} setDaysToReserve={setDaysToReserve}
+            calendarSize={2}
+          />
         </div>
     </div>
   )
