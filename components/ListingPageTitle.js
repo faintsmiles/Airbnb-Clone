@@ -33,7 +33,7 @@ export default function ListingPageTitle({roomData}) {
                 <div>
                     <span className='px-1 whitespace-nowrap'>
                         <FontAwesomeIcon icon={faStar} />  
-                        { roomData.review_scores_rating  ? Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 : " **New**"  }
+                        { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
                     </span>
                     <span className='px-2'>·</span>
                     <span className=' underline cursor-pointer whitespace-nowrap'>

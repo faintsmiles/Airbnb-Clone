@@ -3,16 +3,18 @@ import { faStar, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function ReserveForm({roomData}) {
+export default function ReserveForm({roomData, checkIn, checkOut}) {
 
   // in the event we add functionality for choosing # of nights
   const pricePerNight = parseInt(roomData.price);
-  const nightsSelected = parseInt(roomData.maximum_nights);
+  // In the event the maximum nights available to reserve exceeds 90 days, we set it to something far more reasonable
+  const nightsSelected =  parseInt(roomData.maximum_nights) > 90 ? 30 : parseInt(roomData.maximum_nights);
   const basePrice = (pricePerNight) * (nightsSelected);
-  const cleaningFee = parseInt(roomData.cleaning_fee);
+  const cleaningFee = roomData.cleaning_fee ? parseInt(roomData.cleaning_fee) : 0;
   // round cost up to nearest dollar
   const serviceFee = parseInt((pricePerNight * nightsSelected * .10).toFixed());
   const totalCost = (basePrice + cleaningFee + serviceFee); 
+
 
   return (
     <form className='w-9/12 absolute right-0 border rounded-lg shadow-lg'>
@@ -26,7 +28,7 @@ export default function ReserveForm({roomData}) {
             <div>
                 <FontAwesomeIcon icon={faStar} />
                 <span>
-                  { Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100   }
+                  { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
                 </span>
                 <span className=' font-bold'> · </span>
                 <span className=' text-gray-500 underline cursor-pointer'>{roomData.number_of_reviews} reviews</span>
@@ -38,11 +40,11 @@ export default function ReserveForm({roomData}) {
           <div className='flex'>
             <div id='check-in' className='p-2 w-1/2 border-r'>
               <div className=' text-xs font-bold'>CHECK-IN</div>
-              <div>10/15/2022</div>
+              <div>{checkIn}</div>
             </div>
             <div id='check-out' className='p-2 w-1/2'>
               <div className=' text-xs font-bold'>CHECK-OUT</div>
-              <div>10/15/2022</div>
+              <div>{checkOut}</div>
             </div>
           </div>
           <div className='flex w-full border-t'>
