@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Image from 'next/image'
 
 import { Autocomplete } from "@react-google-maps/api";
@@ -36,7 +36,12 @@ export default function Header({ setSearchLocation }) {
       setShowMenu(false)
     }
   }
-  document.addEventListener('mousedown', closeUserMenu)
+  useEffect(()=> {
+    document.addEventListener('mousedown', closeUserMenu)
+    return() => {
+      removeEventListener('mousedown', closeUserMenu)
+    }
+  })
 
   return (
     <div className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
@@ -70,7 +75,7 @@ export default function Header({ setSearchLocation }) {
             <FontAwesomeIcon icon={faGlobe} />
           </button>
           {/* Bars + User Icon */}
-          <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" onClick={()=> setShowMenu(true) }>
+          <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" onClick={()=> setShowMenu(!showMenu) }>
             <span className="flex px-2 py-1 align-baseline gap-3 ">
               <span>
                 <FontAwesomeIcon icon={faBars} />

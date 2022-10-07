@@ -4,7 +4,7 @@ import ReserveForm from './common/ReserveForm'
 import moment from 'moment'
 moment.locale('en')
 
-export default function ListingPageForm({roomData, checkInDay, checkOutDay}) {
+export default function ListingPageForm({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
   return (
     <div 
         className='w-full fixed left-0 bottom-0 right-0 
@@ -23,7 +23,13 @@ export default function ListingPageForm({roomData, checkInDay, checkOutDay}) {
             </button>
         </form>
         <div className='hidden md:block md:sticky md:top-16'>
-            <ReserveForm roomData={roomData} checkInDay={checkInDay} checkOutDay={checkOutDay} />
+            <ReserveForm 
+                roomData={roomData} 
+                checkInDay={checkInDay} setCheckInDay={setCheckInDay} 
+                checkOutDay={checkOutDay} setCheckOutDay={setCheckOutDay} 
+                minimumNights={roomData.minimum_nights} 
+                daysToReserve={daysToReserve} setDaysToReserve={setDaysToReserve} 
+            />
         </div>
     </div>
   )
