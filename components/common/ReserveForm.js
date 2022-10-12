@@ -50,7 +50,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
             <div>
                 <FontAwesomeIcon icon={faStar} />
                 <span>
-                  { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
+                  { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ).toFixed(2) : " New "  }
                 </span>
                 <span className=' font-bold'> · </span>
                 <span className=' text-gray-500 underline cursor-pointer'>{roomData.number_of_reviews} reviews</span>

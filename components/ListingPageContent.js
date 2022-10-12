@@ -3,6 +3,7 @@ import ListingPageTitle from './ListingPageTitle'
 import ListingPageDescription from './ListingPageDescription'
 import ListingPageForm from './ListingPageForm'
 import Calendar from './common/Calendar'
+import Reviews from './common/Reviews'
 
 
 
@@ -31,8 +32,8 @@ export default function ListingPageContent({roomData}) {
             daysToReserve={daysToReserve} setDaysToReserve={setDaysToReserve} 
           />
         </div>
-        {/* Calendar x2 --- calendar size changes depending on screen width and hides the opposing. only difference */}
-        <div className='p-8 flex justify-center md:block'>
+        {/* Calendar Section */}
+        <div className='px-8 pb-24 flex justify-center border-b md:block'>
           <div className='pb-16'>
             <div className='text-2xl font-medium '>Select checkout date</div>
             <div className='text-sm text-gray-500'>{`Minimum stay: ${minimumNights} nights`}</div>
@@ -43,6 +44,18 @@ export default function ListingPageContent({roomData}) {
             minimumNights={roomData.minimum_nights} setDaysToReserve={setDaysToReserve}
             key={'ContentPage'} noBorder={false}
           />
+        </div>
+        {/* Reviews Section */}
+        <div className='p-8 border-b'>
+          <Reviews 
+            listingRating={roomData.review_scores_rating} numberOfReviews={roomData.number_of_reviews}  
+            cleanlinessRating={roomData.review_scores_cleanliness} accuracyRating={roomData.review_scores_accuracy}
+            communicationRating={roomData.review_scores_communication} locationRating={roomData.review_scores_location}
+            valueRating={roomData.review_scores_value} checkinRating={roomData.review_scores_checkin}
+          />
+        </div>
+        <div className='p-8'>
+
         </div>
     </div>
   )
