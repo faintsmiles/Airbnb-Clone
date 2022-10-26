@@ -67,6 +67,8 @@ a {
 /* Controls InfoWindowF */
 .gm-style-iw-c {
   padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Prevents a random whitespace, inside of info windows specifically on chrome */
@@ -106,3 +108,14 @@ a {
   max-height: 560px !important;
   max-width: 1120px !important;
 }
+
+/* Listing page map */
+.listing-page-map{
+  /* display: relative; */
+  max-height: 400px !important;
+  max-width: 1120px !important;
+  height: 400px !important;
+  width: 100% !important;
+
+}
+

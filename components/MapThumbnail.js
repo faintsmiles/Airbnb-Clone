@@ -8,11 +8,11 @@ export default function MapThumbnail({ listingData, listingID }) {
     // Exactly the same as  thumbnail with slight styling differences
     // We checked for missing properties 1 layer up inside of marker.
     return (
-    <div className='relative h-48 w-48 md:h-full md:w-96  ' >
+    <div className='relative h-48 w-48 md:h-full md:w-96 bg-white-500' >
         <button className='absolute top-4 right-4 z-10'>
             <FontAwesomeIcon className='heart text-black text-opacity-50 text-xl' icon={faHeart} />
         </button>
-        <div>
+        <div className=' bg-white h-full w-full'>
         <Link 
             href={{ 
                 pathname:`listings/${listingID}`, 
@@ -22,8 +22,8 @@ export default function MapThumbnail({ listingData, listingID }) {
                 }
             }} 
         >
-        <a target='_blank' >
-            <div>
+        <a target='_blank'>
+            <div className=''>
                 <Image 
                     src={listingData.xl_picture_url}
                     layout='responsive'
@@ -36,8 +36,8 @@ export default function MapThumbnail({ listingData, listingID }) {
                 />
                 
             </div>
-            <div className='text-sm px-2 md:p-4' >
-                <div className='mt-2 flex justify-between'>
+            <div className='text-sm px-2 md:p-4 ' >
+                <div className='mt-2 flex justify-between '>
                     <div className='font-bold pr-4'> {listingData.smart_location} </div>
                             {/* If rating doesnt exist assign ** New ** */}
                     {   

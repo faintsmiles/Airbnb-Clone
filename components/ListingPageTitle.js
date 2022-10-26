@@ -6,13 +6,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ListingPageTitle({roomData}) {
-  return (
-    // <div className=' w-full flex flex-col  lg:p-8 lg:flex-col-reverse' >
-    //     <div className='w-full m-auto p-auto  bg-blue-50'>
-    //         <img  src={roomData.xl_picture_url} alt="" className='listing-page-title-image '  />
-    //     </div>
-    
-
+  return ( 
     <div className=' my-0 mx-auto flex flex-col md:p-8 lg:flex-col-reverse' >
         <div className='bg-blue-50'>
             <Image  
@@ -33,6 +27,7 @@ export default function ListingPageTitle({roomData}) {
                 <div>
                     <span className='px-1 whitespace-nowrap'>
                         <FontAwesomeIcon icon={faStar} />  
+                        <span> </span>
                         { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
                     </span>
                     <span className='px-2'>·</span>

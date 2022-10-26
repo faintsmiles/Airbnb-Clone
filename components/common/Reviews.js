@@ -84,7 +84,7 @@ export default function Reviews({listingRating , numberOfReviews, cleanlinessRat
             </div>
         </div>
         {/* Reviews */}
-        <div className='py-8 grid grid-cols-2 auto-rows-auto gap-4'>
+        <div className='py-8 grid grid-cols-1 auto-rows-auto gap-4 md:grid-cols-2 '>
           {createReviews(numberOfReviews)}
         </div>
         {/* Show all reviews button */}
@@ -97,7 +97,7 @@ export default function Reviews({listingRating , numberOfReviews, cleanlinessRat
 
 function createReviews(numberOfReviews) {
   const maxReviewsToShow = numberOfReviews >= 8 ? 8 : numberOfReviews;
-  let names = ['Max', 'Christy', 'Chloe', 'Chris', 'Sam', 'Nicole', 'Matthew', 'John', 'Gabriel', 'Andrea' , 'Michelle' , 'Ember' ]
+  let names = ['Max', 'Christy','Sam', 'Nicole', 'Ember', 'Matthew', 'Michelle' , 'John' ]
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   return(
     <>
@@ -107,7 +107,8 @@ function createReviews(numberOfReviews) {
           <div className='flex items-center'>
             <div className='h-12 w-12 rounded-full border border-blue-900 bg-slate-100'></div>
               <div className='pl-2 flex flex-col'>
-                <div className='font-bold'>{names[Math.floor(Math.random() * names.length )]}</div>
+                {/* <div className='font-bold'>{names[Math.floor(Math.random() * names.length )]}</div> */}
+                <div className='font-bold'>{names[i]}</div>
                 <div className='text-sm text-slate-500'>October 2022</div>
               </div>
           </div>
