@@ -6,7 +6,6 @@ import Calendar from './common/Calendar'
 import Reviews from './common/Reviews'
 import MapSingleListing from './common/MapSingleListing'
 
-
 export default function ListingPageContent({roomData}) {
 
   // Create a date object for initial dates to reserve
@@ -62,10 +61,6 @@ export default function ListingPageContent({roomData}) {
             <div className='text-base font-bold'>{ roomData.neighbourhood + ', ' + roomData.smart_location}</div>
             <p>{roomData.neighborhood_overview}</p>
           </div>
-        </div>
-
-        <div className='m-8'>
-          ok
         </div>
 
     </div>
