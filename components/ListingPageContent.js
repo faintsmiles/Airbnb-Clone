@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import ListingPageTitle from './ListingPageTitle'
 import ListingPageDescription from './ListingPageDescription'
-import ListingPageForm from './ListingPageForm'
+import ListingPageForm from './common/ReserveFormCondensed'
 import Calendar from './common/Calendar'
 import Reviews from './common/Reviews'
 import MapSingleListing from './common/MapSingleListing'
@@ -54,11 +54,14 @@ export default function ListingPageContent({roomData}) {
           />
         </div>
 
-        <div className='mx-8 py-8 lg:px-0 border-b'>
+        <div className='mx-8 py-8 lg:px-0'>
           <div className='pb-8 text-2xl '>Where you’ll be</div>
           <MapSingleListing key={"singleListingMap"} results={roomData} center={ {lat:roomData.geolocation[0], lng: roomData.geolocation[1] } } />
           <div className='pt-8 pb-16 flex flex-col gap-4'>
-            <div className='text-base font-bold'>{ roomData.neighbourhood + ', ' + roomData.smart_location}</div>
+            <div className='text-base font-bold'>
+              <span> {roomData.neighbourhood ? (roomData.neighbourhood  + ',') : ""  }</span>
+              <span> {roomData.smart_location} </span>
+            </div>
             <p>{roomData.neighborhood_overview}</p>
           </div>
         </div>

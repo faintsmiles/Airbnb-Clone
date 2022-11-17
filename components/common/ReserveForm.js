@@ -39,7 +39,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
   console.log("render")
 
   return (
-    <form className='w-9/12  absolute right-0 border rounded-lg shadow-lg'>
+    <form className='w-9/12 absolute right-0 border rounded-lg shadow-lg'>
 
        {/* Price and reviews */}
         <div className='p-6 flex justify-between '>

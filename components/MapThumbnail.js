@@ -12,6 +12,7 @@ export default function MapThumbnail({ listingData, listingID }) {
         <button className='absolute top-4 right-4 z-10'>
             <FontAwesomeIcon className='heart text-black text-opacity-50 text-xl' icon={faHeart} />
         </button>
+        {/* We overrode the css on a map element to be transparent so we need to set our background white to display text here instead  */}
         <div className=' bg-white h-full w-full'>
         <Link 
             href={{ 

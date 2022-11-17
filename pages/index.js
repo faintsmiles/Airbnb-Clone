@@ -6,7 +6,7 @@ import Category from '../components/Category'
 import FilterModal from '../components/FilterModal'
 import Content from '../components/Content'
 import ListMapControl from '../components/ListMapControl'
-import Footer from '../components/Footer'
+import FooterCondensed from '../components/FooterCondensed'
 
 // React hooks
 import { useState } from 'react'
@@ -54,7 +54,11 @@ export default function Home({data}) {
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
 
         {/* Footer only shows on list view  */}
-        { !mapToggle && <Footer  />  }
+        { !mapToggle && 
+          <div className='w-full fixed bottom-0'>
+             <FooterCondensed  /> 
+          </div>  
+        }
         {/* Filter Modal only shows when filter button inside of Category component is clicked */}
         { showFilterModal && <FilterModal setShowFilterModal={setShowFilterModal}/> }
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import ReserveForm from './common/ReserveForm'
+import ReserveForm from './ReserveForm'
 
 import moment from 'moment'
 moment.locale('en')
 
-export default function ListingPageForm({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
+export default function ReserveFormCondensed({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
   return (
     <div 
         className='w-full fixed left-0 bottom-0 right-0 
