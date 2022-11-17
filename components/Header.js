@@ -75,7 +75,7 @@ export default function Header({ setSearchLocation }) {
             <FontAwesomeIcon icon={faGlobe} />
           </button>
           {/* Bars + User Icon */}
-          <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" onClick={()=> setShowMenu(!showMenu) }>
+          <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" ref={userMenu} onClick={(e)=> {setShowMenu(!showMenu)} }>
             <span className="flex px-2 py-1 align-baseline gap-3 ">
               <span>
                 <FontAwesomeIcon icon={faBars} />
@@ -86,7 +86,7 @@ export default function Header({ setSearchLocation }) {
             </span>
             {/* Expanded onclick menu for bars + user */}
             { showMenu &&
-              <div ref={userMenu} className="absolute mt-5 right-0 w-64 py-2 text-base z-50 bg-white shadow-[0_0px_16px_rgba(0,0,0,0.1)] rounded-lg ">  
+              <div className="absolute mt-5 right-0 w-64 py-2 text-base z-50 bg-white shadow-[0_0px_16px_rgba(0,0,0,0.1)] rounded-lg">  
                   <div className="px-4 py-2 hover:bg-gray-100">Sign Up</div>
                   <div className="px-4 py-2 hover:bg-gray-100">Log in</div>
                   <div className="w-full my-2 border-b"></div>

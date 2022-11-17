@@ -3,7 +3,7 @@ import React from 'react'
 export default function FooterExpanded() {
   return (
     // bottom padding is for when the condensed reserve form is displayed
-    <footer className=' bg-slate-100 pt-12 pb-20 md:pb-12 text-sm border'>
+    <footer className=' bg-gray-50 pt-12 pb-20 md:pb-12 text-sm border'>
         <div className='listing-page-container mx-auto px-8 flex flex-col lg:flex-row lg:justify-between'>
           <section className=' border-b lg:border-0 pb-8 '>
             <div className='font-bold pb-3'>Support</div>
@@ -21,7 +21,6 @@ export default function FooterExpanded() {
             <div className='font-bold pb-3'>Community</div>
             <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3 '>
               <li className='hover:underline'><a href="/">Airbnb.org: disaster relief housing</a></li>
-              <li className='hover:underline'><a href="/">Support Afghan refugees</a></li>
               <li className='hover:underline'><a href="/">Combatting discrimination</a></li>
             </ul>
           </section>

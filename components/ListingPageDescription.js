@@ -14,10 +14,10 @@ export default function ListingPageDescription({roomData}) {
             <div>
                 <div className=' font-bold'>{ roomData.room_type + ' by ' + roomData.host_name }</div>
                 <div className=''>
-                    <span>{ roomData.guests_included + ' guests' } </span>
-                    <span>{ roomData.bedrooms + ' bedrooms' }</span>
-                    <span>{ roomData.beds + ' beds'}</span>
-                    <span>{ roomData.bathrooms + ' baths'}</span>
+                    <span>{ roomData.guests_included + ' guests ' } </span>
+                    <span>{ roomData.bedrooms + ' bedrooms ' }</span>
+                    <span>{ roomData.beds + ' beds '}</span>
+                    <span>{ roomData.bathrooms + ' baths '}</span>
                 </div>
             </div>
             <div className='h-14 w-14' >
