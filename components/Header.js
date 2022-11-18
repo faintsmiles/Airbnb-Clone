@@ -3,10 +3,10 @@ import Image from 'next/image'
 
 import { Autocomplete } from "@react-google-maps/api";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faGlobe } from '@fortawesome/free-solid-svg-icons'
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default function Header({ setSearchLocation }) {

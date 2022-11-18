@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { faStar, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import moment from 'moment'
 moment.locale('en')
 import Calendar from './Calendar';
+
+import GuestMenuOptions from './GuestMenuOptions';
 
 export default function ReserveForm({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
 
@@ -30,13 +32,32 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
       setDisplayCalendar(false)
     }
   }
+
+  // Guest Menu State & Controls
+  const [ displayGuestMenu, setDisplayGuestMenu] = useState(false);
+  const guestMenuContainer = useRef(null)
+  const closeGuestMenu = (e) => {
+    if(guestMenuContainer.current && displayGuestMenu && !guestMenuContainer.current.contains(e.target)){
+      setDisplayGuestMenu(false)
+    }
+  }
+
+
+
+  // Named function so that we can cleanly remove the following event listener
+  function closeStateBasedMenus (e) {
+    closeGuestMenu(e);
+    closeCalendar(e)
+  }
+  // Event handler for calender / guest menus
   useEffect(()=> {
-    document.addEventListener('mousedown', closeCalendar)
+    document.addEventListener('mousedown', closeStateBasedMenus)
+
     return() => {
-      removeEventListener('mousedown', closeCalendar)
+      removeEventListener('mousedown', closeStateBasedMenus )
     }
   })
-  console.log("render")
+
 
   return (
     <form className='w-9/12 absolute right-0 border rounded-lg shadow-lg'>
@@ -71,7 +92,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
           </div>
           {/* Calendar for form */}
           { displayCalendar && 
-            <div className=' absolute -right-1 p-4 shadow-[0_0px_24px_rgba(0,0,0,0.2)] rounded-2xl bg-white'>
+            <div className=' absolute -right-1 p-4 shadow-[0_0px_24px_rgba(0,0,0,0.2)] rounded-2xl bg-white z-20'>
               <div className='p-4 bg-white  '>
                 <div className='text-2xl font-medium '>Select checkout date</div>
                 <div className='text-sm text-gray-500'>{`Minimum stay: ${minimumNights} nights`}</div>
@@ -84,18 +105,20 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
               />
             </div>
           }
-          <div className='flex w-full border-t'>
-            <div className='w-full p-2 flex justify-between items-center'>
+          <div ref={guestMenuContainer} className='relative w-full border-t flex-col'>
+            <div className='w-full p-2 flex justify-between items-center'  onClick={()=> setDisplayGuestMenu(!displayGuestMenu)}  >
               <div className=''>
                 <div className='text-xs font-bold'>GUESTS</div>
                 <div>1 Guest</div>
               </div>
               <div>
                 <span>
-                  <FontAwesomeIcon icon={faChevronDown} />
+                  { displayGuestMenu ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />   }
                 </span>
               </div>
             </div>
+            {/* Condinitional menu options to include extra guests */}
+            { displayGuestMenu && <GuestMenuOptions setDisplayGuestMenu={setDisplayGuestMenu} />}
           </div>
         </div>
 
