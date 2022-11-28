@@ -26,9 +26,9 @@ export default function FitlerModalCheckBox({options, amenity, setAmenity}) {
         {/* Category title */}
         <div className='font-semibold '>{options.subcategory}</div>
         {/* Options */}
-        <div className='checkbox-continer py-8 grid grid-cols-2 gap-4 justify-between '>
-            { options.items.map(element => { return (
-                <div  className='checkbox-item'>
+        <ul className='checkbox-continer py-8 grid grid-cols-2 gap-4 justify-between '>
+            { options.items.map((element) => { return (
+                <li key={element.title}  className='checkbox-item'>
                     <div className='flex '>
                         <input type="checkbox" id={element.title} value={element.title} className='w-6 h-6 hover:border-2' onChange={(e) => modifyAmentityList(e)} />
                         <label htmlFor={element.title} className='flex flex-col text-sm px-4 cursor-pointer'>
@@ -36,9 +36,9 @@ export default function FitlerModalCheckBox({options, amenity, setAmenity}) {
                             <span className='max-w-xs text-gray-500 '> { element.description }</span>
                         </label>
                     </div>
-                </div>
+                </li>
             )})}
-        </div>
+        </ul>
     </>
   )
 }

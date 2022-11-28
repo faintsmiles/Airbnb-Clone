@@ -123,10 +123,11 @@ export default function FilterModal({setShowFilterModal}) {
             <section className=' w-auto mx-8 py-8 border-b'>
               <div className='text-lg  font-semibold' >Rooms and beds</div> 
               {/* Subcategories  */}
-              {roomStates.map((item) => {
+              {roomStates.map((item, index) => {
                 return (
                   <FilterModalMenuButtons
                     id={"numberOf" + item.category}
+                    key={item.category + index}
                     title={item.category}
                     options={roomOptions}
                     optionSelected={item.value}
