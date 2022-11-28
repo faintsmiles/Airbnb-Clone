@@ -63,7 +63,8 @@ export default function FilterModal({setShowFilterModal}) {
   // Amenities
   const [essentials, setEssentials] = useState([])
   const [features, setFeatures] = useState([])
-  const [safety, setSafety] = useState(['test','wat'])
+  const [safety, setSafety] = useState([])
+  // Object containing the current state values and set state functions for amenities
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
 
 
