@@ -33,7 +33,7 @@ export default function CategoryCarousel() {
       }
 
   return (
-    <div className='carousel relative flex h-max text-xs whitespace-nowrap overflow-scroll' onScrollCapture={() =>buttonVisibility(ref.current.scrollLeft) }>
+    <div className='carousel relative flex h-max text-xs whitespace-nowrap overflow-hidden' onScrollCapture={() =>buttonVisibility(ref.current.scrollLeft) }>
         
         <div ref={ref} className=' carousel mx-4 relative flex h-max text-xs text-center whitespace-nowrap overflow-x-scroll no-scrollbar'>
           {   categories.map(element => {

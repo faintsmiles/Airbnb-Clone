@@ -4,7 +4,8 @@ import ReserveForm from './ReserveForm'
 import moment from 'moment'
 moment.locale('en')
 
-export default function ReserveFormCondensed({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
+export default function ReserveFormCondensed({ roomData, checkInDay, setCheckInDay, checkOutDay,
+     setCheckOutDay, daysToReserve, setDaysToReserve, guestCounter, setGuestCounter }) {
   return (
     <div 
         className='w-full fixed left-0 bottom-0 right-0 
@@ -29,6 +30,7 @@ export default function ReserveFormCondensed({ roomData, checkInDay, setCheckInD
                 checkOutDay={checkOutDay} setCheckOutDay={setCheckOutDay} 
                 minimumNights={roomData.minimum_nights} 
                 daysToReserve={daysToReserve} setDaysToReserve={setDaysToReserve} 
+                // guestCounter={guestCounter} setGuestCounter={setGuestCounter}
             />
         </div>
     </div>

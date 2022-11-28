@@ -16,7 +16,6 @@ export default function ListingPageContent({roomData}) {
   const [ daysToReserve, setDaysToReserve ] = useState(minimumNights)
   date.setDate(date.getDate() + daysToReserve);
   const [ checkOutDay, setCheckOutDay] = useState(date.toLocaleDateString())
-  console.log(checkInDay)
 
   return (
     <div className='listing-page-container my-0 mx-auto'>
@@ -29,6 +28,7 @@ export default function ListingPageContent({roomData}) {
             checkOutDay={checkOutDay} setCheckOutDay={setCheckOutDay} 
             minimumNights={roomData.minimum_nights}   
             daysToReserve={daysToReserve} setDaysToReserve={setDaysToReserve} 
+            // guestCounter={guestCounter} setGuestCounter={setGuestCounter}
           />
         </div>
         {/* Calendar Section */}

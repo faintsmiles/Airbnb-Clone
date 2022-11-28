@@ -9,7 +9,8 @@ import Calendar from './Calendar';
 
 import GuestMenuOptions from './GuestMenuOptions';
 
-export default function ReserveForm({ roomData, checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
+export default function ReserveForm({ roomData, checkInDay, setCheckInDay, checkOutDay, 
+  setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
 
   // in the event we add functionality for choosing # of nights
   const pricePerNight = parseInt(roomData.price);
@@ -21,7 +22,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
   // round cost up to nearest dollar
   const serviceFee = parseInt((pricePerNight * nightsSelected * .10).toFixed());
   const totalCost = (basePrice + cleaningFee + serviceFee); 
-
+  
 
   // Calendar State & Controls
   const [displayCalendar, setDisplayCalendar] = useState(false)
@@ -41,6 +42,13 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
       setDisplayGuestMenu(false)
     }
   }
+  // Type of guests and their current counter for guest menu child component.
+  const [ Adults, setAdults] = useState(1)
+  const [Children, setChildren] = useState(0)
+  const [Infants, setInfants] = useState(0)
+  const [Pets, setPets] = useState(0)
+  // Total guests staying (infants dont count toward total and pets are disabled)
+  const [ guestCounter, setGuestCounter ] = useState( Adults + Children)
 
 
 
@@ -109,7 +117,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
             <div className='w-full p-2 flex justify-between items-center'  onClick={()=> setDisplayGuestMenu(!displayGuestMenu)}  >
               <div className=''>
                 <div className='text-xs font-bold'>GUESTS</div>
-                <div>1 Guest</div>
+                <div>{ guestCounter === 1 ? guestCounter + ' Guest' :  guestCounter + ' Guests' } </div>
               </div>
               <div>
                 <span>
@@ -117,8 +125,14 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
                 </span>
               </div>
             </div>
-            {/* Condinitional menu options to include extra guests */}
-            { displayGuestMenu && <GuestMenuOptions setDisplayGuestMenu={setDisplayGuestMenu} />}
+            {/* Conditional menu options to include extra guests */}
+            { displayGuestMenu && 
+              <GuestMenuOptions 
+                guestCounter={guestCounter} setGuestCounter={setGuestCounter} 
+                Adults={Adults} setAdults={setAdults} Children={Children} setChildren={setChildren}
+                Infants={Infants} setInfants={setInfants} Pets={Pets} setPets={setPets}
+                maxGuests={roomData.accommodates} 
+              />}
           </div>
         </div>
 
