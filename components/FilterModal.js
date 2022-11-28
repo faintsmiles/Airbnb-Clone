@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import FitlerModalCheckBox from './common/FitlerModalCheckBox'
 
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -52,6 +52,20 @@ export default function FilterModal({setShowFilterModal}) {
     ]
   }
 ]
+  // Type of place
+  const [placeType, setPlaceType] = useState([])
+  // Rooms and beds
+  const [bedrooms, setBedrooms] = useState()
+  const [beds, setBeds] = useState()
+  const [bathrooms, setBathrooms] = useState()
+  // Property Type
+  const [property, setProperty] = useState()
+  // Amenities
+  const [essentials, setEssentials] = useState([])
+  const [features, setFeatures] = useState([])
+  const [safety, setSafety] = useState(['test','wat'])
+  const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
+
 
   return (
     <div className='fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50' onClick={()=> setShowFilterModal(false)} >
@@ -233,64 +247,12 @@ export default function FilterModal({setShowFilterModal}) {
 
               </div>          
             </section>
+
             {/* Amenities */}
-            {/* <section className=' w-auto mx-8 py-8 border-b'>
-              <div className='text-lg  font-semibold' >Amenities</div>
-              <div className='mt-4'>
-
-                <div className='py-4 font-bold'>Essentials</div>
-                  <ul className='grid grid-cols-2 gap-6 font-extralight'>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Wifi</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Kitchen</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Washer</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Dryer</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Air conditioning</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Heating</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Dedicated workspace</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >TV</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Hair dryer</div>
-                    </li>
-                    <li className='flex gap-2'>
-                      <input type="checkbox" className='w-6 h-6' />
-                      <div >Iron</div>
-                    </li>
-
-
-
-                  </ul>
-
-              </div>
-            </section> */}
             <section className='w-auto mx-8 py-8 border-b'>
               <div className='text-xl pb-12 font-bold'>Amenities</div>
-              { amenities.map(element => {
-                return <FitlerModalCheckBox options={element} />
+              { amenities.map((element, index) => {
+                return <FitlerModalCheckBox key={element+index} options={element} amenity={amenityStates[index].value} setAmenity={amenityStates[index].setValue} />
               } )}              
             </section>
         </div>

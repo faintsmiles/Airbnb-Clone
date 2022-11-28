@@ -42,6 +42,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
       setDisplayGuestMenu(false)
     }
   }
+
   // Type of guests and their current counter for guest menu child component.
   const [ Adults, setAdults] = useState(1)
   const [Children, setChildren] = useState(0)
@@ -49,8 +50,6 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
   const [Pets, setPets] = useState(0)
   // Total guests staying (infants dont count toward total and pets are disabled)
   const [ guestCounter, setGuestCounter ] = useState( Adults + Children)
-
-
 
   // Named function so that we can cleanly remove the following event listener
   function closeStateBasedMenus (e) {
