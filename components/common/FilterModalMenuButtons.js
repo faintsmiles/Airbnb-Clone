@@ -5,7 +5,7 @@ export default function FilterModalMenuButtons({ id, title, options, optionSelec
     <>
         <div className='mt-4 ml-2'>{title}</div>
 
-        <ul id={id} className='mt-6 flex justify-start gap-4'>
+        <ul id={id} className='mt-6 flex justify-start gap-2 lg:gap-4'>
         {options.map((item) => {
             return (
             <li key={ title + item}>

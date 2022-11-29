@@ -95,14 +95,14 @@ export default function FilterModal({setShowFilterModal}) {
 
   return (
     // Modal container
-    <div className='fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 p-8' onClick={()=> setShowFilterModal(false)} >
+    <div className='fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 p-1 md:p-8' onClick={()=> setShowFilterModal(false)} >
         {/* Filter form */}
         <div className='relative flex flex-col w-full h-full md:max-w-4xl top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 bg-white rounded-xl overflow-auto overflow-y-visible z-50 no-scrollbar' onClick={(e) => e.stopPropagation()} >
             
           {/* Form Header */}
           <header className='bg-white py-2 flex justify-center border-b z-10'>
               <h1 className='p-4 font-bold'>Filters</h1>
-              <button className='absolute top-5 left-3 p-1 px-3 hover:bg-gray-100  rounded-full '>
+              <button className='absolute top-5 left-3 p-1 px-3 hover:bg-gray-100 rounded-full' onClick={()=> setShowFilterModal(false)}>
                   <FontAwesomeIcon icon={faXmark} />
               </button>
           </header>
