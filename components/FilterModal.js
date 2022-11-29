@@ -108,7 +108,7 @@ export default function FilterModal({setShowFilterModal}) {
           </header>
 
           {/* Filter settings/options */}
-          <div className='h-full py-2 overflow-y-scroll overscroll-contain' >
+          <form className='h-full py-2 overflow-y-scroll overscroll-contain' >
             {/* Price Range  */}
             <section className=' w-auto mx-8 py-8 border-b'>
               <p className='text-lg  font-semibold '>Price Range</p>
@@ -180,13 +180,13 @@ export default function FilterModal({setShowFilterModal}) {
                 return <FitlerModalCheckBox key={element + index} options={element} amenity={amenityStates[index].value} setAmenity={amenityStates[index].setValue} />
               } )}              
             </section>
-          </div>
+          </form>
 
         {/* Form clear-all / send */}
-        <div className='sticky bottom-0 px-8 py-2 flex h-20 w-full  justify-between items-center border-t font-semibold '>
+        <section className='sticky bottom-0 px-8 py-2 flex h-20 w-full  justify-between items-center border-t font-semibold '>
           <div className='underline hover:cursor-pointer' onClick={(e)=> clearFilter()} >Clear all</div>
           <button className='px-8 py-4 bg-black text-white rounded-xl'>Update listings</button>
-        </div>
+        </section>
 
         </div>
     </div>
