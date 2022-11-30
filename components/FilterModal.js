@@ -37,10 +37,10 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       { title: 'Dryer', description: '' },
       { title: 'Air conditioning', description: '' },
       { title: 'Heating', description: '' },
-      // { title: 'Dedicated workspace', description: '' },
       { title: 'TV', description: '' },
       { title: 'Hair Dryer', description: '' },
       { title: 'Iron', description: '' },
+      { title: 'Wheelchair accessible', description: '' },
     ]
   },
   {
@@ -49,7 +49,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       { title: 'Pool', description: '' },
       { title: 'Hot tub', description: '' },
       { title: 'Free parking on premises', description: '' },
-      // { title: 'EV charger', description: '' },
+      { title: 'EV charger', description: '' },
       { title: 'Crib', description: '' },
       { title: 'Gym', description: '' },
       { title: 'BBQ grill', description: '' },
@@ -89,9 +89,11 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
 
   function clearFilter() {
     setRoomType([])
+
     setBedrooms()
     setBeds()
     setBathrooms()
+
     setProperty()
     setEssentials([])
     setFeatures([])
@@ -105,37 +107,54 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
     createQueryURL(optionsSelected)
   }
   function createQueryURL(optionsSelected) {
-    // Our api doesnt allow multi search on room types, so we'll most likely do a call for each or only the first for simplicity
-    // There is also no option for number of bedrooms, beds, or bathrooms. 
-    // Will probably just manually filter results (may slow down app too much as api is a bit slow)
-
-    // API url
-    let baseURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30'
+    // 
+    // Url builder
+    // ORDER: apiURL, Rows, propertyType, roomType, essentials location
+    const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows='
+    let rows = 30;
+    let propertyURL = ''
+    let roomURL = ''
+    let essentialsURL = ''
+    let locationURL = '' 
+    // Requests we'll be calling
+    const urlsToQuery = []
 
     // Append url with options that are queryable 
-    //optionsSelected.room.map(element => baseURL += '&refine.room_type=' + element )
-    optionsSelected.property ? baseURL += ('&refine.property_type=' + optionsSelected.property) : null ;
-    optionsSelected.essentials.map(element => baseURL += '&refine.amenities=' + element )
-    optionsSelected.features.map(element => baseURL += '&refine.amenities=' + element )
-    optionsSelected.safety.map(element => baseURL += '&refine.amenities=' + element )
-
-    console.log(property)
-    console.log( 'room type: ' + roomType)
-
-    baseURL = baseURL.replace(/ /g, '+')
-    baseURL += '&refine.city=' + searchLocation
-    console.log(baseURL)
-
-
-    fetch(baseURL)
-    .then(response => response.json())
-    .then( result => {
-      console.log("Fetching new results...")
-      console.log(result)
-      setResults( result.records ) 
-    })
-    .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
+    // ORDER: apiURL, Rows, propertyType, roomType, essentials location
+    optionsSelected.property ? propertyURL += ('&refine.property_type=' + optionsSelected.property) : null ;
     
+    optionsSelected.essentials.map(element => essentialsURL += '&refine.amenities=' + element )
+    optionsSelected.features.map(element => essentialsURL += '&refine.amenities=' + element )
+    optionsSelected.safety.map(element => essentialsURL += '&refine.amenities=' + element )
+    locationURL += '&refine.city=' + searchLocation
+
+    // Room types were selected
+    if (optionsSelected.room.length != 0 && optionsSelected.room.length != typeOfRoom.items.length){ 
+      rows = 15;
+      optionsSelected.room.map(element => {
+        roomURL = '&refine.room_type=' + element
+        urlsToQuery.push(
+         fetch((apiURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
+         .then(response => response.json())
+         .then(response => response.records)
+        )
+      })
+    }
+    else {
+      urlsToQuery.push(
+        fetch((apiURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
+        .then(response => response.json())
+        .then(response => response.records)
+      )
+    }
+
+    Promise.all(urlsToQuery)
+      .then(results => {
+        console.log(results.flat())
+        setResults(results.flat())
+      })
+      .catch( err => alert('There was a problem getting filter results. Please try again.'))
+
   }
 
   function createFetchList(filters) {
