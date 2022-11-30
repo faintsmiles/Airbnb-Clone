@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 
-export default function FilterModal({setShowFilterModal, setResults}) {
-
+export default function FilterModal({setShowFilterModal, searchLocation, setResults}) {
+ 
   // Overall filter options and types
 
   // Options for bedrooms, beds, and bathrooms. Section name 'Rooms and beds' 
@@ -105,7 +105,7 @@ export default function FilterModal({setShowFilterModal, setResults}) {
     // Will probably just manually filter results (may slow down app too much as api is a bit slow)
 
     // API url
-    let baseURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q='
+    let baseURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30'
 
     // Append url with options that are queryable 
     //optionsSelected.room.map(element => baseURL += '&refine.room_type=' + element )
@@ -115,10 +115,11 @@ export default function FilterModal({setShowFilterModal, setResults}) {
     optionsSelected.safety.map(element => baseURL += '&refine.amenities=' + element )
     baseURL +=  '&refine.room_type=' + optionsSelected.room[0]
 
-    console.log(baseURL)
+    console.log(searchLocation)
     console.log( 'room type: ' + roomType)
 
     baseURL = baseURL.replace(/ /g, '+')
+    baseURL += '&refine.city=' + searchLocation
     console.log(baseURL)
 
 
@@ -127,7 +128,7 @@ export default function FilterModal({setShowFilterModal, setResults}) {
     .then( result => {
       console.log("Fetching new results...")
       console.log(result)
-      setResults({data: result.records} ) 
+      setResults( result.records ) 
     })
     .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
     

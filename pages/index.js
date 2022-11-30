@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { useLoadScript  } from '@react-google-maps/api'
 
 
-export default function Home({data}) {
+export default function Home({data, defaultLocation }) {
   
   // Are we connected to google's api
   const { isLoaded } = useLoadScript({
@@ -25,8 +25,8 @@ export default function Home({data}) {
     libraries: ['places'],
 })
 
-  const [ results, setResults ] = useState(data);
-  const [searchLocation, setSearchLocation] = useState();
+  const [ results, setResults ] = useState(data)
+  const [searchLocation, setSearchLocation] = useState(defaultLocation);
   const [ mapToggle, setMapToggle] = useState(false);
   const [ showFilterModal, setShowFilterModal] = useState(false);
 
@@ -36,7 +36,7 @@ export default function Home({data}) {
 
   return (
     <div>
-      {console.log('rerender main')}
+      {console.log('render main')}
       <Head>
         <title>Airbnb Clone</title>
         <meta name="description" content="Airbnb clone created with NextJS" />
@@ -60,7 +60,7 @@ export default function Home({data}) {
           </div>  
         }
         {/* Filter Modal only shows when filter button inside of Category component is clicked */}
-        { showFilterModal && <FilterModal setShowFilterModal={setShowFilterModal}/> }
+        { showFilterModal && <FilterModal setShowFilterModal={setShowFilterModal} searchLocation={searchLocation} setResults={setResults} /> }
 
       </main>
     </div>
@@ -73,5 +73,6 @@ export async function getServerSideProps (context) {
   const res = await fetch ( 'http://localhost:3000/api/hello')
   const data = await res.json();
   console.log('API CALL');
-  return { props: { data } }
+  console.log(data)
+  return { props: { data: data.data, defaultLocation: data.defaultLocation } }
 }

@@ -5,16 +5,18 @@ import Map from '../components/Map'
 
 export default function Content({ results, setResults, searchLocation, showMap }) {
 
+    const [intitialRender, setInitialRender] = useState(0)
     // Default center
     const [ center, setCenter] = useState({lat: 52.370216, lng: 4.895168 })
    
     // User requested location change, only runs when search location has been changed
     useEffect(() => {
-
-        if(!searchLocation) { return}
-
+        // Prevents geocoder from fetching new results on the initial render
+        if(intitialRender === 0) { setInitialRender(1); return; }
+        
         const geocoder = new google.maps.Geocoder();
 
+        // Gets the coordinates for the address inside of search 
         geocoder.geocode( { address: searchLocation}, (results, status) => {
             if(status === google.maps.GeocoderStatus.OK){
                 console.log("Geocoding: ")

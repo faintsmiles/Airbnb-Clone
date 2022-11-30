@@ -24,7 +24,7 @@ export default function FitlerModalCheckBox({options, amenity, setAmenity}) {
   return (
     <>
         {/* Category title */}
-        <div className='font-semibold '>{options.subcategory}</div>
+        <div className='font-semibold'>{options.subcategory}</div>
         {/* Options */}
         <ul className='checkbox-continer py-8 grid grid-cols-2 gap-4 justify-between '>
             { options.items.map((element) => { return (
