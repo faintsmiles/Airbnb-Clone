@@ -30,8 +30,8 @@ export default function FitlerModalCheckBox({options, amenity, setAmenity}) {
                 <li key={element.title}  className='checkbox-item'>
                     <div className='flex '>
                         <input 
-                            type="checkbox" id={element.title} value={element.title} className='w-6 h-6 hover:border-2'
-                            checked={amenity.includes(element.title) ? true : false}
+                            type="checkbox" id={element.title} value={ element.value || element.title } className='w-6 h-6 hover:border-2'
+                            checked={amenity.includes( element.value || element.title) ? true : false}
                             onChange={(e) => modifyAmentityList(e)} 
                             
                         />

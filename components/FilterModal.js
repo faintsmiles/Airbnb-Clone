@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 
-export default function FilterModal({setShowFilterModal}) {
+export default function FilterModal({setShowFilterModal, setResults}) {
 
   // Overall filter options and types
 
@@ -15,17 +15,18 @@ export default function FilterModal({setShowFilterModal}) {
   // Property types available and their fontawesome icons
   const propertyOptions = [ { type: 'House', icon: faHouse}, {type: 'Apartment', icon: faBuilding}, { type: 'Guesthouse', icon: faHouseUser }, {type:'Hotel', icon: faHotel}]
   // Objects containingg the subcategory title and list of options with title/descriptions for each respective choice available
-  const typeOfPlace= {
+  const typeOfRoom= {
     subcategory: '',
     items: [
-      { title: 'Entire Place', description: 'A place all to yourself'},
-      { title: 'Private room', description: 'Your own room in a home or a hotel, plus some shared common spaces'},
+      { title: 'Entire Place', description: 'A place all to yourself', value: 'Entire home/apt' },
+      { title: 'Private Room', description: 'Your own room in a home or a hotel, plus some shared common spaces', value: 'Private room'},
+      { title: 'Shared Room', description: 'A sleeping space and common areas that may be shared with others', value: 'Shared room'}
     ]
   }
   const amenities = [{
     subcategory: 'Essentials',
     items: [ 
-      { title: 'Wifi', description: '' },
+      { title: 'Wireless Internet', description: '' },
       { title: 'Kitchen', description: '' },
       { title: 'Washer', description: '' },
       { title: 'Dryer', description: '' },
@@ -63,8 +64,8 @@ export default function FilterModal({setShowFilterModal}) {
 
   // States and controls
 
-  // Type of place
-  const [placeType, setPlaceType] = useState([])
+  // Type of room (ie: solo, private, shared)
+  const [roomType, setRoomType] = useState([])
   // Keeps track of which Rooms and beds option has been selected
   const [bedrooms, setBedrooms] = useState()
   const [beds, setBeds] = useState()
@@ -82,7 +83,7 @@ export default function FilterModal({setShowFilterModal}) {
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
 
   function clearFilter() {
-    setPlaceType([])
+    setRoomType([])
     setBedrooms()
     setBeds()
     setBathrooms()
@@ -90,6 +91,73 @@ export default function FilterModal({setShowFilterModal}) {
     setEssentials([])
     setFeatures([])
     setSafety([])
+  }
+
+
+  function fetchNewData() {
+    const optionsSelected = createFetchList(optionsSelected)
+    console.log(optionsSelected)
+    createQueryURL(optionsSelected)
+  }
+  function createQueryURL(optionsSelected) {
+    // Our api doesnt allow multi search on room types, so we'll most likely do a call for each or only the first for simplicity
+    // There is also no option for number of bedrooms, beds, or bathrooms. 
+    // Will probably just manually filter results (may slow down app too much as api is a bit slow)
+
+    // API url
+    let baseURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q='
+
+    // Append url with options that are queryable 
+    //optionsSelected.room.map(element => baseURL += '&refine.room_type=' + element )
+    optionsSelected.property ? baseURL += ('&refine.property_type=' + optionsSelected.property) : null ;
+    optionsSelected.essentials.map(element => baseURL += '&refine.amenities=' + element )
+    optionsSelected.features.map(element => baseURL += '&refine.amenities=' + element )
+    optionsSelected.safety.map(element => baseURL += '&refine.amenities=' + element )
+    baseURL +=  '&refine.room_type=' + optionsSelected.room[0]
+
+    console.log(baseURL)
+    console.log( 'room type: ' + roomType)
+
+    baseURL = baseURL.replace(/ /g, '+')
+    console.log(baseURL)
+
+
+    fetch(baseURL)
+    .then(response => response.json())
+    .then( result => {
+      console.log("Fetching new results...")
+      console.log(result)
+      setResults({data: result.records} ) 
+    })
+    .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
+    
+  }
+
+  function createFetchList(filters) {
+    // create object to store the data, we'll be fetching
+     const optionsSelected = {
+      room: [],
+      bedrooms: '',
+      beds: '',
+      bathrooms: '',
+      property: '',
+      // amenities
+      essentials: [],
+      features: [],
+      safety: []
+    }
+    // 0 is false
+    roomType.length ? optionsSelected.room = [...roomType] : console.log(false)
+    bedrooms ? optionsSelected.bedrooms = bedrooms : console.log(false)
+    beds ? optionsSelected.beds = beds : console.log(false)
+    bathrooms ? optionsSelected.bathrooms = bathrooms : console.log(false)
+    property ? optionsSelected.property = property : console.log(false)
+    essentials.length ? optionsSelected.essentials = [...essentials] : console.log(false)
+    features.length ? optionsSelected.features = [...features] : console.log(false)
+    safety.length ? optionsSelected.safety = [...safety] : console.log(false)
+    console.log(optionsSelected)
+    
+    return optionsSelected
   }
 
 
@@ -133,10 +201,10 @@ export default function FilterModal({setShowFilterModal}) {
               </div>
             </section>
 
-            {/* Type of place */}
+            {/* Type of room */}
             <section className=' w-auto mx-8 py-8 border-b'>
               <div className='text-lg font-semibold'>Type of place</div>
-              <FitlerModalCheckBox options={typeOfPlace} amenity={placeType} setAmenity={setPlaceType} />
+              <FitlerModalCheckBox options={typeOfRoom} amenity={roomType} setAmenity={setRoomType} />
             </section>
 
             {/* Rooms and beds filter  */}
@@ -185,7 +253,7 @@ export default function FilterModal({setShowFilterModal}) {
         {/* Form clear-all / send */}
         <section className='sticky bottom-0 px-8 py-2 flex h-20 w-full  justify-between items-center border-t font-semibold '>
           <div className='underline hover:cursor-pointer' onClick={(e)=> clearFilter()} >Clear all</div>
-          <button className='px-8 py-4 bg-black text-white rounded-xl'>Update listings</button>
+          <button type='button' className='px-8 py-4 bg-black text-white rounded-xl' onClick={(e)=> fetchNewData()}>Update listings</button>
         </section>
 
         </div>
