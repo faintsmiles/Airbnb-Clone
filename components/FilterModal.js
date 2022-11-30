@@ -61,7 +61,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
   {
     subcategory: 'Safety',
     items: [
-      { title: 'Smoke alarm', description: '' },
+      { title: 'Smoke detector', description: '' },
       { title: 'Carbon monoxide detector', description: '' },
     ]
   }
