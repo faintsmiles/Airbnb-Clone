@@ -37,7 +37,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       { title: 'Dryer', description: '' },
       { title: 'Air conditioning', description: '' },
       { title: 'Heating', description: '' },
-      { title: 'Dedicated workspace', description: '' },
+      // { title: 'Dedicated workspace', description: '' },
       { title: 'TV', description: '' },
       { title: 'Hair Dryer', description: '' },
       { title: 'Iron', description: '' },
@@ -49,7 +49,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       { title: 'Pool', description: '' },
       { title: 'Hot tub', description: '' },
       { title: 'Free parking on premises', description: '' },
-      { title: 'EV charger', description: '' },
+      // { title: 'EV charger', description: '' },
       { title: 'Crib', description: '' },
       { title: 'Gym', description: '' },
       { title: 'BBQ grill', description: '' },
@@ -62,7 +62,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
     subcategory: 'Safety',
     items: [
       { title: 'Smoke alarm', description: '' },
-      { title: 'Carbon monoxide alarm', description: '' },
+      { title: 'Carbon monoxide detector', description: '' },
     ]
   }
 ]
