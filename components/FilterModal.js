@@ -13,7 +13,12 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
   // Options for bedrooms, beds, and bathrooms. Section name 'Rooms and beds' 
   const roomOptions = ['Any', '1' , '2', '3', '4', '5', '6','7', '8+']
   // Property types available and their fontawesome icons
-  const propertyOptions = [ { type: 'House', icon: faHouse}, {type: 'Apartment', icon: faBuilding}, { type: 'Guesthouse', icon: faHouseUser }, {type:'Hotel', icon: faHotel}]
+  const propertyOptions = [ 
+    { type: 'House', icon: faHouse, value: 'House'},
+    {type: 'Apartment', icon: faBuilding , value: 'Apartment'}, 
+    { type: 'Guesthouse', icon: faHouseUser, value: 'Guesthouse' }, 
+    {type:'Hotel', icon: faHotel, value: 'Boutique hotel'}
+  ]
   // Objects containingg the subcategory title and list of options with title/descriptions for each respective choice available
   const typeOfRoom= {
     subcategory: '',
@@ -113,9 +118,8 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
     optionsSelected.essentials.map(element => baseURL += '&refine.amenities=' + element )
     optionsSelected.features.map(element => baseURL += '&refine.amenities=' + element )
     optionsSelected.safety.map(element => baseURL += '&refine.amenities=' + element )
-    baseURL +=  '&refine.room_type=' + optionsSelected.room[0]
 
-    console.log(searchLocation)
+    console.log(property)
     console.log( 'room type: ' + roomType)
 
     baseURL = baseURL.replace(/ /g, '+')
@@ -234,7 +238,8 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
                 {propertyOptions.map((element) => {
                   return (
                     <FilterModalMenuButtonIcon 
-                      key={element.type} type={element.type} icon={element.icon}
+                      key={element.type} type={element.type} 
+                      icon={element.icon} value={element.value}
                       property={property} setProperty={setProperty} 
                     />
                   )
