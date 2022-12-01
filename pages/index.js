@@ -27,8 +27,9 @@ export default function Home({data, defaultLocation }) {
 
   const [ results, setResults ] = useState(data)
   const [searchLocation, setSearchLocation] = useState(defaultLocation);
-  const [ mapToggle, setMapToggle] = useState(false);
+  const [carouselFocus, setCarouselFocus] = useState()
   const [ showFilterModal, setShowFilterModal] = useState(false);
+  const [ mapToggle, setMapToggle] = useState(false);
 
   const [ wishList, setWishList] = useState({});
   
@@ -46,7 +47,10 @@ export default function Home({data, defaultLocation }) {
 
         <Header setSearchLocation={setSearchLocation} />
 
-        <Category setShowFilterModal={setShowFilterModal} />
+        <Category
+         carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus} 
+         searchLocation={searchLocation} setResults={setResults} setShowFilterModal={setShowFilterModal} 
+        />
 
         <Content results={results} setResults={setResults} searchLocation={searchLocation} showMap={mapToggle} />
  
@@ -54,12 +58,17 @@ export default function Home({data, defaultLocation }) {
 
         {/* Footer only shows on list view  */}
         { !mapToggle && 
-          <div className='w-full fixed bottom-0'>
+          <div className='w-full fixed bottom-0 z-50'>
              <FooterCondensed  /> 
           </div>  
         }
         {/* Filter Modal only shows when filter button inside of Category component is clicked */}
-        { showFilterModal && <FilterModal setShowFilterModal={setShowFilterModal} searchLocation={searchLocation} setResults={setResults} /> }
+        { showFilterModal && 
+          <FilterModal 
+          carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus}
+          setResults={setResults} searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
+        />
+        }
 
       </main>
     </div>

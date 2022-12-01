@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 
-export default function FilterModal({setShowFilterModal, searchLocation, setResults}) {
+export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, setResults}) {
  
   // Overall filter options and types
 
@@ -76,13 +76,12 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
   const [beds, setBeds] = useState()
   const [bathrooms, setBathrooms] = useState()
   // Property Type
-  const [property, setProperty] = useState()
+  const [property, setProperty] = useState(carouselFocus)
   // Amenities
   const [essentials, setEssentials] = useState([])
   const [features, setFeatures] = useState([])
   const [safety, setSafety] = useState([])
 
-  
   // Object containing the current state values and set state functions for grouped items, used to map through easily
   const roomStates = [ {category: 'Bedrooms', value: bedrooms, setValue: setBedrooms}, { category: 'Beds', value: beds, setValue: setBeds}, { category: 'Bathrooms', value: bathrooms, setValue: setBathrooms} ] 
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
@@ -102,6 +101,7 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
 
 
   function fetchNewData() {
+    property != carouselFocus ? setCarouselFocus(null) : null
     const optionsSelected = createFetchList(optionsSelected)
     createQueryURL(optionsSelected)
   }
@@ -161,10 +161,6 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       })
       .catch(err => alert(err))
       .catch(err => alert('There was a problem getting filter results. Please try again.'))
-
-    // results = filterResultsByBeds(results, { bedrooms: optionsSelected.bedrooms, beds: optionsSelected.beds, bathrooms: optionsSelected.bathrooms})
-    // console.log(results)
-    // setResults(results)
 
   }
 

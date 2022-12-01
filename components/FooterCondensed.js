@@ -3,7 +3,7 @@ import React from 'react'
 export default function FooterCondensed() {
   return (
     <div className='h-24 sm:h-14 p-4 md:px-15 lg:px-24 2xl:px-48 flex
-    justify-between  items-center text-sm bg-slate-300 z-50'>
+    justify-between  items-center text-sm bg-slate-300'>
         <div className='space-x-1 whitespace-nowrap flex w-full flex-wrap'>
             <span>© 2022 Airbnb, Inc.</span>
             <span>·</span>
@@ -34,8 +34,7 @@ export default function FooterCondensed() {
                             <svg className='h-4' fill='black' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                 {/* <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
                                 <path d="M352 352c-8.188 0-16.38-3.125-22.62-9.375L192 205.3l-137.4 137.4c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25C368.4 348.9 360.2 352 352 352z"/>
-                            </svg>
-                        
+                            </svg>                     
                     </span>
                 </button>
             </span>

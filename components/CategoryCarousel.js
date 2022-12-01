@@ -1,43 +1,61 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CarouselItem from './CarouselItem';
 
 import {faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-// library.add(faChevronLeft)
+export default function CategoryCarousel({ carouselFocus, setCarouselFocus, searchLocation, setResults}) {
 
-export default function CategoryCarousel() {
+  const ref = useRef()
+  const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden")
+  const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block")
 
-    const ref = useRef()
+  //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
+  const scroll = (scrollOffset) => {   
+      ref.current.scrollLeft += scrollOffset;
+  }
 
-    const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden")
-    const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block")
+  const buttonVisibility = (scrollPosition ) => {
 
-    //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
-    const scroll = (scrollOffset) => {
-      
-        ref.current.scrollLeft += scrollOffset;
-      }
+    if(scrollPosition > 0) 
+      setLeftButtonVisibility('hidden md:block')
+    else 
+      setLeftButtonVisibility('hidden')
+    if(scrollPosition >= ref.current.scrollLeftMax) 
+      setRightButtonVisibility('hidden')
+    else 
+      setRightButtonVisibility('hidden md:block')
+  }
 
-      const buttonVisibility = (scrollPosition ) => {
+  useEffect(() => {
+    console.log('category useEffect')
+    if(!carouselFocus) {return}
+  
+    const apiURL = `https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30&facet=city`
+    const location = '&refine.city=' + searchLocation;
+    const propertyType = '&refine.property_type=' + carouselFocus
 
-        if(scrollPosition > 0) 
-          setLeftButtonVisibility('hidden md:block')
-        else 
-          setLeftButtonVisibility('hidden')
-        if(scrollPosition >= ref.current.scrollLeftMax) 
-          setRightButtonVisibility('hidden')
-        else 
-          setRightButtonVisibility('hidden md:block')
-      }
+    fetch(apiURL + propertyType + location)
+    .then(response => response.json())
+    .then(results => {
+      console.log(results)
+      setResults(results.records)
+    })
+
+
+  }, [carouselFocus])
+
 
   return (
     <div className='carousel relative flex h-max text-xs whitespace-nowrap overflow-hidden' onScrollCapture={() =>buttonVisibility(ref.current.scrollLeft) }>
         
         <div ref={ref} className=' carousel mx-4 relative flex h-max text-xs text-center whitespace-nowrap overflow-x-scroll no-scrollbar'>
-          {   categories.map(element => {
-              return <CarouselItem key={element.type} element={element}/>
+          { categories.map(element => {
+              return (
+              <CarouselItem 
+                key={element.type} element={element} carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus}
+              />)
           })}
         </div>
 
@@ -54,8 +72,6 @@ export default function CategoryCarousel() {
         </div>
     </div>
   )
-
-
 }
 
 const categories = [
