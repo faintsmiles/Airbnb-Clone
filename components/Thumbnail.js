@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Thumbnail({ results, listingID }) {
 
     // Fields used in thumbnail
-    if( !results.geolocation  ) return null;
-    if(!results.price  ) return null;
-    if(!results.xl_picture_url) return null;
-    if (!results.smart_location ) return null;
+    // if(!results) {console.log('No results');return null}
+    if( !results.geolocation  ) {console.log('No geolocation');return null}
+    if(!results.price  ) {console.log('No Price');return null}
+    if(!results.xl_picture_url) {console.log('No picture');return null}
+    if (!results.smart_location ) {console.log('No smart location');return null}
     return (
         <div className='relative'>
                 <button className='absolute top-4 right-4 z-10'>

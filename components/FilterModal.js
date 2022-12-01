@@ -103,9 +103,9 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
 
   function fetchNewData() {
     const optionsSelected = createFetchList(optionsSelected)
-    console.log(optionsSelected)
     createQueryURL(optionsSelected)
   }
+  
   function createQueryURL(optionsSelected) {
     // 
     // Url builder
@@ -148,12 +148,23 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       )
     }
 
+    let results;
     Promise.all(urlsToQuery)
+      .then(results => results.flat())
       .then(results => {
-        console.log(results.flat())
-        setResults(results.flat())
+        console.log('Result size PROMISE: ' + results.length)
+        console.log(results)
+        results = filterResultsByBeds(results, { bedrooms: optionsSelected.bedrooms, beds: optionsSelected.beds, bathrooms: optionsSelected.bathrooms})
+        console.log('Result size PROMISE: ' + results.length)
+        console.log(results)
+        setResults(results)
       })
-      .catch( err => alert('There was a problem getting filter results. Please try again.'))
+      .catch(err => alert(err))
+      .catch(err => alert('There was a problem getting filter results. Please try again.'))
+
+    // results = filterResultsByBeds(results, { bedrooms: optionsSelected.bedrooms, beds: optionsSelected.beds, bathrooms: optionsSelected.bathrooms})
+    // console.log(results)
+    // setResults(results)
 
   }
 
@@ -170,16 +181,15 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
       features: [],
       safety: []
     }
-    // 0 is false
-    roomType.length ? optionsSelected.room = [...roomType] : console.log(false)
-    bedrooms ? optionsSelected.bedrooms = bedrooms : console.log(false)
-    beds ? optionsSelected.beds = beds : console.log(false)
-    bathrooms ? optionsSelected.bathrooms = bathrooms : console.log(false)
-    property ? optionsSelected.property = property : console.log(false)
-    essentials.length ? optionsSelected.essentials = [...essentials] : console.log(false)
-    features.length ? optionsSelected.features = [...features] : console.log(false)
-    safety.length ? optionsSelected.safety = [...safety] : console.log(false)
-    console.log(optionsSelected)
+    // 0 is false and 'Any' means filtering isnt necessary
+    roomType.length ? optionsSelected.room = [...roomType] : null
+    bedrooms && bedrooms != 'Any' ? optionsSelected.bedrooms = bedrooms : null
+    beds && beds != 'Any' ? optionsSelected.beds = beds : null
+    bathrooms && bathrooms != 'Any' ? optionsSelected.bathrooms = bathrooms : null
+    property ? optionsSelected.property = property : null
+    essentials.length ? optionsSelected.essentials = [...essentials] : null
+    features.length ? optionsSelected.features = [...features] : null
+    safety.length ? optionsSelected.safety = [...safety] : null
     
     return optionsSelected
   }
@@ -284,4 +294,20 @@ export default function FilterModal({setShowFilterModal, searchLocation, setResu
         </div>
     </div>
   )
+}
+
+
+function filterResultsByBeds(results, filters) {
+
+  if (!filters) {return}
+
+  Object.keys(filters).forEach((key) => {
+        
+    if (!filters[key]) {return}
+
+    results = results.filter(result => parseInt(result.fields[key]) >= parseInt(filters[key]))
+
+  })
+
+  return results;
 }

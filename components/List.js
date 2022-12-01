@@ -4,7 +4,6 @@ import Thumbnail from './Thumbnail'
 
 export default function List({results, isLoading}) {
     // if (isLoading) return <p>Loading...</p>
-    console.log(results)
     if (!results ) return <p className='absolute p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto'>Results could not be fetched. Please try refreshing</p>
     if(results.length === 0) return <div className='p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto'>No results found</div>
     

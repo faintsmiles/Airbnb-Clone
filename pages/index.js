@@ -36,7 +36,6 @@ export default function Home({data, defaultLocation }) {
 
   return (
     <div>
-      {console.log('render main')}
       <Head>
         <title>Airbnb Clone</title>
         <meta name="description" content="Airbnb clone created with NextJS" />
@@ -72,7 +71,5 @@ export async function getServerSideProps (context) {
   // Check this later in network tab. may also need to reduce data size in the future or modify api url
   const res = await fetch ( 'http://localhost:3000/api/hello')
   const data = await res.json();
-  console.log('API CALL');
-  console.log(data)
   return { props: { data: data.data, defaultLocation: data.defaultLocation } }
 }

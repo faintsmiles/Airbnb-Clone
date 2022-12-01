@@ -4,7 +4,6 @@ export default function FooterCondensed() {
   return (
     <div className='h-24 sm:h-14 p-4 md:px-15 lg:px-24 2xl:px-48 flex
     justify-between  items-center text-sm bg-slate-300 z-50'>
-        {console.log('rerender footer')}
         <div className='space-x-1 whitespace-nowrap flex w-full flex-wrap'>
             <span>© 2022 Airbnb, Inc.</span>
             <span>·</span>
