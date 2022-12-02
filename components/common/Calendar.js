@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 // Moment.js peer dep of react-dates
 import moment from 'moment'
+moment.suppressDeprecationWarnings = true;
 moment.locale('en')
 // react-dates by airbnb
 import 'react-dates/initialize'
@@ -64,7 +65,7 @@ export default function Calender({checkInDay, setCheckInDay, checkOutDay, setChe
             }}
             focusedInput={stateFocusedInput || 'startDate'} // startDate
             onFocusChange={focusedInput => setStateFocusedInput(focusedInput )} // PropTypes.func.isRequired,
-            initialVisibleMonth={() => moment()} // PropTypes.func or null,
+            initialVisibleMonth={() => moment() }// PropTypes.func or null,
             isOutsideRange={(day) => day.isBefore(moment().subtract(1,'days')) }
             numberOfMonths={visibleCalendarMonths}
             noBorder={noBorder}

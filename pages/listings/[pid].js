@@ -1,5 +1,5 @@
 import Head  from 'next/head'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
 
 // Utility library for google maps API
@@ -11,11 +11,22 @@ import ListingPageContent from '../../components/ListingPageContent';
 // import ListingPageForm from '../../components/ListingPageForm'
 import FooterExpanded from '../../components/FooterExpanded'
 
+
 export default function listingPage() {
+
   const router = useRouter();
-  const { data } = router.query;
-  // if router is not ready it'll return undefined which is falsy, in which case we set temp to empty string
-  const roomData = data ? JSON.parse(data) : "";
+  const { pid } = router.query;
+
+  const [roomData, setRoomData ] = useState()
+
+  useEffect(() => {
+    if(!router.isReady) return;
+    let data = JSON.parse(localStorage.getItem(pid))
+    setRoomData(data)
+
+ }, [router.isReady])
+  
+
 
   const { isLoaded } = useLoadScript({
     // This needs to be hidden in the future, currently visible in network
@@ -24,11 +35,9 @@ export default function listingPage() {
     libraries: ['places'],
 })
 
-  if(roomData === "") return <h1>Listing data could not be found.</h1>
+  if(!roomData) return <h1>Listing data could not be found.</h1>
   if(!isLoaded) return <h1>Loading...</h1>
 
-
-  console.log(roomData)
 
   return (
     <>

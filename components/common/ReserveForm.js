@@ -56,7 +56,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
     closeGuestMenu(e);
     closeCalendar(e)
   }
-  // Event handler for calender / guest menus
+  // Event handler for calendar / guest menus
   useEffect(()=> {
     document.addEventListener('mousedown', closeStateBasedMenus)
 

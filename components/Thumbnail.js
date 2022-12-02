@@ -32,16 +32,19 @@ export default function Thumbnail({ results, listingID }) {
         />
       </button>
       <div>
-        <Link
+        {/* <Link
           href={{
             pathname: `listings/${listingID}`,
-            query: {
-              filler: "176262402122865703321029156979",
-              data: JSON.stringify(results),
-            },
+            // query: {
+            //   filler: "176262402122865703321029156979",
+            //   data: JSON.stringify(results),
+            // },
           }}
-        >
-          <a target="_blank">
+          prefetch={false}
+          onClick={()=> localStorage.setItem("data", JSON.stringify(results) )}
+          onLoad={()=> localStorage.setItem("data", JSON.stringify(results) )}
+        > */}
+          <a target="_blank" href={`/listings/${listingID}`} onClick={()=> localStorage.setItem( listingID, JSON.stringify(results) )} >
             <Image
               src={results.xl_picture_url}
               layout="responsive"
@@ -78,7 +81,7 @@ export default function Thumbnail({ results, listingID }) {
               </div>
             </div>
           </a>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
   );
