@@ -11,7 +11,7 @@ import 'react-dates/lib/css/_datepicker.css';
 
 
 
-export default function Calender({checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, setDaysToReserve, noBorder}) {
+export default function Calendar({checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, setDaysToReserve, noBorder}) {
   
     // TailwindCSS default 'large' width breakpoint
     const widthBreakpoint = 1024;
