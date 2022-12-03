@@ -21,6 +21,34 @@ a {
   overflow: none;
 }
 
+input[type=range] {
+  pointer-events: none;
+  -webkit-appearance: none !important;
+}
+
+/* (Firefox) */
+input[type="range"]::-moz-range-thumb {
+    pointer-events:auto !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    background: red !important;
+    -webkit-appearance: none !important;
+
+}
+/* (Safari, Chrome, and Opera) */
+input[type=range]::-webkit-slider-thumb {
+	pointer-events: auto !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: red !important;
+  -webkit-appearance: none !important;
+
+/* @apply w-6 h-6 appearance-none pointer-events-auto; */
+}
+
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

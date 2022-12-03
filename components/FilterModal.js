@@ -5,6 +5,7 @@ import { faBuilding, faHotel, faHouse, faHouseUser, faXmark } from '@fortawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
+import RangeSlider from './common/RangeSlider';
 
 export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, setResults}) {
  
@@ -211,9 +212,11 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
             <section className=' w-auto mx-8 py-8 border-b'>
               <p className='text-lg  font-semibold '>Price Range</p>
               <p className='text-gray-500'>The average nightly price is $</p>
-                        {/* Input Boxes */}
-              <div className='flex mx-6'>
-                <div className='flex-grow leading-none pl-2 pt-2 text-gray-500  border rounded-lg'>
+              {/* Input Boxes */}
+              <RangeSlider />
+              {/*  */}
+              {/* <div className='flex gap-2'>
+                <div className='flex-grow leading-none pl-4 pt-2 text-gray-500  border rounded-lg'>
                   <span className='text-xs leading-none' >min price</span>
                   <div className='leading-none'>
                     <span>$ </span>
@@ -221,14 +224,14 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
                   </div>
                 </div>
                 <span className='p-4' > - </span>
-                <div className='flex-grow leading-none  pl-2 pt-2 text-gray-500  border rounded-lg'>
+                <div className='flex-grow leading-none  pl-4 pt-2 text-gray-500  border rounded-lg'>
                   <span className='text-xs leading-none' >min price</span>
                   <div className='leading-none'>
                     <span>$ </span>
                     <input className="text-black focus:outline-none" type="text" placeholder={'1000+'} />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </section>
 
             {/* Type of room */}
