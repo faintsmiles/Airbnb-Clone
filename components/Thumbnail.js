@@ -22,7 +22,7 @@ export default function Thumbnail({ results, listingID }) {
     console.log("No smart location");
     return null;
   }
-
+  
   return (
     <div className="relative">
       <button className="absolute top-4 right-4 z-10">

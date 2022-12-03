@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Autocomplete } from "@react-google-maps/api";
 
@@ -47,7 +48,11 @@ export default function Header({ setSearchLocation }) {
     <div className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
       <header className="flex flex-col sm:flex-row justify-between items-center h-auto">
         <div className="hidden md:flex sm:pr-4">
-          <a href="/"><Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image" ></Image></a>
+          <Link href={{ pathname: '/' }} >
+            <a>
+              <Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image"  />
+            </a>
+          </Link>
         </div>
         <form className="search-container flex items-center w-full md:max-w-xs hover:shadow-lg" onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="simple-search" className="sr-only">Search</label>

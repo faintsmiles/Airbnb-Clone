@@ -23,7 +23,6 @@ export default function listingPage() {
     if(!router.isReady) return;
     let data = JSON.parse(localStorage.getItem(pid))
     setRoomData(data)
-
  }, [router.isReady])
   
 

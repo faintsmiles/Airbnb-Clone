@@ -9,7 +9,7 @@ import ListMapControl from '../components/ListMapControl'
 import FooterCondensed from '../components/FooterCondensed'
 
 // React hooks
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Utility library for google maps API
 import { useLoadScript  } from '@react-google-maps/api'
@@ -23,7 +23,13 @@ export default function Home({data, defaultLocation }) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     // Move this to env later: https://github.com/JustFly1984/react-google-maps-api/issues/238
     libraries: ['places'],
-})
+  })
+
+  useEffect(() => {
+    // clears local storage when the index page is closed. 
+    return () => { window.onunload = function() { localStorage.clear(); } }
+  }, [])
+  
 
   const [ results, setResults ] = useState(data)
   const [searchLocation, setSearchLocation] = useState(defaultLocation);
