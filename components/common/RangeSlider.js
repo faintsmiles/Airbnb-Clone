@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState } from 'react'
 
 export default function RangeSlider() {
 
@@ -7,14 +7,10 @@ export default function RangeSlider() {
 
     const onLowChange = (e) => {
         setLow(e.target.value)
-        console.log(parseInt(e.target.value))
-        console.log(parseInt(high))
         if( parseInt(e.target.value) > parseInt(high)) { setHigh(10000) }
     }
     const onHighChange = (e) => {
         setHigh(e.target.value)
-        console.log(parseInt(e.target.value))
-        console.log(parseInt(low))
         if( parseInt(e.target.value) < parseInt(low) ) { setLow(0)}
     }
 
@@ -55,24 +51,30 @@ export default function RangeSlider() {
             </div>
             <div className='mt-12 flex gap-2'>
                 <div className='flex-grow leading-none pl-4 pt-2 text-gray-500  border rounded-lg'>
+                    <label htmlFor='minPrice' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-10' />
                     <span className='text-xs leading-none' >min price</span>
                     <div className='leading-none'>
                         <span>$ </span>
                         <input 
-                            className='text-black focus:outline-none' type='text' 
-                            placeholder={'10'} value={low} 
+                            id='minPrice'
+                            className='text-black focus:outline-none appearance-none' type='number' 
+                            placeholder={'0'} value={low} 
+                            min={0}
                             onInput={(e) => onLowChange(e) }
                         />
                     </div>
                 </div>
-                <span className='p-4' > - </span>
-                <div className='flex-grow leading-none  pl-4 pt-2 text-gray-500  border rounded-lg'>
+                <span className='p-4'> - </span>
+                <div className='relative flex-grow leading-none  pl-4 pt-2 text-gray-500  border rounded-lg'>
+                    <label htmlFor='maxPrice' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-10' />
                     <span className='text-xs leading-none' >max price</span>
                     <div className='leading-none'>
                         <span>$ </span>
                         <input 
-                            className='text-black focus:outline-none' type='text' 
+                            id='maxPrice'
+                            className='text-black focus:outline-none appearance-none' type='number' 
                             placeholder={'10000+'} value={high} 
+                            max={10000}
                             onInput={(e) => onHighChange(e) }
                         />
                     </div>
