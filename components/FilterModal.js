@@ -215,23 +215,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
               {/* Input Boxes */}
               <RangeSlider />
               {/*  */}
-              {/* <div className='flex gap-2'>
-                <div className='flex-grow leading-none pl-4 pt-2 text-gray-500  border rounded-lg'>
-                  <span className='text-xs leading-none' >min price</span>
-                  <div className='leading-none'>
-                    <span>$ </span>
-                    <input className="text-black focus:outline-none" type="text" placeholder={'10'} />
-                  </div>
-                </div>
-                <span className='p-4' > - </span>
-                <div className='flex-grow leading-none  pl-4 pt-2 text-gray-500  border rounded-lg'>
-                  <span className='text-xs leading-none' >min price</span>
-                  <div className='leading-none'>
-                    <span>$ </span>
-                    <input className="text-black focus:outline-none" type="text" placeholder={'1000+'} />
-                  </div>
-                </div>
-              </div> */}
+
             </section>
 
             {/* Type of room */}
