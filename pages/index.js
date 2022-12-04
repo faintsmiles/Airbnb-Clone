@@ -72,7 +72,8 @@ export default function Home({data, defaultLocation }) {
         { showFilterModal && 
           <FilterModal 
           carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus}
-          setResults={setResults} searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
+          results={results} setResults={setResults} 
+          searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
         />
         }
 

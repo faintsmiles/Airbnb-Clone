@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import FitlerModalCheckBox from './common/FitlerModalCheckBox'
 
 import { faBuilding, faHotel, faHouse, faHouseUser, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -7,7 +7,7 @@ import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 import RangeSlider from './common/RangeSlider';
 
-export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, setResults}) {
+export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults}) {
  
   // Overall filter options and types
 
@@ -69,7 +69,10 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
 ]
 
   // States and controls
-
+  // Min/max price of rooms
+  const [minPrice, setMinPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(10000)
+  const [avgPrice, setAvgPrice] = useState()
   // Type of room (ie: solo, private, shared)
   const [roomType, setRoomType] = useState([])
   // Keeps track of which Rooms and beds option has been selected
@@ -149,15 +152,15 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
       )
     }
 
-    let results;
+    // let results;
     Promise.all(urlsToQuery)
       .then(results => results.flat())
       .then(results => {
-        console.log('Result size PROMISE: ' + results.length)
-        console.log(results)
+        console.log('Pre filter: ' + results.length)
+        results = filterResultsByPrice(results, minPrice, maxPrice)
         results = filterResultsByBeds(results, { bedrooms: optionsSelected.bedrooms, beds: optionsSelected.beds, bathrooms: optionsSelected.bathrooms})
-        console.log('Result size PROMISE: ' + results.length)
-        console.log(results)
+        console.log('Post filter: ' + results.length)
+
         setResults(results)
       })
       .catch(err => alert(err))
@@ -168,6 +171,8 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   function createFetchList(filters) {
     // create object to store the data, we'll be fetching
      const optionsSelected = {
+      minPrice: '',
+      maxPrice,
       room: [],
       bedrooms: '',
       beds: '',
@@ -179,6 +184,8 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
       safety: []
     }
     // 0 is false and 'Any' means filtering isnt necessary
+    optionsSelected.minPrice = minPrice
+    optionsSelected.maxPrice = maxPrice
     roomType.length ? optionsSelected.room = [...roomType] : null
     bedrooms && bedrooms != 'Any' ? optionsSelected.bedrooms = bedrooms : null
     beds && beds != 'Any' ? optionsSelected.beds = beds : null
@@ -191,13 +198,19 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     return optionsSelected
   }
 
+  useEffect(() => {
+      if(!results) { return }
+
+      let averagePrice = 0;
+      results.map(result => averagePrice += parseInt(result.fields.price))
+      setAvgPrice( (averagePrice/results.length).toFixed(2) )
+  }, [])
 
   return (
     // Modal container
     <div className='fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 p-1 md:p-8' onClick={()=> setShowFilterModal(false)} >
         {/* Filter form */}
         <div className='relative flex flex-col w-full h-full md:max-w-4xl top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 bg-white rounded-xl overflow-auto overflow-y-visible z-50 no-scrollbar' onClick={(e) => e.stopPropagation()} >
-            
           {/* Form Header */}
           <header className='bg-white py-2 flex justify-center border-b z-10'>
               <h1 className='p-4 font-bold'>Filters</h1>
@@ -211,9 +224,12 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
             {/* Price Range  */}
             <section className=' w-auto mx-8 py-8 border-b'>
               <p className='text-lg  font-semibold '>Price Range</p>
-              <p className='text-gray-500'>The average nightly price is $</p>
+              <p className='text-gray-500'>The average nightly price is ${avgPrice}</p>
               {/* Input Boxes */}
-              <RangeSlider />
+              <RangeSlider 
+                minPrice={minPrice} setMinPrice={setMinPrice} 
+                maxPrice={maxPrice} setMaxPrice={setMaxPrice} 
+              />
               {/*  */}
 
             </section>
@@ -292,5 +308,14 @@ function filterResultsByBeds(results, filters) {
 
   })
 
+  return results;
+}
+
+function filterResultsByPrice(results, minPrice, maxPrice) {
+  if(!results) {return}
+
+  results = results.filter(result => {
+    return parseInt(minPrice) <= parseInt(result.fields['price']) && parseInt(maxPrice) >= parseInt(result.fields['price'])  
+  })
   return results;
 }
