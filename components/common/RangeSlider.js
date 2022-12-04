@@ -52,13 +52,13 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                 </div>
             </div>
             <div className='mt-12 flex gap-2'>
-                <div className='flex-grow leading-none pl-4 pt-2 text-gray-500  border rounded-lg'>
-                    <label htmlFor='minPrice' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-10' />
+                <div className='relative flex-grow leading-none pl-4 pt-2 text-gray-500  border rounded-lg z-10'>
+                    <label htmlFor='minPriceInput' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-20' />
                     <span className='text-xs leading-none' >min price</span>
                     <div className='leading-none'>
                         <span>$ </span>
                         <input 
-                            id='minPrice'
+                            id='minPriceInput'
                             className='text-black focus:outline-none appearance-none' type='number' 
                             placeholder={'0'} value={minPrice} 
                             min={0}
@@ -68,12 +68,12 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                 </div>
                 <span className='p-4'> - </span>
                 <div className='relative flex-grow leading-none  pl-4 pt-2 text-gray-500  border rounded-lg'>
-                    <label htmlFor='maxPrice' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-10' />
+                    <label htmlFor='maxPriceInput' className='absolute w-full h-full top-0 bottom-0 left-0 opacity-0 z-10' value={' '} />
                     <span className='text-xs leading-none' >max price</span>
                     <div className='leading-none'>
                         <span>$ </span>
                         <input 
-                            id='maxPrice'
+                            id='maxPriceInput'
                             className='text-black focus:outline-none appearance-none' type='number' 
                             placeholder={'10000+'} value={maxPrice} 
                             max={10000}

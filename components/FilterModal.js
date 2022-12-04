@@ -91,6 +91,9 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
 
   function clearFilter() {
+    setMinPrice(0)
+    setMaxPrice(10000)
+
     setRoomType([])
 
     setBedrooms()
@@ -113,9 +116,12 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   function createQueryURL(optionsSelected) {
     // 
     // Url builder
-    // ORDER: apiURL, Rows, propertyType, roomType, essentials location
-    const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows='
-    let rows = 30;
+    // ORDER: apiURL, Beds BedRooms Bathrooms, Price, Rows, propertyType, roomType, essentials location
+    const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q='
+    
+    let queriesURL =''
+    let priceURL = ''
+    let rows = `&rows=${30}`;
     let propertyURL = ''
     let roomURL = ''
     let essentialsURL = ''
@@ -123,8 +129,13 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     // Requests we'll be calling
     const urlsToQuery = []
 
-    // Append url with options that are queryable 
-    // ORDER: apiURL, Rows, propertyType, roomType, essentials location
+    // Build query url
+    // ORDER: apiURL, queries(beds, bedrooms,baths, minprice,maxprice, rows), propertyType, roomType, essentials, location
+    optionsSelected.beds ? queriesURL += `beds%3E%3D${optionsSelected.beds}+` : null
+    optionsSelected.bedrooms ? queriesURL += `bedrooms%3E%3D${optionsSelected.bedrooms}+` : null
+    optionsSelected.bathrooms ? queriesURL += `bathrooms%3E%3D${optionsSelected.bathrooms}+` : null
+    priceURL +=  `price%3E%3D${optionsSelected.minPrice}+` + `price+%3C%3D${optionsSelected.maxPrice}`
+
     optionsSelected.property ? propertyURL += ('&refine.property_type=' + optionsSelected.property) : null ;
     
     optionsSelected.essentials.map(element => essentialsURL += '&refine.amenities=' + element )
@@ -132,13 +143,13 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     optionsSelected.safety.map(element => essentialsURL += '&refine.amenities=' + element )
     locationURL += '&refine.city=' + searchLocation
 
-    // Room types were selected
+    // Query for each room type selected (can only search 1 at a time through api)
     if (optionsSelected.room.length != 0 && optionsSelected.room.length != typeOfRoom.items.length){ 
-      rows = 15;
+      rows = `&rows=${15}`;
       optionsSelected.room.map(element => {
         roomURL = '&refine.room_type=' + element
         urlsToQuery.push(
-         fetch((apiURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
+         fetch((apiURL + queriesURL + priceURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
          .then(response => response.json())
          .then(response => response.records)
         )
@@ -146,7 +157,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     }
     else {
       urlsToQuery.push(
-        fetch((apiURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
+        fetch((apiURL + queriesURL + priceURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
         .then(response => response.json())
         .then(response => response.records)
       )
@@ -156,15 +167,9 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     Promise.all(urlsToQuery)
       .then(results => results.flat())
       .then(results => {
-        console.log('Pre filter: ' + results.length)
-        results = filterResultsByPrice(results, minPrice, maxPrice)
-        results = filterResultsByBeds(results, { bedrooms: optionsSelected.bedrooms, beds: optionsSelected.beds, bathrooms: optionsSelected.bathrooms})
-        console.log('Post filter: ' + results.length)
-
         setResults(results)
       })
       .catch(err => alert(err))
-      .catch(err => alert('There was a problem getting filter results. Please try again.'))
 
   }
 
@@ -296,26 +301,28 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
 }
 
 
-function filterResultsByBeds(results, filters) {
+// **No longer needed - api allows us to filter by beds . . .
+// function filterResultsByBeds(results, filters) {
 
-  if (!filters) {return}
+//   if (!filters) {return}
 
-  Object.keys(filters).forEach((key) => {
+//   Object.keys(filters).forEach((key) => {
         
-    if (!filters[key]) {return}
+//     if (!filters[key]) {return}
 
-    results = results.filter(result => parseInt(result.fields[key]) >= parseInt(filters[key]))
+//     results = results.filter(result => parseInt(result.fields[key]) >= parseInt(filters[key]))
 
-  })
+//   })
 
-  return results;
-}
+//   return results;
+// }
 
-function filterResultsByPrice(results, minPrice, maxPrice) {
-  if(!results) {return}
+// **No longer needed - api allows us to filter by price . . . 
+// function filterResultsByPrice(results, minPrice, maxPrice) {
+//   if(!results) {return}
 
-  results = results.filter(result => {
-    return parseInt(minPrice) <= parseInt(result.fields['price']) && parseInt(maxPrice) >= parseInt(result.fields['price'])  
-  })
-  return results;
-}
+//   results = results.filter(result => {
+//     return parseInt(minPrice) <= parseInt(result.fields['price']) && parseInt(maxPrice) >= parseInt(result.fields['price'])  
+//   })
+//   return results;
+// }
