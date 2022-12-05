@@ -34,7 +34,7 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                 <div className='relative h-2 text-center'>
                     {/* Range background colors */}
                     <div 
-                        className='absolute w-full top-0 bottom-0 rounded-md bg-gray-200'
+                        className='absolute w-full top-0 bottom-0 rounded-md bg-gray-100'
                     />
                     <div 
                         className='absolute left-0 right-0 bottom-0 top-0 rounded-md bg-blue-300'
@@ -42,12 +42,12 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                     />
                     {/* Artificial range thumbs */}
                     <div 
-                        id='minPrice' style={{ left:`${minPrice/10000 * 97 + '%'}` }} 
-                        className='absolute w-6 h-6 top-0 bg-green-300 rounded-full -mt-2' 
+                        id='minPrice' style={{ left:`${minPrice/10000 * 96 + '%'}` }} 
+                        className='absolute w-8 h-8 top-0 bg-gray-200 rounded-full -mt-3 border border-gray-500' 
                     />
                     <div 
-                        id='maxPrice' style={{ left:`${maxPrice/10000 * 97 + '%'}` }} 
-                        className='absolute w-6 h-6 top-0 right-0 bg-red-300 rounded-full -mt-2' 
+                        id='maxPrice' style={{ left:`${maxPrice/10000 * 96 + '%'}` }} 
+                        className='absolute w-8 h-8 top-0 right-0 bg-gray-200 rounded-full -mt-3 border border-gray-500' 
                     />
                 </div>
             </div>

@@ -192,9 +192,9 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     optionsSelected.minPrice = minPrice
     optionsSelected.maxPrice = maxPrice
     roomType.length ? optionsSelected.room = [...roomType] : null
-    bedrooms && bedrooms != 'Any' ? optionsSelected.bedrooms = bedrooms : null
-    beds && beds != 'Any' ? optionsSelected.beds = beds : null
-    bathrooms && bathrooms != 'Any' ? optionsSelected.bathrooms = bathrooms : null
+    bedrooms && bedrooms != 'Any' ? optionsSelected.bedrooms = parseInt(bedrooms) : null
+    beds && beds != 'Any' ? optionsSelected.beds = parseInt(beds) : null
+    bathrooms && bathrooms != 'Any' ? optionsSelected.bathrooms = parseInt(bathrooms) : null
     property ? optionsSelected.property = property : null
     essentials.length ? optionsSelected.essentials = [...essentials] : null
     features.length ? optionsSelected.features = [...features] : null
