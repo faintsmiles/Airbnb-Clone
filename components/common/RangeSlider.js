@@ -2,17 +2,23 @@ import React from 'react'
 
 export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPrice}) {
 
+    const minPriceAllowed = 0
+    const maxPriceAllowed = 20000
 
     const onLowPriceChange = (e) => {
-        setMinPrice(parseInt(e.target.value))
+        e.target.value < maxPriceAllowed ? setMinPrice(parseInt(e.target.value)) : setMinPrice(maxPriceAllowed - 1)
+
         if( parseInt(e.target.value) > parseInt(maxPrice)) { 
-            parseInt(e.target.value) + 50 > 600 ? setMaxPrice(600) : setMaxPrice( parseInt(e.target.value) + 50) 
+            // 20,000 arbitrary max input value
+            e.target.value < maxPriceAllowed ? setMaxPrice( parseInt(e.target.value) + 50) : setMaxPrice(maxPriceAllowed)
         }
     }
     const onMaxPriceChange = (e) => {
-        setMaxPrice(parseInt(e.target.value))
+        // 20,000 arbitrary max input value
+        e.target.value < maxPriceAllowed ? setMaxPrice(parseInt(e.target.value)) : setMaxPrice(maxPriceAllowed)
+
         if( parseInt(e.target.value) < parseInt(minPrice) ) { 
-            parseInt(e.target.value) - 50 < 0 ? setMinPrice(0) : setMinPrice( parseInt(e.target.value) - 50)
+            parseInt(e.target.value) - 50 < minPriceAllowed ? setMinPrice(minPriceAllowed) : setMinPrice(parseInt(e.target.value) - 50)
         }
     }
 
@@ -20,7 +26,8 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
         if(0 >= price ) return 0 
         
         return price < 600 ? price/600 * 96 : 96
-    }
+    } 
+
 
   return (
     <div className='w-full py-8 flex justify-center items-center'>
@@ -67,7 +74,7 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                             id='minPriceInput'
                             className='text-black focus:outline-none appearance-none' type='number' 
                             placeholder={'0'} value={minPrice} 
-                            min={0}
+                            min={0} max={9999}
                             onInput={(e) => onLowPriceChange(e) }
                         />
                     </div>
@@ -79,10 +86,10 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                     <div className='leading-none'>
                         <span>$ </span>
                         <input 
-                            id='maxPriceInput'
-                            className='text-black focus:outline-none appearance-none' type='number' 
+                            id='maxPriceInput' type='number'
+                            className='text-black focus:outline-none appearance-none'
                             placeholder={'600+'} value={maxPrice} 
-                            max={600}
+                            max={20000}
                             onInput={(e) => onMaxPriceChange(e) }
                         />
                     </div>
