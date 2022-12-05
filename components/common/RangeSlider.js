@@ -6,7 +6,7 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
     const onLowPriceChange = (e) => {
         setMinPrice(parseInt(e.target.value))
         if( parseInt(e.target.value) > parseInt(maxPrice)) { 
-            parseInt(e.target.value) + 50 > 10000 ? setMaxPrice(10000) : setMaxPrice( parseInt(e.target.value) + 50) 
+            parseInt(e.target.value) + 50 > 600 ? setMaxPrice(600) : setMaxPrice( parseInt(e.target.value) + 50) 
         }
     }
     const onMaxPriceChange = (e) => {
@@ -16,17 +16,23 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
         }
     }
 
+    const findPadding = (price) => {
+        if(0 >= price ) return 0 
+        
+        return price < 600 ? price/600 * 96 : 96
+    }
+
   return (
     <div className='w-full py-8 flex justify-center items-center'>
         <div className='relative w-full'>
             <div className=''>
                 <input 
-                    type='range' min={0} max={10000} value={minPrice} 
+                    type='range' min={0} max={600} value={minPrice} 
                     className='absolute h-2 w-full opacity-0 cursor-pointer z-20'
                     onInput={(e) => onLowPriceChange(e) }
                 />
                 <input 
-                    type='range' min={1} max={10000} value={maxPrice} 
+                    type='range' min={1} max={600} value={maxPrice} 
                     className='absolute h-2 w-full opacity-0 cursor-pointer z-20'
                     onInput={(e) => onMaxPriceChange(e) }
                 />
@@ -38,15 +44,15 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                     />
                     <div 
                         className='absolute left-0 right-0 bottom-0 top-0 rounded-md bg-blue-300'
-                        style={{ left:`${minPrice/10000 * 97 + '%'}`, right:`${ 100 - (maxPrice/10000 * 97) + '%'}` }}
+                        style={{ left:`${findPadding(minPrice) + '%'}`, right:`${ 100 - findPadding(maxPrice) + '%'}` }}
                     />
                     {/* Artificial range thumbs */}
                     <div 
-                        id='minPrice' style={{ left:`${minPrice/10000 * 96 + '%'}` }} 
+                        id='minPrice' style={{ left:`${findPadding(minPrice) + '%'}` }} 
                         className='absolute w-8 h-8 top-0 bg-gray-200 rounded-full -mt-3 border border-gray-500' 
                     />
                     <div 
-                        id='maxPrice' style={{ left:`${maxPrice/10000 * 96 + '%'}` }} 
+                        id='maxPrice' style={{ left :`${ findPadding(maxPrice) + '%'}` }} 
                         className='absolute w-8 h-8 top-0 right-0 bg-gray-200 rounded-full -mt-3 border border-gray-500' 
                     />
                 </div>
@@ -75,8 +81,8 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                         <input 
                             id='maxPriceInput'
                             className='text-black focus:outline-none appearance-none' type='number' 
-                            placeholder={'10000+'} value={maxPrice} 
-                            max={10000}
+                            placeholder={'600+'} value={maxPrice} 
+                            max={600}
                             onInput={(e) => onMaxPriceChange(e) }
                         />
                     </div>

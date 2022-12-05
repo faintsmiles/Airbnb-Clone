@@ -71,7 +71,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   // States and controls
   // Min/max price of rooms
   const [minPrice, setMinPrice] = useState(0)
-  const [maxPrice, setMaxPrice] = useState(10000)
+  const [maxPrice, setMaxPrice] = useState(600)
   const [avgPrice, setAvgPrice] = useState()
   // Type of room (ie: solo, private, shared)
   const [roomType, setRoomType] = useState([])
@@ -92,7 +92,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
 
   function clearFilter() {
     setMinPrice(0)
-    setMaxPrice(10000)
+    setMaxPrice(600)
 
     setRoomType([])
 
@@ -229,7 +229,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
             {/* Price Range  */}
             <section className=' w-auto mx-8 py-8 border-b'>
               <p className='text-lg  font-semibold '>Price Range</p>
-              <p className='text-gray-500'>The average nightly price is ${avgPrice}</p>
+              <p className='text-gray-600'>The average nightly price is ${avgPrice}</p>
               {/* Input Boxes */}
               <RangeSlider 
                 minPrice={minPrice} setMinPrice={setMinPrice} 
