@@ -51,7 +51,7 @@ export default function RangeSlider({ minPrice, setMinPrice, maxPrice, setMaxPri
                     />
                     <div 
                         className='absolute left-0 right-0 bottom-0 top-0 rounded-md bg-blue-300'
-                        style={{ left:`${findPadding(minPrice) + '%'}`, right:`${ 100 - findPadding(maxPrice) + '%'}` }}
+                        style={{ left:`${findPadding(minPrice) + '%'}`, right:`${ 96 - findPadding(maxPrice) + '%'}` }}
                     />
                     {/* Artificial range thumbs */}
                     <div 

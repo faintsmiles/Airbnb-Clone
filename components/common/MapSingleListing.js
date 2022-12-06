@@ -1,31 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, CircleF } from '@react-google-maps/api'
-
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-
-
-
+import React, { useState } from 'react'
+import { GoogleMap, MarkerF, InfoWindowF } from '@react-google-maps/api'
 
 
 export default function MapSingleListing({results, center}) {
 
-    // Are we connected to google's api
-    const { isLoaded } = useLoadScript({
-        // This needs to be hidden in the future, currently visible in network
-        // May need to do SSR in future to prevent leaking or calling to API on server
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-        libraries: ['places'],
-    })
-
-
     const [displayBubble, setDisplayBubble] = useState(true)
 
-
     if(!results || !center) return <>?????</>;
-    if(!isLoaded) return <>Loading..</>
-
 
     const options = {
         strokeColor: '#FFC0CB',
@@ -46,7 +27,6 @@ export default function MapSingleListing({results, center}) {
             zoom={12} 
             center={center}            
             mapContainerClassName='listing-page-map'
-            
         >
             <MarkerF          
                 position={{ lat: center.lat, lng: center.lng }} 

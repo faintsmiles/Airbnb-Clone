@@ -31,9 +31,9 @@ export default function ListingPageTitle({roomData}) {
                         { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
                     </span>
                     <span className='px-2'>·</span>
-                    <span className=' underline cursor-pointer whitespace-nowrap'>
+                    <a href='#review-section' className=' underline cursor-pointer whitespace-nowrap'>
                         {roomData.number_of_reviews + ' reviews'}
-                    </span>
+                    </a>
                     <span className='px-2'>·</span>
                     <span className=' underline cursor-pointer whitespace-nowrap' >{roomData.smart_location}</span>
                 </div>
@@ -49,15 +49,6 @@ export default function ListingPageTitle({roomData}) {
                 </div>
             </div>
         </div>
-        {/* <div>
-            <span>{roomData.guests_included + ' guests' }</span>
-            <span className='px-2'>·</span>
-            <span> {roomData.bedrooms + ' bedrooms'} </span>
-            <span className='px-2'>·</span>
-            <span> {roomData.beds + ' beds'} </span>
-            <span className='px-2'>·</span>
-            <span> {roomData.bathrooms + ' baths'} </span>
-        </div> */}
     </div>
   )
 }

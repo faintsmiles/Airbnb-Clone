@@ -56,7 +56,9 @@ export default function ListingPageContent({roomData}) {
 
         <div className='mx-8 py-8 lg:px-0'>
           <div className='pb-8 text-2xl '>Where you’ll be</div>
-          <MapSingleListing key={"singleListingMap"} results={roomData} center={ {lat:roomData.geolocation[0], lng: roomData.geolocation[1] } } />
+          <MapSingleListing 
+            key={"singleListingMap"} results={roomData} center={ {lat:roomData.geolocation[0], lng: roomData.geolocation[1] } } 
+          />
           <div className='pt-8 pb-16 flex flex-col gap-4'>
             <div className='text-base font-bold'>
               <span> {roomData.neighbourhood ? (roomData.neighbourhood  + ',') : ""  }</span>

@@ -34,8 +34,8 @@ export default function listingPage() {
     libraries: ['places'],
 })
 
-  if(!roomData) return <h1>Listing data could not be found.</h1>
   if(!isLoaded) return <h1>Loading...</h1>
+  if(!roomData) return <h1>Listing data could not be found.</h1>
 
 
   return (
