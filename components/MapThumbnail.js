@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function MapThumbnail({ listingData, listingID }) {
+  // prevents displaying where image hangs/returns an error
+  const [error, setError] = useState(false);
   // Exactly the same as  thumbnail with slight styling differences
   // We checked for missing properties 1 layer up inside of marker.
   return (
@@ -37,6 +39,7 @@ export default function MapThumbnail({ listingData, listingID }) {
                 className=""
                 priority={true}
                 alt="Loading"
+                onError={() => setError(true)}
               />
             </div>
             <div className="text-sm px-2 md:p-4 ">
