@@ -21,8 +21,6 @@ export default async function handler(req, res) {
       countryName = '&refine.country=' + body.country;
    }
 
-   console.log("api url:" + apiURL + countryName + cityName )
-
    return fetch(apiURL + cityName )
     .then((response) => response.json())
     .then((data) => {
