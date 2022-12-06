@@ -11,7 +11,7 @@ import ListingPageContent from '../../components/ListingPageContent';
 // import ListingPageForm from '../../components/ListingPageForm'
 import FooterExpanded from '../../components/FooterExpanded'
 
-const googleMapLibraries =  ['places']
+const googleLibraries =  ['places']
 
 
 export default function listingPage() {
@@ -33,7 +33,7 @@ export default function listingPage() {
     // This needs to be hidden in the future, currently visible in network
     // May need to do SSR in future to prevent leaking or calling to API on server
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: googleMapLibraries,
+    libraries: googleLibraries,
 })
 
   if(!isLoaded) return <h1>Loading...</h1>

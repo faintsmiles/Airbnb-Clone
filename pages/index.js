@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
 // Utility library for google maps API
 import { useLoadScript  } from '@react-google-maps/api'
 
-const googleMapLibraries =  ['places']
+const googleLibraries =  ['places']
 
 
 export default function Home({data, defaultLocation }) {
@@ -25,7 +25,7 @@ export default function Home({data, defaultLocation }) {
     // May need to do SSR in future to prevent leaking or calling to API on server
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     // Move this to env later: https://github.com/JustFly1984/react-google-maps-api/issues/238
-    libraries: googleMapLibraries,
+    libraries: googleLibraries,
   })
 
   useEffect(() => {
