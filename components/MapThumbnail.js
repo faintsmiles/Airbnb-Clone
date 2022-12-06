@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function MapThumbnail({ listingData, listingID, setError, favorites, modifyFavorites }) {
   // Exactly the same as  thumbnail with slight styling differences
   // We checked for missing properties 1 layer up inside of marker.
+  
   return (
     <div className="relative h-48 w-48 md:h-full md:w-96 bg-white-500">
-      <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites([...favorites, listingData])} >
+      <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, listingData)} >
         <FontAwesomeIcon
           className="heart text-black text-opacity-50 text-xl"
           icon={faHeart}
