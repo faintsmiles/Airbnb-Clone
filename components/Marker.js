@@ -4,9 +4,14 @@ import { MarkerF, InfoWindowF } from '@react-google-maps/api'
 import MapThumbnail from './MapThumbnail';
 
 export default function Marker({item , index, showInfo, setShowInfoIndex }) {
+    // prevents displaying where image hangs/returns an error
+    const [error, setError] = useState(false);
+
     
     // Displays info window when marker is clicked
     // const [ showInfoWindow, setShowInfoWindow] = useState(showInfo);
+
+    if(error) return;
 
     // Fields used in thumbnail
     if( !item.fields.geolocation  ) return;
@@ -36,7 +41,7 @@ export default function Marker({item , index, showInfo, setShowInfoIndex }) {
                         id='infoWindowF'
                         onCloseClick={() => setShowInfoIndex(null) }
                     >   
-                            <MapThumbnail listingData={item.fields} listingID={item.recordid}  />                        
+                            <MapThumbnail listingData={item.fields} listingID={item.recordid} setError={setError} />                        
                     </InfoWindowF>
                 }
             </MarkerF>
