@@ -3,7 +3,7 @@ import { MarkerF, InfoWindowF } from '@react-google-maps/api'
 // import Thumbnail from "./Thumbnail";
 import MapThumbnail from './MapThumbnail';
 
-export default function Marker({item , index, showInfo, setShowInfoIndex }) {
+export default function Marker({item , index, showInfo, setShowInfoIndex, favorites, modifyFavorites }) {
     // prevents displaying where image hangs/returns an error
     const [error, setError] = useState(false);
 
@@ -41,7 +41,10 @@ export default function Marker({item , index, showInfo, setShowInfoIndex }) {
                         id='infoWindowF'
                         onCloseClick={() => setShowInfoIndex(null) }
                     >   
-                            <MapThumbnail listingData={item.fields} listingID={item.recordid} setError={setError} />                        
+                            <MapThumbnail
+                                listingData={item.fields} listingID={item.recordid} setError={setError} 
+                                favorites={favorites} modifyFavorites={modifyFavorites}
+                            />                        
                     </InfoWindowF>
                 }
             </MarkerF>

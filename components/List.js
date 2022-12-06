@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import Thumbnail from './Thumbnail'
 
-export default function List({results, isLoading}) {
+export default function List({results, favorites, modifyFavorites}) {
     // if (isLoading) return <p>Loading...</p>
     if (!results ) return <p className='absolute p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto'>Results could not be fetched. Please try refreshing</p>
     if(results.length === 0) return <div className='p-4 w-full h-max border z-50 bg-white text-black font-bold text-center mx-auto'>No results found</div>
@@ -17,6 +17,7 @@ export default function List({results, isLoading}) {
                   location={element.geometry} 
                   key={element.recordid} 
                   listingID={element.recordid}
+                  favorites={favorites} modifyFavorites={modifyFavorites}
                 /> 
             }) 
           }

@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { Autocomplete } from "@react-google-maps/api";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGlobe, faHeart } from '@fortawesome/free-solid-svg-icons'
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
 
-export default function Header({ setSearchLocation }) {
+export default function Header({ setSearchLocation, favorites, setshowFavorites }) {
 
 
   // Ref to accesss the search input value
@@ -43,8 +43,8 @@ export default function Header({ setSearchLocation }) {
 
   return (
     <div className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
-      <header className="flex flex-col sm:flex-row justify-between items-center h-auto">
-        <div className="hidden md:flex sm:pr-4">
+      <header className="flex flex-1 justify-between  items-center h-auto">
+        <div className="w-full hidden md:flex sm:pr-4">
           <Link href={{ pathname: '/' }} >
             <a>
               <Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image"  />
@@ -69,16 +69,22 @@ export default function Header({ setSearchLocation }) {
             </button>
           </div>
         </form>
-        <div className="hidden md:flex justify-between gap-1 " >
+        <div className="hidden w-full md:flex md:justify-end md:items-center gap-1 " >
           {/* 'Become a Host link */}
-          <div className=" py-3 px-4 hover:bg-gray-100 rounded-full text-sm font-semibold ">Become a Host</div>
+          <div className="hidden text-center lg:flex py-3 px-4 hover:bg-gray-100 rounded-full text-sm font-semibold ">Become a Host</div>
           {/* Globe Icon */}
           <button className="p-3 flex hover:bg-gray-100 rounded-full text-base">
             <FontAwesomeIcon icon={faGlobe} />
           </button>
+          {/* favorites Button. Only visible when favorites has items */}
+          { favorites.length > 0 && 
+            <button className="p-3 flex hover:bg-gray-100 rounded-full text-base" onClick={()=>setshowFavorites(true)}>
+              <FontAwesomeIcon icon={faHeart} />
+            </button>
+          }
           {/* Bars + User Icon */}
           <div className="relative p-2 ml-2 border hover:shadow-xl rounded-full" ref={userMenu} onClick={(e)=> {setShowMenu(!showMenu)} }>
-            <span className="flex px-2 py-1 align-baseline gap-3 ">
+            <span className="flex px-2 py-1 align-baseline  gap-3 ">
               <span>
                 <FontAwesomeIcon icon={faBars} />
               </span>

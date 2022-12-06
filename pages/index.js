@@ -3,9 +3,10 @@
 import Head  from 'next/head'
 import Header from '../components/Header'
 import Category from '../components/Category'
-import FilterModal from '../components/FilterModal'
 import Content from '../components/Content'
 import ListMapControl from '../components/ListMapControl'
+import FilterModal from '../components/FilterModal'
+import FavoritesModal from '../components/FavoritesModal'
 import FooterCondensed from '../components/FooterCondensed'
 
 // React hooks
@@ -26,22 +27,39 @@ export default function Home({data, defaultLocation }) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: googleLibraries,
   })
+  
+  //let favorites = [];
+
+  const [results, setResults ] = useState(data)
+  const [searchLocation, setSearchLocation] = useState(defaultLocation);
+  const [carouselFocus, setCarouselFocus] = useState()
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [mapToggle, setMapToggle] = useState(false);
+  const [favorites, setFavorites]  = useState([])
+  const [showFavorites, setShowFavorites] = useState(false)
+
+  function modifyFavorites(favorites, newItem) {
+    // check favorites to see if item is already present, if so remove. otherwise add.
+    let duplicateFound = false;
+    favorites = favorites.filter(object => object.id != newItem.id ? true : (duplicateFound = true, false))
+
+    if(!duplicateFound) {
+      favorites.push(newItem)
+    }
+
+    setFavorites(favorites)
+    console.log(favorites)
+  }  
 
   useEffect(() => {
     // clears local storage when the index page is closed. 
     return () => { window.onunload = function() { localStorage.clear(); } }
   }, [])
+
   
 
-  const [ results, setResults ] = useState(data)
-  const [searchLocation, setSearchLocation] = useState(defaultLocation);
-  const [carouselFocus, setCarouselFocus] = useState()
-  const [ showFilterModal, setShowFilterModal] = useState(false);
-  const [ mapToggle, setMapToggle] = useState(false);
-
-  const [ wishList, setWishList] = useState({});
-  
   if(!isLoaded) return <h1> Loading ... </h1>
+
 
   return (
     <div>
@@ -53,14 +71,18 @@ export default function Home({data, defaultLocation }) {
 
       <main>
 
-        <Header setSearchLocation={setSearchLocation} />
+        <Header setSearchLocation={setSearchLocation} favorites={favorites} setShowFavorites={setShowFavorites} />
 
         <Category
          carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus} 
          searchLocation={searchLocation} setResults={setResults} setShowFilterModal={setShowFilterModal} 
         />
 
-        <Content results={results} setResults={setResults} searchLocation={searchLocation} showMap={mapToggle} />
+        <Content 
+          results={results} setResults={setResults} 
+          searchLocation={searchLocation} showMap={mapToggle} 
+          favorites={favorites} modifyFavorites={modifyFavorites}
+          />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
 
@@ -77,6 +99,9 @@ export default function Home({data, defaultLocation }) {
           results={results} setResults={setResults} 
           searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
         />
+        }
+        {
+          showFavorites && <FavoritesModal />
         }
 
       </main>

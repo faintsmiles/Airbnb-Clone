@@ -4,7 +4,7 @@ import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Thumbnail({ results, listingID }) {
+export default function Thumbnail({ results, listingID, favorites, modifyFavorites }) {
 
   // prevents displaying where image hangs/returns an error
   const [error, setError] = useState(false);
@@ -34,7 +34,7 @@ export default function Thumbnail({ results, listingID }) {
   
   return (
     <div className="relative">
-      <button className="absolute top-4 right-4 z-10">
+      <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, results)}>
         <FontAwesomeIcon
           className="heart text-black text-opacity-50 text-xl"
           icon={faHeart}
