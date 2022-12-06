@@ -60,10 +60,6 @@ const fetchNewResults = ( results, setResults ) => {
       body: JSON.stringify(body)
     })
     .then(response => response.json())
-    .then( result => {
-      console.log("Fetching new results...")
-      console.log(result)
-      setResults(result ) 
-    })
+    .then( result => setResults(result))
     .catch( err => alert('There was a problem getting listing data. Please try again, or change destination'))
 }

@@ -29,7 +29,6 @@ export default function CategoryCarousel({ carouselFocus, setCarouselFocus, sear
   }
 
   useEffect(() => {
-    console.log('category useEffect')
     if(!carouselFocus) {return}
   
     const apiURL = `https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30&facet=city`
@@ -38,11 +37,8 @@ export default function CategoryCarousel({ carouselFocus, setCarouselFocus, sear
 
     fetch(apiURL + propertyType + location)
     .then(response => response.json())
-    .then(results => {
-      console.log(results)
-      setResults(results.records)
-    })
-
+    .then(results => setResults(results.records))
+    .catch(err => alert(err))
 
   }, [carouselFocus])
 

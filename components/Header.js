@@ -21,10 +21,7 @@ export default function Header({ setSearchLocation }) {
 
   // Submit handler for search input 
   const handleSearchSubmit = async (e) => {
-    if(e) {
-      e.preventDefault();
-    }
-    console.log("handle search submission")
+    e.preventDefault();
     setSearchLocation(searchInputValue.current.value);
   } 
 

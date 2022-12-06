@@ -9,7 +9,7 @@ import 'react-dates/initialize'
 import { DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-
+// ** regarding legacy warnings -- see https://github.com/react-dates/react-dates/issues/1748 ** 
 
 export default function Calendar({checkInDay, setCheckInDay, checkOutDay, setCheckOutDay, minimumNights, setDaysToReserve, noBorder}) {
   

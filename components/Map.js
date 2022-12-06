@@ -57,8 +57,8 @@ function Google({ results, center }) {
                 fullscreenControl: false
             }}
             mapContainerClassName='map-container' 
-            onIdle={() => console.log(google.maps.LatLng())}
-            onDragEnd={() => console.log()}
+            onIdle={() => null }
+            onDragEnd={() => null }
         >
             { 
                 results.map((item, index) => {

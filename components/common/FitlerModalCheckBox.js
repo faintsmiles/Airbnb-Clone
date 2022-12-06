@@ -8,16 +8,14 @@ export default function FitlerModalCheckBox({options, amenity, setAmenity}) {
         if(e.target.checked) {
             if(!amenity.includes(e.target.value)){
                 setAmenity([...amenity, e.target.value])
-                console.log([...amenity, e.target.value])
             }
         }
         if(!e.target.checked){
             if(amenity.includes(e.target.value)) {
                 let temp  = amenity.filter(item => item !== e.target.value)
                 setAmenity(temp)    
-                console.log(temp)                
-                }
             }
+        }
     }
 
   return (

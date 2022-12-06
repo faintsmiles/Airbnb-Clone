@@ -5,9 +5,7 @@ export default function ListingPageDescription({roomData}) {
 
     const amenityList = roomData.amenities.split(',')
 
-    console.log(amenityList)
-
-  return (
+    return (
     <div className='w-full'>
         {/* Title + number of rooms/guests */}
         <div className='flex justify-between py-8 border-b '>
