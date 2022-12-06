@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Thumbnail({ results, listingID }) {
+
+  // prevents displaying where image hangs/returns an error
+  const [error, setError] = useState(false);
+
+
+  if(error) {
+    console.log("Image could not be found")
+    return null;
+  }
   // Fields used in thumbnail
   if (!results.geolocation) {
     console.log("No geolocation");
@@ -51,9 +60,10 @@ export default function Thumbnail({ results, listingID }) {
               objectFit="cover"
               width={200}
               height={200}
-              className="rounded-lg"
+              className="bg-gray-100 rounded-lg"
               priority={true}
               alt="Loading..."
+              onError={() => setError(true)}
             />
             <div className="text-sm">
               <div className="mt-2 flex justify-between">
