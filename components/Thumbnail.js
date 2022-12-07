@@ -12,10 +12,6 @@ export default function Thumbnail({ results, listingID, favorites, setFavorites 
   const [saved, setSaved] = useState(false)
 
   useEffect(() => {
-    console.log("thumbnail")
-    console.log(favorites)
-    console.log(results)
-
     let isSaved = false
     favorites.map(element => { if(element.id == results.id ) {isSaved = true} })
     setSaved(isSaved)
@@ -47,15 +43,13 @@ export default function Thumbnail({ results, listingID, favorites, setFavorites 
   
   return (
     <div className="relative">
-      {/* Heart icon on thumbnail. only to display if favorites exists */}
-      { favorites &&
+        {/* Add to favorites button */}
         <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, setFavorites, results) } >
           <FontAwesomeIcon
             className={`heart text-xl ${saved ? 'text-red-600 text-opacity-100' : 'text-black text-opacity-50' }`}
             icon={faHeart}
           />
         </button>
-      }
       <div>
           <a target="_blank" href={`/listings/${listingID}`} onClick={()=> localStorage.setItem( listingID, JSON.stringify(results) )} > 
             <Image
