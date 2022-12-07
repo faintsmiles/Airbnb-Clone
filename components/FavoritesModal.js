@@ -1,5 +1,8 @@
 import React from 'react'
 import Thumbnail from './Thumbnail'
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 export default function favoritesModal({favorites, setFavorites,  setShowFavorites}) {
 
@@ -10,8 +13,12 @@ export default function favoritesModal({favorites, setFavorites,  setShowFavorit
           <div className='h-auto w-full bg-green-50 grid grid-cols-1 sm:grid-cols-2 justify-items-center px-8 md:px-32 pt-12 pb-24 gap-x-16 gap-y-6'>
             {favorites.map(item => {
                 return (
-                <div className='h-full w-full max-w-sm max-h-sm'>
-                  <Thumbnail results={item} listingID={item.recordid} favorites={favorites} setFavorites={setFavorites}  />
+                <div className='h-full w-full max-w-sm max-h-sm' key={'Favorites' + uuidv4()}>
+                  <Thumbnail 
+                    key={uuidv4()}
+                    results={item} listingID={item.recordid} 
+                    favorites={favorites} setFavorites={setFavorites}  
+                    />
                 </div>)
             })}
             </div>

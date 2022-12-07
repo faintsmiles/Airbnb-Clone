@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 //import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,19 @@ export default function Thumbnail({ results, listingID, favorites, setFavorites 
 
   // prevents displaying where image hangs/returns an error
   const [error, setError] = useState(false);
+  const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    console.log("thumbnail")
+    console.log(favorites)
+    console.log(results)
+
+    let isSaved = false
+    favorites.map(element => { if(element.id == results.id ) {isSaved = true} })
+    setSaved(isSaved)
+
+  }, [favorites])
+
 
   if(error) {
     console.log("Image could not be found")
@@ -36,9 +49,9 @@ export default function Thumbnail({ results, listingID, favorites, setFavorites 
     <div className="relative">
       {/* Heart icon on thumbnail. only to display if favorites exists */}
       { favorites &&
-        <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, setFavorites, results)}>
+        <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, setFavorites, results) } >
           <FontAwesomeIcon
-            className="heart text-black text-opacity-50 text-xl"
+            className={`heart text-xl ${saved ? 'text-red-600 text-opacity-100' : 'text-black text-opacity-50' }`}
             icon={faHeart}
           />
         </button>
