@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { modifyFavorites } from "../utils/favorites";
 
 export default function MapThumbnail({ listingData, listingID, setError, favorites, setFavorites }) {
   // Exactly the same as  thumbnail with slight styling differences
@@ -10,7 +11,7 @@ export default function MapThumbnail({ listingData, listingID, setError, favorit
   
   return (
     <div className="relative h-48 w-48 md:h-full md:w-96 bg-white-500">
-      <button className="absolute top-4 right-4 z-10" onClick={() => setFavorites(favorites, listingData)} >
+      <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, setFavorites, listingData)} >
         <FontAwesomeIcon
           className="heart text-black text-opacity-50 text-xl"
           icon={faHeart}
