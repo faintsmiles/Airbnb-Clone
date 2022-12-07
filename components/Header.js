@@ -10,8 +10,7 @@ import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
 
-export default function Header({ setSearchLocation, favorites, setshowFavorites }) {
-
+export default function Header({ setSearchLocation, favorites, setShowFavorites }) {
 
   // Ref to accesss the search input value
   const searchInputValue = useRef();
@@ -77,8 +76,8 @@ export default function Header({ setSearchLocation, favorites, setshowFavorites 
             <FontAwesomeIcon icon={faGlobe} />
           </button>
           {/* favorites Button. Only visible when favorites has items */}
-          { favorites.length > 0 && 
-            <button className="p-3 flex hover:bg-gray-100 rounded-full text-base" onClick={()=>setshowFavorites(true)}>
+          { (favorites && favorites.length > 0) && 
+            <button className="p-3 flex hover:bg-gray-100 rounded-full text-base" onClick={() => setShowFavorites(true)}>
               <FontAwesomeIcon icon={faHeart} />
             </button>
           }

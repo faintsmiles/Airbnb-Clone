@@ -10,31 +10,47 @@ import Header from '../../components/Header'
 import ListingPageContent from '../../components/ListingPageContent';
 // import ListingPageForm from '../../components/ListingPageForm'
 import FooterExpanded from '../../components/FooterExpanded'
+import FavoritesModal from '../../components/FavoritesModal'
+import { refreshFavorites } from '../../utils/favorites'
+
 
 const googleLibraries =  ['places']
 
 
 export default function listingPage() {
 
-  const router = useRouter();
-  const { pid } = router.query;
-
-  const [roomData, setRoomData ] = useState()
-
-  useEffect(() => {
-    if(!router.isReady) return;
-    let data = JSON.parse(localStorage.getItem(pid))
-    setRoomData(data)
- }, [router.isReady])
-  
-
-
   const { isLoaded } = useLoadScript({
     // This needs to be hidden in the future, currently visible in network
     // May need to do SSR in future to prevent leaking or calling to API on server
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: googleLibraries,
-})
+  })
+
+  const router = useRouter();
+  const { pid } = router.query;
+
+  const [roomData, setRoomData ] = useState()
+  const [favorites, setFavorites]  = useState([])
+  const [showFavorites, setShowFavorites] = useState(false)
+
+  const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
+
+
+  useEffect(() => {
+    if(!router.isReady) return;
+
+    // syncs/refreshes favorites if altered in another tab witin the same domain
+    window.addEventListener('storage', callRefreshFavorites)
+    // Set initial values, once router has connected
+    let temp = JSON.parse(localStorage.getItem(pid))
+    setRoomData(temp)
+    temp = JSON.parse(localStorage.getItem("favoriteListings"))
+    setFavorites(temp) 
+
+    return () => { window.removeEventListener('storage', refreshFavorites) }
+
+ }, [router.isReady])
+  
 
   if(!isLoaded) return <h1>Loading...</h1>
   if(!roomData) return <h1>Listing data could not be found.</h1>
@@ -48,9 +64,10 @@ export default function listingPage() {
         <link rel="icon" href="/airbnb.svg" />
       </Head>
       <main>
-        <Header />  
+        <Header favorites={favorites} setShowFavorites={setShowFavorites}  />  
         <ListingPageContent roomData={roomData} />
         <FooterExpanded />
+        { showFavorites && <FavoritesModal favorites={favorites} setFavorites={setFavorites} setShowFavorites={setShowFavorites} />}
       </main>
     </>
   )

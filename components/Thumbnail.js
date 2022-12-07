@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+//import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {modifyFavorites } from "../utils/favorites";
 
-export default function Thumbnail({ results, listingID, favorites, modifyFavorites }) {
+export default function Thumbnail({ results, listingID, favorites, setFavorites }) {
 
   // prevents displaying where image hangs/returns an error
   const [error, setError] = useState(false);
-
 
   if(error) {
     console.log("Image could not be found")
@@ -34,26 +34,17 @@ export default function Thumbnail({ results, listingID, favorites, modifyFavorit
   
   return (
     <div className="relative">
-      <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, results)}>
-        <FontAwesomeIcon
-          className="heart text-black text-opacity-50 text-xl"
-          icon={faHeart}
-        />
-      </button>
+      {/* Heart icon on thumbnail. only to display if favorites exists */}
+      { favorites &&
+        <button className="absolute top-4 right-4 z-10" onClick={() => modifyFavorites(favorites, setFavorites, results)}>
+          <FontAwesomeIcon
+            className="heart text-black text-opacity-50 text-xl"
+            icon={faHeart}
+          />
+        </button>
+      }
       <div>
-        {/* <Link
-          href={{
-            pathname: `listings/${listingID}`,
-            // query: {
-            //   filler: "176262402122865703321029156979",
-            //   data: JSON.stringify(results),
-            // },
-          }}
-          prefetch={false}
-          onClick={()=> localStorage.setItem("data", JSON.stringify(results) )}
-          onLoad={()=> localStorage.setItem("data", JSON.stringify(results) )}
-        > */}
-          <a target="_blank" href={`/listings/${listingID}`} onClick={()=> localStorage.setItem( listingID, JSON.stringify(results) )} >
+          <a target="_blank" href={`/listings/${listingID}`} onClick={()=> localStorage.setItem( listingID, JSON.stringify(results) )} > 
             <Image
               src={results.xl_picture_url}
               layout="responsive"
@@ -91,7 +82,6 @@ export default function Thumbnail({ results, listingID, favorites, modifyFavorit
               </div>
             </div>
           </a>
-        {/* </Link> */}
       </div>
     </div>
   );

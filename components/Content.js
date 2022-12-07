@@ -3,7 +3,7 @@ import List from '../components/List'
 import Map from '../components/Map'
 
 
-export default function Content({ results, setResults, searchLocation, showMap, favorites, modifyFavorites }) {
+export default function Content({ results, setResults, searchLocation, showMap, favorites, setFavorites }) {
 
     const [intitialRender, setInitialRender] = useState(0)
     // Default center
@@ -34,8 +34,8 @@ export default function Content({ results, setResults, searchLocation, showMap, 
     }, [searchLocation])
 
 
-    if(!showMap) return <List results={results} favorites={favorites} modifyFavorites={modifyFavorites} />
-    if(showMap) return <Map results={results} center={center} favorites={favorites} modifyFavorites={modifyFavorites} />
+    if(!showMap) return <List results={results} favorites={favorites} setFavorites={setFavorites} />
+    if(showMap) return <Map results={results} center={center} favorites={favorites} setFavorites={setFavorites} />
     
     return null;
 }

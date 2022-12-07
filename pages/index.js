@@ -14,7 +14,10 @@ import { useState, useEffect } from 'react'
 
 // Utility library for google maps API
 import { useLoadScript  } from '@react-google-maps/api'
+import { refreshFavorites } from '../utils/favorites'
 
+
+// google maps libraries
 const googleLibraries =  ['places']
 
 
@@ -28,8 +31,6 @@ export default function Home({data, defaultLocation }) {
     libraries: googleLibraries,
   })
   
-  //let favorites = [];
-
   const [results, setResults ] = useState(data)
   const [searchLocation, setSearchLocation] = useState(defaultLocation);
   const [carouselFocus, setCarouselFocus] = useState()
@@ -38,22 +39,16 @@ export default function Home({data, defaultLocation }) {
   const [favorites, setFavorites]  = useState([])
   const [showFavorites, setShowFavorites] = useState(false)
 
-  function modifyFavorites(favorites, newItem) {
-    // check favorites to see if item is already present, if so remove. otherwise add.
-    let duplicateFound = false;
-    favorites = favorites.filter(object => object.id != newItem.id ? true : (duplicateFound = true, false))
-
-    if(!duplicateFound) {
-      favorites.push(newItem)
-    }
-
-    setFavorites(favorites)
-    console.log(favorites)
-  }  
+  const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
 
   useEffect(() => {
+    // syncs/refreshes favorites if altered in another tab witin the same domain
+    window.addEventListener('storage', callRefreshFavorites)
     // clears local storage when the index page is closed. 
-    return () => { window.onunload = function() { localStorage.clear(); } }
+    return () => { 
+      window.removeEventListener('storage', callRefreshFavorites)
+      window.onunload = function() { localStorage.clear(); } 
+    }
   }, [])
 
   
@@ -81,7 +76,7 @@ export default function Home({data, defaultLocation }) {
         <Content 
           results={results} setResults={setResults} 
           searchLocation={searchLocation} showMap={mapToggle} 
-          favorites={favorites} modifyFavorites={modifyFavorites}
+          favorites={favorites} setFavorites={setFavorites}
           />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
@@ -101,7 +96,7 @@ export default function Home({data, defaultLocation }) {
         />
         }
         {
-          showFavorites && <FavoritesModal />
+          showFavorites && <FavoritesModal favorites={favorites} setFavorites={setFavorites} setShowFavorites={setShowFavorites} />
         }
 
       </main>

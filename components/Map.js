@@ -2,12 +2,12 @@ import { useState } from "react";
 import { GoogleMap } from '@react-google-maps/api'
 import Marker from "./Marker";
 
-export default function Map({results, center, favorites, modifyFavorites }) {
-    return <Google results={results} center={center} favorites={favorites} modifyFavorites={modifyFavorites} />
+export default function Map({results, center, favorites, setFavorites }) {
+    return <Google results={results} center={center} favorites={favorites} setFavorites={setFavorites} />
 }
 
 
-function Google({ results, center, favorites, modifyFavorites }) {
+function Google({ results, center, favorites, setFavorites }) {
 
     // Controls which marker is set to display it's show InfoWindow
     // Done this specific way so that only 1 show info window is shown at any singular point. 
@@ -70,7 +70,7 @@ function Google({ results, center, favorites, modifyFavorites }) {
                         setShowInfoIndex={setShowInfoIndex}
                         key={item.recordid}
                         item={ item }
-                        favorites={favorites} modifyFavorites={modifyFavorites}
+                        favorites={favorites} setFavorites={setFavorites}
                     />)
                 })
             }
