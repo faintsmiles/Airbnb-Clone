@@ -70,18 +70,18 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
     <form className='w-9/12 absolute right-0 border rounded-lg shadow-lg'>
 
        {/* Price and reviews */}
-        <div className='p-6 flex justify-between '>
+        <div className='p-6 flex justify-between items-center '>
             <div>
                 <span className='text-2xl font-semibold '>{'$' + roomData.price}</span>
                 <span className='font-extralight'> night</span>
             </div>
-            <div>
-                <FontAwesomeIcon icon={faStar} />
-                <span>
+            <div className='flex gap-2 flex-wrap'>
+                <a href='#review-section' className='flex items-baseline gap-2'>
+                  <FontAwesomeIcon icon={faStar} />  
                   { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ).toFixed(2) : " New "  }
-                </span>
+                </a>
                 <span className=' font-bold'> · </span>
-                <a href='#review-section' className=' text-gray-500 underline cursor-pointer'>{roomData.number_of_reviews +" reviews" }</a>
+                <a href='#review-section' className='text-gray-500 underline cursor-pointer'>{roomData.number_of_reviews +" reviews" }</a>
             </div>
         </div>
 

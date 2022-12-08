@@ -37,11 +37,11 @@ export default function ListingPageTitle({roomData, favorites, setFavorites}) {
             </div>
             <div className='flex justify-between items-center'>
                 <div>
-                    <span className='px-1 whitespace-nowrap'>
+                    <a href='#review-section' className='px-1 whitespace-nowrap'>
                         <FontAwesomeIcon icon={faStar} />  
                         <span> </span>
                         { roomData.review_scores_rating  ? (Math.round(( (roomData.review_scores_rating / 20) + Number.EPSILON) * 100) / 100 ) : "**New**"  }
-                    </span>
+                    </a>
                     <span className='px-2'>·</span>
                     <a href='#review-section' className=' underline cursor-pointer whitespace-nowrap'>
                         {roomData.number_of_reviews + ' reviews'}
