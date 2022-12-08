@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { modifyFavorites } from "../utils/favorites";
@@ -30,16 +29,7 @@ export default function MapThumbnail({ listingData, listingID, setError, favorit
       </button>
       {/* We overrode the css on a map element to be transparent so we need to set our background white to display text here instead  */}
       <div className=" bg-white h-full w-full">
-        <Link
-          href={{
-            pathname: `listings/${listingID}`,
-            query: {
-              filler: "176262402122865703321029156979",
-              data: JSON.stringify(listingData),
-            },
-          }}
-        >
-          <a target="_blank">
+          <a target="_blank" href={`/listings/${listingID}`} onClick={()=> localStorage.setItem( listingID, JSON.stringify(listingData) )} > 
             <div className="">
               <Image
                 src={listingData.xl_picture_url}
@@ -86,7 +76,6 @@ export default function MapThumbnail({ listingData, listingID, setError, favorit
               </div>
             </div>
           </a>
-        </Link>
       </div>
     </div>
   );
