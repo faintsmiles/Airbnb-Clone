@@ -6,7 +6,7 @@ import Calendar from './common/Calendar'
 import Reviews from './common/Reviews'
 import MapSingleListing from './common/MapSingleListing'
 
-export default function ListingPageContent({roomData}) {
+export default function ListingPageContent({roomData, favorites, setFavorites}) {
 
   // Create a date object for initial dates to reserve
   let date = new Date();
@@ -19,9 +19,9 @@ export default function ListingPageContent({roomData}) {
 
   return (
     <div className='listing-page-container my-0 mx-auto'>
-        <ListingPageTitle roomData={roomData} />
+        <ListingPageTitle roomData={roomData} favorites={favorites} setFavorites={setFavorites} />
         <div className='flex m-8 '>
-          <ListingPageDescription roomData={roomData} />
+          <ListingPageDescription roomData={roomData}  />
           <ListingPageForm  
             roomData={roomData} 
             checkInDay={checkInDay} setCheckInDay={setCheckInDay} 

@@ -1,11 +1,23 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Image from 'next/image'
+import {modifyFavorites } from "../utils/favorites";
 
-import { faStar, faShare } from '@fortawesome/free-solid-svg-icons'
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+
+import { faStar, faShare, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function ListingPageTitle({roomData}) {
+export default function ListingPageTitle({roomData, favorites, setFavorites}) {
+
+    const [saved, setSaved] = useState(false)
+
+    useEffect(() => {
+        let isSaved = false
+        favorites.map(element => { if(element.id == roomData.id ) {isSaved = true} })
+        setSaved(isSaved)
+      }, [favorites])
+    
+
   return ( 
     <div className=' my-0 mx-auto flex flex-col md:p-8 lg:flex-col-reverse' >
         <div className='bg-blue-50'>
@@ -23,7 +35,7 @@ export default function ListingPageTitle({roomData}) {
             <div className='pb-4 font-bold text-xl'>
                 {roomData.summary}
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between items-center'>
                 <div>
                     <span className='px-1 whitespace-nowrap'>
                         <FontAwesomeIcon icon={faStar} />  
@@ -38,14 +50,20 @@ export default function ListingPageTitle({roomData}) {
                     <span className=' underline cursor-pointer whitespace-nowrap' >{roomData.smart_location}</span>
                 </div>
                 <div className='hidden sm:block'>
-                    <span className=' p-1 underline cursor-pointer whitespace-nowrap hover:bg-slate-100 rounded-sm'>
+                    <button className=' p-2 underline cursor-pointer whitespace-nowrap hover:bg-slate-100 rounded-sm'>
                         <FontAwesomeIcon icon={faShare} />
                         <span className='pl-2'>Share</span>
-                    </span>
-                    <span className='p-1 underline cursor-pointer whitespace-nowrap hover:bg-slate-100 rounded-sm'>
-                        <FontAwesomeIcon icon={faHeart} />
-                        <span className='pl-2'>Save</span>
-                    </span>
+                    </button>
+                    <button 
+                        className='p-2 underline cursor-pointer whitespace-nowrap hover:bg-slate-100 rounded-sm'
+                        onClick={() => modifyFavorites(favorites, setFavorites, roomData)}
+                    >
+                        <FontAwesomeIcon 
+                            icon={saved ? faHeartSolid : faHeartRegular} 
+                            className={`${saved ? 'text-red-600' : 'text-black'}`} 
+                        />
+                        <span className='pl-2'>{saved ? "Saved" : "Save" }</span>
+                    </button>
                 </div>
             </div>
         </div>

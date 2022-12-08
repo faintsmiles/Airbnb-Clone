@@ -65,7 +65,7 @@ export default function listingPage() {
       </Head>
       <main>
         <Header favorites={favorites} setShowFavorites={setShowFavorites}  />  
-        <ListingPageContent roomData={roomData} />
+        <ListingPageContent roomData={roomData} favorites={favorites} setFavorites={setFavorites} />
         <FooterExpanded />
         { showFavorites && <FavoritesModal favorites={favorites} setFavorites={setFavorites} setShowFavorites={setShowFavorites} />}
       </main>
