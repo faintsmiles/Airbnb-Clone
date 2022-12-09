@@ -5,17 +5,15 @@ import {faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function CategoryCarousel({ carouselFocus, setCarouselFocus, searchLocation, setResults}) {
+export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults}) {
 
   const ref = useRef()
   const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden")
   const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block")
 
   //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
-  const scroll = (scrollOffset) => {   
-      ref.current.scrollLeft += scrollOffset;
-  }
-
+  const scroll = (scrollOffset) => { ref.current.scrollLeft += scrollOffset; }
+  // Determines if side button controls are visible 
   const buttonVisibility = (scrollPosition ) => {
 
     if(scrollPosition > 0) 

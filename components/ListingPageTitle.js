@@ -12,6 +12,8 @@ export default function ListingPageTitle({roomData, favorites, setFavorites}) {
     const [saved, setSaved] = useState(false)
 
     useEffect(() => {
+        if(!favorites) {return}
+        
         let isSaved = false
         favorites.map(element => { if(element.id == roomData.id ) {isSaved = true} })
         setSaved(isSaved)

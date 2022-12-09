@@ -5,39 +5,34 @@ import Link from 'next/link'
 import { Autocomplete } from "@react-google-maps/api";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faGlobe, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGlobe, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
-
 export default function Header({ setSearchLocation, favorites, setShowFavorites }) {
+  // google's autocomplete options. limiting results to city names only
+  let searchOptions = { types: ["(cities)"] };
 
-  // Ref to accesss the search input value
+  const [showMenu,  setShowMenu] = useState(false)
   const searchInputValue = useRef();
-  var searchOptions = {
-    types: ["(cities)"],
-   };
+  const userMenu = useRef()
 
   // Submit handler for search input 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     setSearchLocation(searchInputValue.current.value);
   } 
-
-  // User Menu State & Controls
-  const [showMenu,  setShowMenu] = useState(false)
-  // Detects if user clicks outside of the menu and if so, closes said menu
-  const userMenu = useRef(null)
+  // Close User Menu when user clicks outside the bounds of the menu options or on another target
   const closeUserMenu = (e) => {
     if(userMenu.current && showMenu && !userMenu.current.contains(e.target)){
       setShowMenu(false)
     }
   }
+  // Event listener that determines when user menu is closed
   useEffect(()=> {
     document.addEventListener('mousedown', closeUserMenu)
-    return() => {
-      removeEventListener('mousedown', closeUserMenu)
-    }
+    
+    return() => { removeEventListener('mousedown', closeUserMenu) }
   })
 
   return (
@@ -61,9 +56,10 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
                 required 
               />
             </Autocomplete>
-            <button className="flex absolute inset-y-0 right-0 items-center pr-2 ">
-              <div className=" bg-brand-color rounded-3xl p-1.5 ">
-                <svg aria-hidden="true" className="w-5 h-5" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+            {/* Search Button */}
+            <button className="flex absolute inset-y-0 right-0 items-center pr-2 text-center  ">
+              <div className=" bg-brand-color rounded-3xl px-2 py-1.5">
+                <FontAwesomeIcon icon={faMagnifyingGlass} className='m-auto text-white text-lg' />
               </div>
             </button>
           </div>

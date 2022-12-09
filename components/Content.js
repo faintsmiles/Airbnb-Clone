@@ -55,7 +55,7 @@ const fetchNewResults = ( results, setResults ) => {
       country: tempCountryHelper ? tempCountryHelper.trim().replace(/\s/g, "+") : tempCityHelper[tempHelper.length - 1].trim().replace(/\s/g, "+"),
     }
 
-    fetch('/api/hello', {
+    fetch('/api/initialize', {
       method: 'POST',
       body: JSON.stringify(body)
     })

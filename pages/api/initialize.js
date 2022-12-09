@@ -1,12 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=20&facet=host_response_time&facet=host_response_rate&facet=host_verifications&facet=city&facet=country&facet=property_type&facet=room_type&facet=bed_type&facet=amenities&facet=availability_365&facet=cancellation_policy&facet=features'
-const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30'
+const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=25'
 //const apiURL ='';
 
 export default async function handler(req, res) {
-   
-   let cityName = '&refine.city=' + 'Amsterdam'
-   let countryName = '&refine.country=' + 'Netherlands'
    
    // Find user's ip
    // require('dns').lookup(require('os').hostname(), function (err, add, fam) { console.log('addr: ' + add ) })
@@ -14,6 +11,9 @@ export default async function handler(req, res) {
    //       req.socket.remoteAddress
 
    // console.log(req.headers['x-forwarded-for'])
+
+   let cityName = '&refine.city=' + 'Amsterdam'
+   let countryName = '&refine.country=' + 'Netherlands'
    
    if(req.body){
       const body = JSON.parse(req.body)

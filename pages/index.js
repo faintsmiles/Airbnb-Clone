@@ -38,13 +38,13 @@ export default function Home({data, defaultLocation }) {
   const [mapToggle, setMapToggle] = useState(false);
   const [favorites, setFavorites]  = useState([])
   const [showFavorites, setShowFavorites] = useState(false)
-
+    
   const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
 
   useEffect(() => {
     // syncs/refreshes favorites if altered in another tab witin the same domain
     window.addEventListener('storage', callRefreshFavorites)
-    // clears local storage when the index page is closed. 
+    // remove event and clear local storage when the index page is closed 
     return () => { 
       window.removeEventListener('storage', callRefreshFavorites)
       window.onunload = function() { localStorage.clear(); } 
@@ -107,7 +107,7 @@ export default function Home({data, defaultLocation }) {
 export async function getServerSideProps (context) {
   // inefficient to call the nextjs api which then calls supporting API, but we're aiming to hide the OpenData API url 
   // Check this later in network tab. may also need to reduce data size in the future or modify api url
-  const res = await fetch ( 'http://localhost:3000/api/hello')
+  const res = await fetch ( 'http://localhost:3000/api/initialize')
   const data = await res.json();
   return { props: { data: data.data, defaultLocation: data.defaultLocation } }
 }

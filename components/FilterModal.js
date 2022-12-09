@@ -1,73 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import FitlerModalCheckBox from './common/FitlerModalCheckBox'
 
-import { faBuilding, faHotel, faHouse, faHouseUser, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 import RangeSlider from './common/RangeSlider';
 
+// Options available within filter modal
+import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../utils/filterModalOptions'
+
 export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults}) {
  
-  // Overall filter options and types
-
-  // Options for bedrooms, beds, and bathrooms. Section name 'Rooms and beds' 
-  const roomOptions = ['Any', '1' , '2', '3', '4', '5', '6','7', '8+']
-  // Property types available and their fontawesome icons
-  const propertyOptions = [ 
-    { type: 'House', icon: faHouse, value: 'House'},
-    {type: 'Apartment', icon: faBuilding , value: 'Apartment'}, 
-    { type: 'Guesthouse', icon: faHouseUser, value: 'Guesthouse' }, 
-    {type:'Hotel', icon: faHotel, value: 'Boutique hotel'}
-  ]
-  // Objects containingg the subcategory title and list of options with title/descriptions for each respective choice available
-  const typeOfRoom= {
-    subcategory: '',
-    items: [
-      { title: 'Entire Place', description: 'A place all to yourself', value: 'Entire home/apt' },
-      { title: 'Private Room', description: 'Your own room in a home or a hotel, plus some shared common spaces', value: 'Private room'},
-      { title: 'Shared Room', description: 'A sleeping space and common areas that may be shared with others', value: 'Shared room'}
-    ]
-  }
-  const amenities = [{
-    subcategory: 'Essentials',
-    items: [ 
-      { title: 'Wireless Internet', description: '' },
-      { title: 'Kitchen', description: '' },
-      { title: 'Washer', description: '' },
-      { title: 'Dryer', description: '' },
-      { title: 'Air conditioning', description: '' },
-      { title: 'Heating', description: '' },
-      { title: 'TV', description: '' },
-      { title: 'Hair Dryer', description: '' },
-      { title: 'Iron', description: '' },
-      { title: 'Wheelchair accessible', description: '' },
-    ]
-  },
-  {
-    subcategory: 'Features',
-    items:[
-      { title: 'Pool', description: '' },
-      { title: 'Hot tub', description: '' },
-      { title: 'Free parking on premises', description: '' },
-      { title: 'EV charger', description: '' },
-      { title: 'Crib', description: '' },
-      { title: 'Gym', description: '' },
-      { title: 'BBQ grill', description: '' },
-      { title: 'Breakfast', description: '' },
-      { title: 'Indoor fireplace', description: '' },
-      { title: 'Smoking allowed', description: '' },
-    ]
-  },
-  {
-    subcategory: 'Safety',
-    items: [
-      { title: 'Smoke detector', description: '' },
-      { title: 'Carbon monoxide detector', description: '' },
-    ]
-  }
-]
-
   // States and controls
   // Min/max price of rooms
   const [minPrice, setMinPrice] = useState(0)
@@ -86,10 +30,11 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   const [features, setFeatures] = useState([])
   const [safety, setSafety] = useState([])
 
-  // Object containing the current state values and set state functions for grouped items, used to map through easily
+  // Object containing the current state values and set state functions for grouped items, used to map through easily when building components
   const roomStates = [ {category: 'Bedrooms', value: bedrooms, setValue: setBedrooms}, { category: 'Beds', value: beds, setValue: setBeds}, { category: 'Bathrooms', value: bathrooms, setValue: setBathrooms} ] 
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
 
+  // Reset states
   function clearFilter() {
     setMinPrice(0)
     setMaxPrice(600)
@@ -109,99 +54,22 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
 
   function fetchNewData() {
     property != carouselFocus ? setCarouselFocus(null) : null
-    const optionsSelected = createFetchList(optionsSelected)
-    createQueryURL(optionsSelected)
+    const _filters = { minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation }
+    console.log(_filters)
+    fetch('/api/filter', {
+      method: 'POST',
+      body: JSON.stringify(_filters)
+    })
+    .then((response) => response.json())
+    .then(results => {
+      console.log(results)
+      setResults(results)})
+    // const _filters = cleanFilters({minPrice, maxPrice, roomType,bedrooms,beds, bathrooms, property, essentials, features, safety})
+    // createQueryURL(_filters)
   }
   
-  function createQueryURL(optionsSelected) {
-    // 
-    // Url builder
-    // ORDER: apiURL, Beds BedRooms Bathrooms, Price, Rows, propertyType, roomType, essentials location
-    const apiURL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q='
-    
-    let queriesURL =''
-    let priceURL = ''
-    let rows = `&rows=${30}`;
-    let propertyURL = ''
-    let roomURL = ''
-    let essentialsURL = ''
-    let locationURL = '' 
-    // Requests we'll be calling
-    const urlsToQuery = []
 
-    // Build query url
-    // ORDER: apiURL, queries(beds, bedrooms,baths, minprice,maxprice, rows), propertyType, roomType, essentials, location
-    optionsSelected.beds ? queriesURL += `beds%3E%3D${optionsSelected.beds}+` : null
-    optionsSelected.bedrooms ? queriesURL += `bedrooms%3E%3D${optionsSelected.bedrooms}+` : null
-    optionsSelected.bathrooms ? queriesURL += `bathrooms%3E%3D${optionsSelected.bathrooms}+` : null
-    priceURL +=  `price%3E%3D${optionsSelected.minPrice}+` + `price+%3C%3D${optionsSelected.maxPrice}`
 
-    optionsSelected.property ? propertyURL += ('&refine.property_type=' + optionsSelected.property) : null ;
-    
-    optionsSelected.essentials.map(element => essentialsURL += '&refine.amenities=' + element )
-    optionsSelected.features.map(element => essentialsURL += '&refine.amenities=' + element )
-    optionsSelected.safety.map(element => essentialsURL += '&refine.amenities=' + element )
-    locationURL += '&refine.city=' + searchLocation
-
-    // Query for each room type selected (can only search 1 at a time through api)
-    if (optionsSelected.room.length != 0 && optionsSelected.room.length != typeOfRoom.items.length){ 
-      rows = `&rows=${15}`;
-      optionsSelected.room.map(element => {
-        roomURL = '&refine.room_type=' + element
-        urlsToQuery.push(
-         fetch((apiURL + queriesURL + priceURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
-         .then(response => response.json())
-         .then(response => response.records)
-        )
-      })
-    }
-    else {
-      urlsToQuery.push(
-        fetch((apiURL + queriesURL + priceURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
-        .then(response => response.json())
-        .then(response => response.records)
-      )
-    }
-
-    // let results;
-    Promise.all(urlsToQuery)
-      .then(results => results.flat())
-      .then(results => {
-        setResults(results)
-      })
-      .catch(err => alert(err))
-
-  }
-
-  function createFetchList(filters) {
-    // create object to store the data, we'll be fetching
-     const optionsSelected = {
-      minPrice: '',
-      maxPrice,
-      room: [],
-      bedrooms: '',
-      beds: '',
-      bathrooms: '',
-      property: '',
-      // amenities
-      essentials: [],
-      features: [],
-      safety: []
-    }
-    // 0 is false and 'Any' means filtering isnt necessary
-    optionsSelected.minPrice = minPrice
-    optionsSelected.maxPrice = maxPrice
-    roomType.length ? optionsSelected.room = [...roomType] : null
-    bedrooms && bedrooms != 'Any' ? optionsSelected.bedrooms = parseInt(bedrooms) : null
-    beds && beds != 'Any' ? optionsSelected.beds = parseInt(beds) : null
-    bathrooms && bathrooms != 'Any' ? optionsSelected.bathrooms = parseInt(bathrooms) : null
-    property ? optionsSelected.property = property : null
-    essentials.length ? optionsSelected.essentials = [...essentials] : null
-    features.length ? optionsSelected.features = [...features] : null
-    safety.length ? optionsSelected.safety = [...safety] : null
-    
-    return optionsSelected
-  }
 
   useEffect(() => {
       if(!results) { return }
