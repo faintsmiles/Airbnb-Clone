@@ -45,7 +45,7 @@ export default function ListingPageContent({roomData, favorites, setFavorites}) 
           />
         </div>
         {/* Reviews Section */}
-        <div className='mx-8 py-16 border-b'>
+        <div id='review-section' className='mx-8 py-16 border-b'>
           <Reviews 
             listingRating={roomData.review_scores_rating} numberOfReviews={roomData.number_of_reviews}  
             cleanlinessRating={roomData.review_scores_cleanliness} accuracyRating={roomData.review_scores_accuracy}
@@ -53,8 +53,8 @@ export default function ListingPageContent({roomData, favorites, setFavorites}) 
             valueRating={roomData.review_scores_value} checkinRating={roomData.review_scores_checkin}
           />
         </div>
-
-        <div className='mx-8 py-8 lg:px-0'>
+        {/* Map Section */}
+        <div id='map-section' className='mx-8 py-8 lg:px-0'>
           <div className='pb-8 text-2xl '>Where you’ll be</div>
           <MapSingleListing 
             key={"singleListingMap"} results={roomData} center={ {lat:roomData.geolocation[0], lng: roomData.geolocation[1] } } 

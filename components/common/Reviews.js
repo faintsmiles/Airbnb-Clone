@@ -11,7 +11,7 @@ export default function Reviews({listingRating , numberOfReviews, cleanlinessRat
   return (
     <>
         {/* Score card */}
-        <div id='review-section'>
+        <div>
             {/* Avg review score + number of reviews */}
             <div className='flex gap-2 items-center leading-loose '>
               <span> 

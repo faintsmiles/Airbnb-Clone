@@ -47,7 +47,7 @@ export default function ListingPageTitle({roomData, favorites, setFavorites}) {
                         {roomData.number_of_reviews + ' reviews'}
                     </a>
                     <span className='px-2'>·</span>
-                    <span className=' underline cursor-pointer whitespace-nowrap' >{roomData.smart_location}</span>
+                    <a href='#map-section' className=' underline cursor-pointer whitespace-nowrap' >{roomData.smart_location}</a>
                 </div>
                 <div className='hidden sm:block'>
                     <button className=' p-2 underline cursor-pointer whitespace-nowrap hover:bg-slate-100 rounded-sm'>

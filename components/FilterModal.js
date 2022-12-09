@@ -292,7 +292,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
         {/* Form clear-all / send */}
         <section className='sticky bottom-0 px-8 py-2 flex h-20 w-full  justify-between items-center border-t font-semibold '>
           <div className='underline hover:cursor-pointer' onClick={(e)=> clearFilter()} >Clear all</div>
-          <button type='button' className='px-8 py-4 bg-black text-white rounded-xl' onClick={(e)=> fetchNewData()}>Update listings</button>
+          <button type='button' className='px-8 py-4 bg-black text-white rounded-xl' onClick={(e)=> {fetchNewData(); setShowFilterModal(false)}}>Update listings</button>
         </section>
 
         </div>
