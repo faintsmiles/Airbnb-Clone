@@ -77,16 +77,13 @@ export default function Home({data, defaultLocation }) {
           results={results} setResults={setResults} 
           searchLocation={searchLocation} showMap={mapToggle} 
           favorites={favorites} setFavorites={setFavorites}
-          />
+        />
  
         <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
 
         {/* Footer only shows on list view  */}
-        { !mapToggle && 
-          <div className='w-full fixed bottom-0 z-50'>
-             <FooterCondensed  /> 
-          </div>  
-        }
+        { !mapToggle && <FooterCondensed  /> }
+        
         {/* Filter Modal only shows when filter button inside of Category component is clicked */}
         { showFilterModal && 
           <FilterModal 
@@ -109,5 +106,5 @@ export async function getServerSideProps (context) {
   // Check this later in network tab. may also need to reduce data size in the future or modify api url
   const res = await fetch ( 'http://localhost:3000/api/initialize')
   const data = await res.json();
-  return { props: { data: data.data, defaultLocation: data.defaultLocation } }
+  return { props: { data: data.results, defaultLocation: data.defaultLocation } }
 }

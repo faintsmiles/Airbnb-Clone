@@ -6,6 +6,7 @@ export default function FooterExpanded() {
     <footer className=' bg-gray-50 pt-12 pb-20 md:pb-12 text-sm border'>
         <div className='listing-page-container mx-auto px-8 flex flex-col lg:flex-row lg:justify-between'>
           <section className=' border-b lg:border-0 pb-8 '>
+            {/*  */}
             <div className='font-bold pb-3'>Support</div>
             <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3 '>
               <li className='hover:underline'><a href="/">Help Center</a></li>
@@ -17,6 +18,7 @@ export default function FooterExpanded() {
               <li className='hover:underline'><a href="/">Report a neighborhood concern</a></li>
             </ul>
           </section>
+          {/*  */}
           <section className='border-b lg:border-0 py-4'>
             <div className='font-bold pb-3'>Community</div>
             <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3 '>
@@ -24,6 +26,7 @@ export default function FooterExpanded() {
               <li className='hover:underline'><a href="/">Combatting discrimination</a></li>
             </ul>
           </section>
+          {/*  */}
           <section className='border-b lg:border-0 py-4'>
             <div className='font-bold pb-3'>Hosting</div>
             <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3 '>
@@ -34,6 +37,7 @@ export default function FooterExpanded() {
               <li className='hover:underline'><a href="/">How to host responsibly</a></li>
             </ul>
           </section>
+          {/*  */}
           <section className='py-4'>
             <div className='font-bold pb-3'>Airbnb</div>
             <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-3 '>
@@ -45,6 +49,7 @@ export default function FooterExpanded() {
               <li className='hover:underline'><a href="/">Gift cards</a></li>
             </ul>
           </section>
+          
         </div>
     </footer>
   )

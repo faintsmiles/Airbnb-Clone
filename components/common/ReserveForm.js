@@ -10,7 +10,7 @@ import Calendar from './Calendar';
 import GuestMenuOptions from './GuestMenuOptions';
 
 export default function ReserveForm({ roomData, checkInDay, setCheckInDay, checkOutDay, 
-  setCheckOutDay, minimumNights, daysToReserve, setDaysToReserve }) {
+  setCheckOutDay, minNightsRequired, daysToReserve, setDaysToReserve }) {
 
   // in the event we add functionality for choosing # of nights
   const pricePerNight = parseInt(roomData.price);
@@ -102,12 +102,12 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
             <div className=' absolute -right-1 p-4 shadow-[0_0px_24px_rgba(0,0,0,0.2)] rounded-2xl bg-white z-20'>
               <div className='p-4 bg-white  '>
                 <div className='text-2xl font-medium '>Select checkout date</div>
-                <div className='text-sm text-gray-500'>{`Minimum stay: ${minimumNights} nights`}</div>
+                <div className='text-sm text-gray-500'>{`Minimum stay: ${minNightsRequired} nights`}</div>
               </div>
               <Calendar
                 checkInDay={checkInDay} setCheckInDay={setCheckInDay} 
                 checkOutDay={checkOutDay} setCheckOutDay={setCheckOutDay} 
-                minimumNights={minimumNights} setDaysToReserve={setDaysToReserve}  
+                minNightsRequired={minNightsRequired} setDaysToReserve={setDaysToReserve}  
                 key={'ReserveForm'} noBorder={true}
               />
             </div>

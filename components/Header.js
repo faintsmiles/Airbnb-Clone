@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Autocomplete } from "@react-google-maps/api";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faGlobe, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faGlobe, faHeart, faMagnifyingGlass  } from '@fortawesome/free-solid-svg-icons'
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
@@ -13,9 +13,9 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
   // google's autocomplete options. limiting results to city names only
   let searchOptions = { types: ["(cities)"] };
 
-  const [showMenu,  setShowMenu] = useState(false)
   const searchInputValue = useRef();
   const userMenu = useRef()
+  const [showMenu,  setShowMenu] = useState(false)
 
   // Submit handler for search input 
   const handleSearchSubmit = async (e) => {
@@ -36,8 +36,9 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
   })
 
   return (
-    <div className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
+    <section className="text-xs py-4 px-8 pb-5 lg:px-24 2xl:px-44 border-b">
       <header className="flex flex-1 justify-between  items-center h-auto">
+        {/* Brand */}
         <div className="w-full hidden md:flex sm:pr-4">
           <Link href={{ pathname: '/' }} >
             <a>
@@ -45,12 +46,15 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
             </a>
           </Link>
         </div>
-        <form className="search-container flex items-center w-full md:max-w-xs hover:shadow-lg" onSubmit={(e) => handleSearchSubmit(e)}>
+        {/* Search bar */}
+        <form className="search-container flex items-center w-full md:max-w-xs hover:shadow-lg rounded-full" onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="simple-search" className="sr-only">Search</label>
           <div className="relative w-full">
+            {/* Autocomplete componenet */}
             <Autocomplete options={searchOptions} onPlaceChanged={(e)=>handleSearchSubmit(e)} >
-              <input type="text" id="simple-search" 
-                className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg" 
+              <input 
+                type="text" id="simple-search" 
+                className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg " 
                 placeholder="Start your search" 
                 ref={searchInputValue}
                 required 
@@ -64,6 +68,7 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
             </button>
           </div>
         </form>
+        {/* Options */}
         <div className="hidden w-full md:flex md:justify-end md:items-center gap-1 " >
           {/* 'Become a Host link */}
           <div className="hidden text-center lg:flex py-3 px-4 hover:bg-gray-100 rounded-full text-sm font-semibold ">Become a Host</div>
@@ -101,7 +106,7 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
           </div>
         </div> 
       </header>
-    </div>
+    </section>
   );
 }
 

@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
+// componenets
 import FitlerModalCheckBox from './common/FitlerModalCheckBox'
-
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FilterModalMenuButtons from './common/FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
 import RangeSlider from './common/RangeSlider';
+
+// fontawesome
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Options available within filter modal
 import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../utils/filterModalOptions'
@@ -30,55 +32,43 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   const [features, setFeatures] = useState([])
   const [safety, setSafety] = useState([])
 
-  // Object containing the current state values and set state functions for grouped items, used to map through easily when building components
+  // Objects containing the current state values and set state functions for grouped items, used to map through easily when building components
   const roomStates = [ {category: 'Bedrooms', value: bedrooms, setValue: setBedrooms}, { category: 'Beds', value: beds, setValue: setBeds}, { category: 'Bathrooms', value: bathrooms, setValue: setBathrooms} ] 
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
+
+  useEffect(() => {
+    if(!results) { return }
+
+    let averagePrice = 0;
+    results.map(result => averagePrice += parseInt(result.fields.price))
+    setAvgPrice( (averagePrice/results.length).toFixed(2) )
+  }, [])
 
   // Reset states
   function clearFilter() {
     setMinPrice(0)
     setMaxPrice(600)
-
     setRoomType([])
-
     setBedrooms()
     setBeds()
     setBathrooms()
-
     setProperty()
     setEssentials([])
     setFeatures([])
     setSafety([])
   }
-
-
-  function fetchNewData() {
-    property != carouselFocus ? setCarouselFocus(null) : null
+  // Get new data with current filters
+  function fetchNewData() { 
+    property != carouselFocus ? setCarouselFocus(null) : null // if filter property doesnt match carouselFocus, reset it
     const _filters = { minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation }
-    console.log(_filters)
     fetch('/api/filter', {
       method: 'POST',
       body: JSON.stringify(_filters)
     })
     .then((response) => response.json())
-    .then(results => {
-      console.log(results)
-      setResults(results)})
-    // const _filters = cleanFilters({minPrice, maxPrice, roomType,bedrooms,beds, bathrooms, property, essentials, features, safety})
-    // createQueryURL(_filters)
+    .then(results => setResults(results))
   }
   
-
-
-
-  useEffect(() => {
-      if(!results) { return }
-
-      let averagePrice = 0;
-      results.map(result => averagePrice += parseInt(result.fields.price))
-      setAvgPrice( (averagePrice/results.length).toFixed(2) )
-  }, [])
-
   return (
     // Modal container
     <div className='fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 p-1 md:p-8' onClick={()=> setShowFilterModal(false)} >

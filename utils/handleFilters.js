@@ -80,7 +80,5 @@ export function createQueryURL(_filters, apiURL) {
         .then(response => response.records)
       )
     }
-
     return urlsToQuery
-
 }
