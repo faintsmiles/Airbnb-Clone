@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import ListingPageTitle from "./ListingPageTitle";
-import ListingPageDescription from "./ListingPageDescription";
-import Reserve from "./common/Reserve";
-import Calendar from "./common/Calendar";
-import Reviews from "./common/Reviews";
-import MapSingleListing from "./common/MapSingleListing";
+import ListingTitle from "./ListingTitle";
+import ListingDescription from "./ListingDescription";
+import ReserveController from "./ReserveForms/ReserveController";
+import Calendar from "../common/Calendar";
+import Reviews from "./Reviews";
+import MapSingleListing from "../Maps/MapSingleListing";
 
-export default function ListingPageContent({ roomData, favorites,setFavorites }) {
+export default function ListingContent({ roomData, favorites,setFavorites }) {
   // Minimum stay required
   const minNightsRequired = parseInt(roomData.minimum_nights) || 0;
   // Create a date object for initial dates
@@ -19,15 +19,15 @@ export default function ListingPageContent({ roomData, favorites,setFavorites })
   return (
     <div className="listing-page-container my-0 mx-auto">
       {/* Title  */}
-      <ListingPageTitle
+      <ListingTitle
         roomData={roomData}
         favorites={favorites}
         setFavorites={setFavorites}
       />
       {/* Listing description + Reserve Form */}
       <div className="flex m-8 ">
-        <ListingPageDescription roomData={roomData} />
-        <Reserve
+        <ListingDescription roomData={roomData} />
+        <ReserveController
           roomData={roomData}
           checkInDay={checkInDay}
           setCheckInDay={setCheckInDay}

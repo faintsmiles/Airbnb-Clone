@@ -45,7 +45,7 @@ export function createQueryURL(_filters, apiURL) {
     let essentialsURL = ''
     let locationURL = '' 
     // Requests we'll be calling
-    const urlsToQuery = []
+    const fetchRequests = []
 
     // Build query url
     // ORDER: apiURL, queries(beds, bedrooms,baths, minprice,maxprice, rows), propertyType, roomType, essentials, location
@@ -66,7 +66,7 @@ export function createQueryURL(_filters, apiURL) {
       rows = `&rows=${15}`;
       _filters.room.map(element => {
         roomURL = '&refine.room_type=' + element
-        urlsToQuery.push(
+        fetchRequests.push(
          fetch((apiURL + queriesURL + priceURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
          .then(response => response.json())
          .then(response => response.records)
@@ -74,11 +74,11 @@ export function createQueryURL(_filters, apiURL) {
       })
     }
     else {
-      urlsToQuery.push(
+      fetchRequests.push(
         fetch((apiURL + queriesURL + priceURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
         .then(response => response.json())
         .then(response => response.records)
       )
     }
-    return urlsToQuery
+    return fetchRequests
 }

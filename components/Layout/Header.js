@@ -51,10 +51,10 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
           <label htmlFor="simple-search" className="sr-only">Search</label>
           <div className="relative w-full">
             {/* Autocomplete componenet */}
-            <Autocomplete options={searchOptions} onPlaceChanged={(e)=>handleSearchSubmit(e)} >
+            <Autocomplete options={searchOptions} onPlaceChanged={(e)=>handleSearchSubmit(e)}>
               <input 
                 type="text" id="simple-search" 
-                className="bg-gray-50 border border-gray-300 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg " 
+                className="block w-full pr-10 p-2.5 text-sm rounded-2xl border bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg " 
                 placeholder="Start your search" 
                 ref={searchInputValue}
                 required 

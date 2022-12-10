@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import moment from 'moment'
 moment.locale('en')
-import Calendar from './Calendar';
+import Calendar from '../../common/Calendar';
 
 import GuestMenuOptions from './GuestMenuOptions';
 

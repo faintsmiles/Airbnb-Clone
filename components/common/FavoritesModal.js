@@ -39,7 +39,7 @@ export default function favoritesModal({
               >
                 <Thumbnail
                   key={uuidv4()}
-                  results={item}
+                  listing={item}
                   listingID={item.recordid}
                   favorites={favorites}
                   setFavorites={setFavorites}

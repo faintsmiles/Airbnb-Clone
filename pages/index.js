@@ -1,13 +1,13 @@
 
 // Components
 import Head  from 'next/head'
-import Header from '../components/Header'
-import Category from '../components/Category'
-import Content from '../components/Content'
-import ListMapControl from '../components/ListMapControl'
-import FilterModal from '../components/FilterModal'
-import FavoritesModal from '../components/FavoritesModal'
-import FooterCondensed from '../components/FooterCondensed'
+import Header from '../components/Layout/Header'
+import Category from '../components/Index/Category'
+import Content from '../components/Index/Content'
+import ListMapController from '../components/Index/ListMapController'
+import FilterModal from '../components/Filter/FilterModal'
+import FavoritesModal from '../components/common/FavoritesModal'
+import FooterCondensed from '../components/Layout/FooterCondensed'
 
 // React hooks
 import { useState, useEffect } from 'react'
@@ -79,7 +79,7 @@ export default function Home({data, defaultLocation }) {
           favorites={favorites} setFavorites={setFavorites}
         />
  
-        <ListMapControl isMapActive={mapToggle} toggleMap={setMapToggle} />
+        <ListMapController isMapActive={mapToggle} toggleMap={setMapToggle} />
 
         {/* Footer only shows on list view  */}
         { !mapToggle && <FooterCondensed  /> }

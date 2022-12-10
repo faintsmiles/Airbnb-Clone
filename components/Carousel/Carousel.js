@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // componenet
 import CarouselItem from "./CarouselItem";
 // options
-import { categories } from "../utils/carouselOptions";
+import { categories } from "../../utils/carouselOptions";
 
 export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults, }) {
   const ref = useRef();

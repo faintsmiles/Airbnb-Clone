@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-export default function ListingPageDescription({ roomData }) {
+export default function ListingDescription({ roomData }) {
   const amenityList = roomData.amenities.split(",");
 
   return (

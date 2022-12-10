@@ -1,6 +1,6 @@
 import React from 'react'
-import Carousel from './Carousel'
-import FilterButton from './common/FilterButton'
+import Carousel from '../Carousel/Carousel'
+import FilterButton from '../Filter/FilterButton'
 
 export default function Category({ carouselFocus, setCarouselFocus, searchLocation, setResults, setShowFilterModal}) {
   return (

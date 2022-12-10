@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import List from "../components/List";
-import Map from "../components/Map";
+import Grid from "./Grid";
+import Map from "../Maps/Map";
 
 export default function Content({ results, setResults, searchLocation, showMap, favorites, setFavorites }) {
   // Set map center to first first result's location or ~Amsterdam
@@ -43,7 +43,7 @@ export default function Content({ results, setResults, searchLocation, showMap, 
       />
     );
   return (
-    <List results={results} favorites={favorites} setFavorites={setFavorites} />
+    <Grid results={results} favorites={favorites} setFavorites={setFavorites} />
   );
 }
 

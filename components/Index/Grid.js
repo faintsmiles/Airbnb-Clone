@@ -1,7 +1,7 @@
 import React from 'react'
-import Thumbnail from './Thumbnail'
+import Thumbnail from '../common/Thumbnail'
 
-export default function List({results, favorites, setFavorites}) {
+export default function Grid({results, favorites, setFavorites}) {
   
     return (
       <section className='px-4 my-24 gap-4 gap-y-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-24 2xl:grid-cols-5 2xl:px-44 3xl:flex flex-wrap justify-center relative'>

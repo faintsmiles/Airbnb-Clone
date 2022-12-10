@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 import { useLoadScript } from "@react-google-maps/api";
 
 // Components
-import Header from "../../components/Header";
-import ListingPageContent from "../../components/ListingPageContent";
-import FooterExpanded from "../../components/FooterExpanded";
-import FavoritesModal from "../../components/FavoritesModal";
+import Header from "../../components/Layout/Header";
+import ListingContent from "../../components/Listings/ListingContent";
+import FooterExpanded from "../../components/Layout/FooterExpanded";
+import FavoritesModal from "../../components/common/FavoritesModal";
 // utils
 import { refreshFavorites } from "../../utils/favorites";
 
@@ -62,7 +62,7 @@ export default function listingPage() {
       </Head>
       <main>
         <Header favorites={favorites} setShowFavorites={setShowFavorites} />
-        <ListingPageContent
+        <ListingContent
           roomData={roomData}
           favorites={favorites}
           setFavorites={setFavorites}

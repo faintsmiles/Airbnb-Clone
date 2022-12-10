@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
 // componenets
-import FitlerModalCheckBox from './common/FitlerModalCheckBox'
-import FilterModalMenuButtons from './common/FilterModalMenuButtons';
-import FilterModalMenuButtonIcon from './common/FilterModalMenuButtonIcon';
-import RangeSlider from './common/RangeSlider';
+import FitlerModalCheckBox from './FitlerModalCheckBox'
+import FilterModalMenuButtons from './FilterModalMenuButtons';
+import FilterModalMenuButtonIcon from './FilterModalMenuButtonIcon';
+import RangeSlider from './RangeSlider';
 
 // fontawesome
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Options available within filter modal
-import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../utils/filterModalOptions'
+import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../../utils/filterModalOptions'
 
 export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults}) {
  

@@ -1,9 +1,8 @@
 import React from "react";
 import ReserveForm from "./ReserveForm";
-
 import ReserveFooter from "./ReserveFooter";
-
-export default function ReserveFormCondensed({
+// Controls whether we display a form or footer for reservation forms
+export default function ReserveController({
   roomData,
   checkInDay,
   setCheckInDay,

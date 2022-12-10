@@ -5,9 +5,9 @@ import { faStar, faShare, faHeart as faHeartSolid } from "@fortawesome/free-soli
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //util
-import { modifyFavorites } from "../utils/favorites";
+import { modifyFavorites } from "../../utils/favorites";
 
-export default function ListingPageTitle({ roomData, favorites, setFavorites }) {
+export default function ListingTitle({ roomData, favorites, setFavorites }) {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
