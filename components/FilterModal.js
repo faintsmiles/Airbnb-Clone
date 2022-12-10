@@ -67,6 +67,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     })
     .then((response) => response.json())
     .then(results => setResults(results))
+    .catch((err) => alert(err));
   }
   
   return (

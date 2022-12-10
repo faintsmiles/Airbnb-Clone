@@ -26,10 +26,10 @@ export default function FooterCondensed() {
             <a href='/' className='hover:underline'>$ USD</a>
             <a href='/'>
                 <button>
-                    <a href='/' className='flex hover:underline'>
+                    <div href='/' className='flex hover:underline'>
                         <span> Support & resources &nbsp; </span>
                         <FontAwesomeIcon icon={faChevronUp} />                
-                    </a>
+                    </div>
                 </button>
             </a>
         </div>

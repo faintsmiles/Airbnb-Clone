@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import CarouselItem from "./CarouselItem";
-
+// fontawesome
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// componenet
+import CarouselItem from "./CarouselItem";
+// options
 import { categories } from "../utils/carouselOptions";
 
-export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults }) {
+export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults, }) {
   const ref = useRef();
   const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden");
   const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block");
 
   //https://stackoverflow.com/questions/60729924/react-scroll-component-horizontally-on-button-click
-  const scroll = (scrollOffset) => { ref.current.scrollLeft += scrollOffset };
+  const scroll = (scrollOffset) => {
+    ref.current.scrollLeft += scrollOffset;
+  };
 
   // Determines if side button controls are visible
   const buttonVisibility = (scrollPosition) => {
@@ -25,15 +28,8 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
 
   useEffect(() => {
     if (!carouselFocus) { return }
-
-    const apiURL = `https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=&rows=30&facet=city`;
-    const location = "&refine.city=" + searchLocation;
-    const propertyType = "&refine.property_type=" + carouselFocus;
-
-    fetch(apiURL + propertyType + location)
-      .then((response) => response.json())
-      .then((results) => setResults(results.records))
-      .catch((err) => alert(err));
+    // get new results by search location and carousel item property type
+    fetchNewResults (searchLocation, carouselFocus, setResults)
   }, [carouselFocus]);
 
   return (
@@ -46,7 +42,7 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
         className=" carousel mx-4 relative flex h-max text-xs text-center whitespace-nowrap overflow-x-scroll no-scrollbar"
       >
         {/* Create items */}
-        {categories.map((element) => { 
+        {categories.map((element) => {
           return (
             <CarouselItem
               key={element.type}
@@ -76,4 +72,17 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
       </div>
     </div>
   );
+}
+
+function fetchNewResults (searchLocation, carouselFocus, setResults) {
+  fetch("/api/property", {
+    method: "POST",
+    body: JSON.stringify({
+      searchLocation: searchLocation,
+      propertyType: carouselFocus,
+    }),
+  })
+    .then(response => response.json())
+    .then(results => setResults(results))
+    .catch(err => alert(err));
 }

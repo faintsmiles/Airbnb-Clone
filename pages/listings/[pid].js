@@ -8,9 +8,9 @@ import { useLoadScript } from "@react-google-maps/api";
 // Components
 import Header from "../../components/Header";
 import ListingPageContent from "../../components/ListingPageContent";
-// import ListingPageForm from '../../components/ListingPageForm'
 import FooterExpanded from "../../components/FooterExpanded";
 import FavoritesModal from "../../components/FavoritesModal";
+// utils
 import { refreshFavorites } from "../../utils/favorites";
 
 const googleLibraries = ["places"];
