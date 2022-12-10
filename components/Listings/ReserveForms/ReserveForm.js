@@ -130,14 +130,14 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
                 guestCounter={guestCounter} setGuestCounter={setGuestCounter} 
                 Adults={Adults} setAdults={setAdults} Children={Children} setChildren={setChildren}
                 Infants={Infants} setInfants={setInfants} Pets={Pets} setPets={setPets}
-                maxGuests={roomData.accommodates} 
+                maxGuests={roomData.accommodates} setDisplayGuestMenu={setDisplayGuestMenu}
               />}
           </div>
         </div>
 
         {/* Reserve button */}
         <div className='mx-6 my-4'>
-          <button className='w-full py-3 bg-pink-500 text-white font-bold rounded-lg' >
+          <button className='w-full py-3 bg-pink-500 text-white font-bold rounded-lg hover:cursor-pointer' disabled >
             Reserve
           </button>
         </div>
