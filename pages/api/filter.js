@@ -1,10 +1,10 @@
-import { cleanFilters, createQueryURL } from '../../utils/handleFilters'
+import { parseFilters, createFilterRequests } from '../../utils/handleFilters'
 
 export default async function handler(req, res) {
 
-  const _filters = cleanFilters(JSON.parse(req.body))
+  const _filters = parseFilters(JSON.parse(req.body))
 
-  const fetchRequests = createQueryURL(_filters, 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=')
+  const fetchRequests = createFilterRequests(_filters, 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=')
 
   return Promise.all(fetchRequests)
     .then(results => results.flat())

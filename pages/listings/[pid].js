@@ -11,7 +11,7 @@ import ListingContent from "../../components/Listings/ListingContent";
 import FooterExpanded from "../../components/Layout/FooterExpanded";
 import FavoritesModal from "../../components/common/FavoritesModal";
 // utils
-import { refreshFavorites } from "../../utils/favorites";
+import { refreshFavorites } from "../../utils/handleFavorites";
 
 const googleLibraries = ["places"];
 

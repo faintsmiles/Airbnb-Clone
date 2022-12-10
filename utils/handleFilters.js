@@ -1,7 +1,6 @@
 import { typeOfRoom as ROOM_TYPES } from '../utils/filterModalOptions'
 
-export function cleanFilters({minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation}) {
-
+export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation}) {
     // create object to store the data, we'll be fetching
      const _filters = {
       minPrice: '',
@@ -33,8 +32,7 @@ export function cleanFilters({minPrice, maxPrice, roomType, bedrooms, beds, bath
     return _filters
   }
 
-export function createQueryURL(_filters, apiURL) {
-    // 
+export function createFilterRequests(_filters, apiURL) {
     // Url builder
     // ORDER: apiURL, Beds BedRooms Bathrooms, Price, Rows, propertyType, roomType, essentials location    
     let queriesURL =''

@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react'
 
 // Utility library for google maps API
 import { useLoadScript  } from '@react-google-maps/api'
-import { refreshFavorites } from '../utils/favorites'
+import { refreshFavorites } from '../utils/handleFavorites'
 
 
 // google maps libraries

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // helper function
-import {modifyFavorites } from '../../utils/favorites';
+import {modifyFavorites } from '../../utils/handleFavorites';
 
 export default function MapThumbnail({ listing, recordID, setError, favorites, setFavorites }) {
   // Same as Thumbnail.js with slight styling changes to better accommodate InfoWindow container

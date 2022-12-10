@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // helper function
-import {modifyFavorites } from '../../utils/favorites';
+import {modifyFavorites } from '../../utils/handleFavorites';
 
 export default function Thumbnail({ listing, recordID, favorites, setFavorites }) {
   // prevents permanently displaying 'loading' if image hangs/returns an error by removing listing
