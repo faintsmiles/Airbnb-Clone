@@ -72,6 +72,7 @@ Additionally, if the project is to be pushed to production, the maps API key wil
 <br />
 This is **required and expected**, as the library is client sided.
 <br />
+<br />
 It is highly recommended you restrict this key to avoid abuse and unauthorized use. 
 <br />
 https://developers.google.com/maps/api-security-best-practices#restrict_apikey
