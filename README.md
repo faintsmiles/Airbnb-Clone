@@ -61,12 +61,14 @@ icons8 - https://icons8.com/
 
 ## Notes
 
-A Google Maps key is optional in development. 
+A Google Maps API key is optional in development. 
 <br />
-However, searching and updating location will not be functional as it uses google's Places and Geocoding APIs.
+However, searching and updating the current location through the searchbar will not be possible without it. 
+<br />
+As it uses Google's Autocomplete and Geocoding APIs, to validate locations and recenter maps prior to fetching new listings.
 <br />
 <br />
-Additionally, if the project is to be pushed to production, the maps API key will be ``visible`` on the client. 
+Additionally, if the project is to be pushed to production, the maps API key will be **``visible``** on the client. 
 <br />
 This is **required and expected**, as the library is client sided.
 <br />
