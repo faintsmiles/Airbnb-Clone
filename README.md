@@ -30,7 +30,7 @@ Navigate to ```localhost:3000```
 <br />
 <br />
 
-# Frameworks / Libraries Used 
+# Frameworks / Libraries 
 
 NextJS/ReactJS
 
