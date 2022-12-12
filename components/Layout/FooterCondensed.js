@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function FooterCondensed() {
   return (
-    <div className='sticky bottom-0 w-full h-24 sm:h-14 p-4 md:px-15 lg:px-24 2xl:px-48 flex
+    <div className='fixed bottom-0 w-full h-24 sm:h-14 p-4 md:px-15 lg:px-24 2xl:px-48 flex
     justify-between items-center text-sm bg-slate-300 z-50'>
         <div className='space-x-1 whitespace-nowrap flex w-full flex-wrap'>
             <a href='/' className='hover:underline' >© 2022 Airbnb, Inc.</a>
