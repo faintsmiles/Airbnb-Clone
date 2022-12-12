@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Airbnb Clone - [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Basic project focusing on front end development and learning NextJS + TailwindCSS
+
 
 ## Getting Started
 
-First, run the development server:
-
+Clone project
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/FaintSmiles/Airbnb-Clone.git
+```
+Paste Google Maps API key in .env (optional see [notes](#Notes))
+```env
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="_key_"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Navigate into project directory
+```bash
+cd Airbnb-Clone
+```
+Run development server
+```bash
+npm run dev
+```
+or 
+```bash
+yarn dev
+```
+navigate to ```localhost:3000```
+##
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Frameworks / Libraries Used 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/initialize](http://localhost:3000/api/initialize). This endpoint can be edited in `pages/api/initialize.js`.
+NextJS/ReactJS
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Google Maps API
 
-## Learn More
+Tailwindcss
 
-To learn more about Next.js, take a look at the following resources:
+Fontawesome
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Dependencies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+React-google-maps/api 
 
-## Deploy on Vercel
+react-dates
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+momentjs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+uuid
+
+## API / Dataset 
+
+https://public.opendatasoft.com/explore/dataset/airbnb-listings
+
+## Notes
+
+Google maps key is optional in development, but searching and updating location will not be functional as it uses both google's Places and Geocoding API.
+Additionally, if the project is to be pushed to production, the maps API key will be ```visible``` on the client. 
+This is required and expected, as the library is client sided. 
+It is recommended you restrict this key to avoid abuse and unauthorized use. 
+https://developers.google.com/maps/documentation/javascript/get-api-key#restrict_key 
