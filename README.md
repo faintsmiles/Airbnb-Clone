@@ -1,7 +1,8 @@
-## Airbnb Clone - [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-Basic project focusing on front end development and learning NextJS + TailwindCSS
-<br />
-<br />
+## Airbnb Clone 
+Airbnb Clone built with [NextJS](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/), and [Google Maps Platform](https://mapsplatform.google.com/). 
+<br /> 
+Listing data provided by [Opendatasoft](https://opendatasoft.com/)
+<br/>
 
 ## Getting Started
 
@@ -9,7 +10,7 @@ Clone project
 ```bash
 git clone https://github.com/FaintSmiles/Airbnb-Clone.git
 ```
-Paste Google Maps API key in .env file (optional see [notes](#Notes))
+Paste Google Maps API key in .env file ([optional](#Notes))
 ```env
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="__key__"
 ```
@@ -28,17 +29,15 @@ yarn dev
 ```
 Navigate to ```localhost:3000```
 <br />
-<br />
 
-# Frameworks / Libraries 
+# Tech Stack 
 
-NextJS/ReactJS
-
-Google Maps Platform (Maps, Places, and Geocoding APIs)
+NextJS
 
 TailwindCSS
 
-FontAwesome
+Google Maps Platform APIs (Maps, Places, and Geocoding)
+
 
 # Dependencies
 
@@ -46,18 +45,34 @@ React-google-maps/api
 
 React-dates
 
-Momentjs
+MomentJS
+
+FontAwesome
 
 Uuid
 
-## API / Dataset 
+# API 
 
 https://public.opendatasoft.com/explore/dataset/airbnb-listings
 
+# Icons
+
+icons8 - https://icons8.com/
+
 ## Notes
 
-A Google Maps key is optional in development, but searching and updating location will not be functional as it uses google's Places and Geocoding APIs.<br />
-Additionally, if the project is to be pushed to production, the maps API key will be ``visible`` on the client. <br />
-This is required and expected, as the library is client sided. <br />
-It is recommended you restrict this key to avoid abuse and unauthorized use. <br />
-https://developers.google.com/maps/documentation/javascript/get-api-key#restrict_key <br />
+A Google Maps key is optional in development. 
+<br />
+However, searching and updating location will not be functional as it uses google's Places and Geocoding APIs.
+<br />
+<br />
+Additionally, if the project is to be pushed to production, the maps API key will be ``visible`` on the client. 
+<br />
+This is **required and expected**, as the library is client sided.
+<br />
+It is highly recommended you restrict this key to avoid abuse and unauthorized use. 
+<br />
+https://developers.google.com/maps/api-security-best-practices#restrict_apikey
+<br />
+<br />
+
