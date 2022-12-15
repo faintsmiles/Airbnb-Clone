@@ -17,7 +17,7 @@ const viewControl = (isMapActive, toggleMap ) => {
 // Map
 const viewMapButton = ( isMapActive, toggleMap ) => {
   return (
-    <div className="fixed left-1/2 -translate-x-1/2 bottom-20 z-50 " >
+    <div className="fixed left-1/2 -translate-x-1/2 bottom-10 sm:bottom-20 z-50 " >
       <button onClick={() => viewControl( isMapActive, toggleMap )} className=" p-4 rounded-full bg-black text-white">
         <span className="flex items-center font-semibold">
           Show Map &nbsp;
