@@ -1,9 +1,17 @@
 import React from 'react'
-
+// Fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function GuestMenuOptions({setDisplayGuestMenu, guestCounter, setGuestCounter, Adults, setAdults, Children, setChildren, Infants, setInfants, Pets, setPets, maxGuests}) {
+export default function GuestMenuOptions({ 
+    setDisplayGuestMenu, 
+    guestCounter, setGuestCounter,
+    Adults, setAdults, 
+    Children, setChildren, 
+    Infants, setInfants, 
+    Pets, setPets, 
+    maxGuests
+}) {
 
   return (
     <div className='absolute right-0 p-5 w-72 lg:w-full border rounded-md bg-white shadow-xl z-10 '>
@@ -67,14 +75,14 @@ export default function GuestMenuOptions({setDisplayGuestMenu, guestCounter, set
   )
 }
 
-
+// Form Buttons
 function FormButtons({currentCount, modifyCount, totalGuests, modifyTotal, minGuestRequired, maxGuests}) {
-
-    const modifyCounters = (x) => {
-        if(totalGuests + x > maxGuests) {return}
-        if(currentCount + x < minGuestRequired) {return}
-        modifyCount(currentCount + x)
-        modifyTotal(totalGuests + x)
+    // Change counts/total if applicable 
+    const modifyCounters = (modifier) => {
+        if(totalGuests + modifier > maxGuests) {return}
+        if(currentCount + modifier < minGuestRequired) {return}
+        modifyCount(currentCount + modifier)
+        modifyTotal(totalGuests + modifier)
     }
     
     return(
@@ -84,7 +92,7 @@ function FormButtons({currentCount, modifyCount, totalGuests, modifyTotal, minGu
                 className={`px-2 py-1 border border-gray-200 rounded-full ${currentCount > minGuestRequired ? 'text-black' : 'text-gray-200 hover:cursor-not-allowed'  }`}
                 onClick={(e)=> modifyCounters(-1)}
             >
-                <FontAwesomeIcon icon={ faMinus} />
+                <FontAwesomeIcon icon={ faMinus } />
             </button>
             <span className='mx-3 text-black'>{currentCount}</span>
             <button 

@@ -1,10 +1,11 @@
+// React
 import React, { useState, useEffect, useRef } from "react";
-// fontawesome
+// Fontawesome
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// componenet
+// Componenet
 import CarouselItem from "./CarouselItem";
-// options
+// Carousel options available
 import { categories } from "../../utils/carouselOptions";
 
 export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults, }) {
@@ -25,10 +26,10 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
       setRightButtonVisibility("hidden");
     else setRightButtonVisibility("hidden md:block");
   };
-
+  // Initial load and whenever user selects a Carousel Item
   useEffect(() => {
     if (!carouselFocus) { return }
-    // get new results by search location and carousel item property type
+    // Get new results by search location and carousel item property type
     fetchNewResults (searchLocation, carouselFocus, setResults)
   }, [carouselFocus]);
 
@@ -73,7 +74,7 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
     </div>
   );
 }
-
+// 
 function fetchNewResults (searchLocation, carouselFocus, setResults) {
   fetch("/api/property", {
     method: "POST",

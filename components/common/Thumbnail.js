@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-// fontawesome
+// Fontawesome
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// helper function
+// Helper function
 import {modifyFavorites } from '../../utils/handleFavorites';
 
 export default function Thumbnail({ listing, recordID, favorites, setFavorites }) {
-  // prevents permanently displaying 'loading' if image hangs/returns an error by removing listing
+  // Prevents permanently displaying 'loading' if image hangs/returns an error by removing listing from view
   const [error, setError] = useState(false);
   const [saved, setSaved] = useState(false)
-
+  //Determines which thumbnails display a red heart icon vs transparent
   useEffect(() => {
     let isSaved = false
     favorites.map(element => { if(element.id == listing.id ) {isSaved = true} })

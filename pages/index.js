@@ -1,4 +1,3 @@
-
 // Components
 import Head  from 'next/head'
 import Header from '../components/Layout/Header'
@@ -8,25 +7,21 @@ import ListMapController from '../components/Index/ListMapController'
 import FilterModal from '../components/Filter/FilterModal'
 import FavoritesModal from '../components/common/FavoritesModal'
 import FooterCondensed from '../components/Layout/FooterCondensed'
-
 // React hooks
 import { useState, useEffect } from 'react'
-
 // Utility library for google maps API
 import { useLoadScript  } from '@react-google-maps/api'
+// Utility functions
 import { refreshFavorites } from '../utils/handleFavorites'
 
 
 // google maps libraries
 const googleLibraries =  ['places']
 
-
 export default function Home({data, defaultLocation }) {
   
-  // Are we connected to google's api
+  // Connect to Google's Maps API
   const { isLoaded } = useLoadScript({
-    // This needs to be hidden in the future, currently visible in network
-    // May need to do SSR in future to prevent leaking or calling to API on server
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: googleLibraries,
   })
@@ -42,9 +37,9 @@ export default function Home({data, defaultLocation }) {
   const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
 
   useEffect(() => {
-    // syncs/refreshes favorites if altered in another tab witin the same domain
+    // syncs/refreshes favorites if altered in another tab within the same domain
     window.addEventListener('storage', callRefreshFavorites)
-    // remove event and clear local storage when the index page is closed 
+    // remove events and clear local storage when the index page is closed 
     return () => { 
       window.removeEventListener('storage', callRefreshFavorites)
       window.onunload = function() { localStorage.clear(); } 
@@ -65,26 +60,26 @@ export default function Home({data, defaultLocation }) {
       </Head>
 
       <main>
-
+        {/*  */}
         <Header setSearchLocation={setSearchLocation} favorites={favorites} setShowFavorites={setShowFavorites} />
-
+        {/* Carousel / Filter Section */}
         <Category
          carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus} 
          searchLocation={searchLocation} setResults={setResults} setShowFilterModal={setShowFilterModal} 
         />
-
+        {/* Main content */}
         <Content 
           results={results} setResults={setResults} 
           searchLocation={searchLocation} showMap={mapToggle} 
           favorites={favorites} setFavorites={setFavorites}
         />
- 
+        {/* Button that controls which content type is shown (List/Map) */}
         <ListMapController isMapActive={mapToggle} toggleMap={setMapToggle} />
 
-        {/* Footer only shows on list view  */}
+        {/* Footer only appears when List component is visible  */}
         { !mapToggle && <FooterCondensed  /> }
         
-        {/* Filter Modal only shows when filter button inside of Category component is clicked */}
+        {/* Filter Modal. */}
         { showFilterModal && 
           <FilterModal 
           carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus}
@@ -92,19 +87,19 @@ export default function Home({data, defaultLocation }) {
           searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
         />
         }
-        {
-          showFavorites && <FavoritesModal favorites={favorites} setFavorites={setFavorites} setShowFavorites={setShowFavorites} />
+        {/* Favorites Modal */}
+        { showFavorites && 
+          <FavoritesModal favorites={favorites} setFavorites={setFavorites} setShowFavorites={setShowFavorites} />
         }
 
       </main>
     </div>
   )
 }
-
+// Enables SSR for index
 export async function getServerSideProps (context) {
-  // inefficient to call the nextjs api which then calls supporting API, but we're aiming to hide the OpenData API url 
-  // Check this later in network tab. may also need to reduce data size in the future or modify api url
-  const res = await fetch ( 'http://localhost:3000/api/initialize')
+  // Retrieves listing data for the intiial load
+  const res = await fetch ( '/api/initialize')
   const data = await res.json();
   return { props: { data: data.results, defaultLocation: data.defaultLocation } }
 }

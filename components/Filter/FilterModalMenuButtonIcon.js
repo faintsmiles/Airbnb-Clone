@@ -1,5 +1,5 @@
 import React from "react";
-// Icons are passed by object
+//FontAwesome; Icons are pased by objects
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function FilterModalMenuButtonIcon({

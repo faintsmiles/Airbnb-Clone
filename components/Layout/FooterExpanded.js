@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function FooterExpanded() {
   return (
-    // bottom padding is for when the condensed reserve form is displayed
+    // Bottom padding is for when the condensed reserve form is displayed
     <footer className=' bg-gray-50 pt-12 pb-20 md:pb-12 text-sm border'>
         <div className='listing-page-container mx-auto px-8 flex flex-col lg:flex-row lg:justify-between'>
           <section className=' border-b lg:border-0 pb-8 '>

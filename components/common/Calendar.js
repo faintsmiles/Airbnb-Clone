@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-
 // Moment.js peer dep of react-dates
 import moment from "moment";
 moment.suppressDeprecationWarnings = true;
 moment.locale("en");
-// react-dates by airbnb
+// React-dates by Airbnb. (Calendar + style)
 import "react-dates/initialize";
 import { DayPickerRangeController } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 
-// ** regarding legacy warnings -- see https://github.com/react-dates/react-dates/issues/1748 **
+// 
+// ** REGARDING LEGACY WARNINGS -- SEE https://github.com/react-dates/react-dates/issues/1748 **
+//
 
 export default function Calendar({
   checkInDay,
@@ -20,12 +21,14 @@ export default function Calendar({
   setDaysToReserve,
   noBorder,
 }) {
-  // TailwindCSS default 'large' width breakpoint
-  const widthBreakpoint = 1024;
-  const [stateFocusedInput, setStateFocusedInput] = useState("startDate");
 
+
+  // TailwindCSS' default 'large' width breakpoint. Helps determine how many calendar months to display for responsive design
+  const widthBreakpoint = 1024; 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [visibleCalendarMonths, setVisibleCalendarMonths] = useState();
+  // Where to focus when user interacts with calendar
+  const [stateFocusedInput, setStateFocusedInput] = useState("startDate");
 
   function handleScreenWidthChange() {
     // No change occured, exit the function

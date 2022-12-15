@@ -6,14 +6,14 @@ export default function RangeSlider({
   maxPrice,
   setMaxPrice,
 }) {
-  // input constraints
+  // Input constraints
   const minPriceAllowed = 0;
   const maxPriceAllowed = 20000;
-  // used for styling/padding
+  // Used for styling/padding
   const pricePadding = 50; // adjust min/max inputs so they arent 'equal'
   const maxSliderRange = 600; // default length of slider and max price
   const sliderPaddingPercent = 96; // normally 100, adjusted for w/h of elements
-
+  // Reflect price changes 
   const onLowPriceChange = (e) => {
     e.target.value < maxPriceAllowed
       ? setMinPrice(parseInt(e.target.value))
@@ -36,7 +36,7 @@ export default function RangeSlider({
         : setMinPrice(parseInt(e.target.value) - pricePadding);
     }
   };
-
+  // Modify Padding for range/sliders when price options change
   const findPadding = (price) => {
     if (minPriceAllowed >= price) return minPriceAllowed;
 

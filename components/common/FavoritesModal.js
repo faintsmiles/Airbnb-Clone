@@ -1,7 +1,9 @@
 import React from "react";
+// Component
 import Thumbnail from "./Thumbnail";
+// Unique ID lib
 import { v4 as uuidv4 } from "uuid";
-
+// Fontawesome
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

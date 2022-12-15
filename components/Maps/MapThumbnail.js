@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-// fontawesome
+// Fontawesome
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// helper function
+// Helper function
 import {modifyFavorites } from '../../utils/handleFavorites';
 
 export default function MapThumbnail({ listing, recordID, setError, favorites, setFavorites }) {
-  // Same as Thumbnail.js with slight styling changes to better accommodate InfoWindow container
-  // Errors and missing properities are also checked 1 layer up (Marker.js)
+  // Same as Thumbnail.js with slight styling changes to better accommodate InfoWindow parent/container
+  // Errors and missing properities are also checked 1 layer up instead (Marker.js)
   
   const [saved, setSaved] = useState(false)
 

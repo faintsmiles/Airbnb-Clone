@@ -1,4 +1,5 @@
 import React from "react";
+// Components
 import ReserveForm from "./ReserveForm";
 import ReserveFooter from "./ReserveFooter";
 // Controls whether we display a form or footer for reservation forms
@@ -9,9 +10,7 @@ export default function ReserveController({
   checkOutDay,
   setCheckOutDay,
   daysToReserve,
-  setDaysToReserve,
-  guestCounter,
-  setGuestCounter,
+  setDaysToReserve
 }) {
   return (
     <div className="w-full fixed left-0 bottom-0 right-0 md:sticky md:top-8 z-50">

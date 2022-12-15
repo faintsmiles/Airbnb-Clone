@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// Marker and Infowindow components
+// Utility library to interact with Google's APIs.
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
-// information to display within InfoWindow
+// Component
 import MapThumbnail from "./MapThumbnail";
 
 export default function Marker({
@@ -12,7 +12,7 @@ export default function Marker({
   favorites,
   setFavorites,
 }) {
-  // prevents displaying where image hangs/returns an error
+  // Prevents displaying where image hangs/returns an error
   const [error, setError] = useState(false);
 
   if (error) return;

@@ -1,5 +1,5 @@
 import React from 'react'
-
+// Fontawesome
 import { faGlobe, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

@@ -1,19 +1,21 @@
+// React + Next Hooks
 import React, {useRef, useState, useEffect} from "react";
 import Image from 'next/image'
 import Link from 'next/link'
-
+// Utility library to interact with Google's APIs.
 import { Autocomplete } from "@react-google-maps/api";
-
+// Fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faGlobe, faHeart, faMagnifyingGlass  } from '@fortawesome/free-solid-svg-icons'
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
 export default function Header({ setSearchLocation, favorites, setShowFavorites }) {
-  // google's autocomplete options. limiting results to city names only
+  // Limiting Google's Autocomplete API to display results for CITY names only
   let searchOptions = { types: ["(cities)"] };
-
+  // Ref for Search Input
   const searchInputValue = useRef();
+  // Show user menu ref + state
   const userMenu = useRef()
   const [showMenu,  setShowMenu] = useState(false)
 
@@ -76,7 +78,7 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
           <button className="p-3 flex hover:bg-gray-100 rounded-full text-base">
             <FontAwesomeIcon icon={faGlobe} />
           </button>
-          {/* favorites Button. Only visible when favorites has items */}
+          {/* Favorites Button. Only visible when favorites has items */}
           { (favorites && favorites.length > 0) && 
             <button className="p-3 flex hover:bg-gray-100 rounded-full text-base" onClick={() => setShowFavorites(true)}>
               <FontAwesomeIcon icon={faHeart} />

@@ -1,26 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
+// Components
+import Calendar from '../../common/Calendar';
+// Options
+import GuestMenuOptions from './GuestMenuOptions';
+// Fontawesome
 import { faStar, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-
+// MomentJS (date util lib)
 import moment from 'moment'
 moment.locale('en')
-import Calendar from '../../common/Calendar';
-
-import GuestMenuOptions from './GuestMenuOptions';
 
 export default function ReserveForm({ roomData, checkInDay, setCheckInDay, checkOutDay, 
   setCheckOutDay, minNightsRequired, daysToReserve, setDaysToReserve }) {
 
-  // in the event we add functionality for choosing # of nights
   const pricePerNight = parseInt(roomData.price);
-  // In the event the maximum nights available to reserve exceeds 90 days, we set it to something far more reasonable
-  //const nightsSelected =  parseInt(roomData.maximum_nights) > 90 ? 30 : parseInt(roomData.maximum_nights);
-  const nightsSelected = daysToReserve;
-  const basePrice = (pricePerNight) * (nightsSelected);
+  const basePrice = pricePerNight * daysToReserve;
   const cleaningFee = roomData.cleaning_fee ? parseInt(roomData.cleaning_fee) : 0;
-  // round cost up to nearest dollar
-  const serviceFee = parseInt((pricePerNight * nightsSelected * .10).toFixed());
+  // Round cost up to nearest dollar
+  const serviceFee = parseInt((pricePerNight * daysToReserve * .10).toFixed());
   const totalCost = (basePrice + cleaningFee + serviceFee); 
   
 
@@ -43,7 +40,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
     }
   }
 
-  // Type of guests and their current counter for guest menu child component.
+  // Type of guest + counter. For GuestMenu child component.
   const [ Adults, setAdults] = useState(1)
   const [Children, setChildren] = useState(0)
   const [Infants, setInfants] = useState(0)
@@ -150,7 +147,7 @@ export default function ReserveForm({ roomData, checkInDay, setCheckInDay, check
         {/* Price Breakdown */}
         <div className='mx-6 my-4 tracking-wide'>
           <div className='py-1 flex justify-between'>
-              <div className='underline'>{ '$' + pricePerNight + ' x ' + nightsSelected + ' nights'}</div>
+              <div className='underline'>{ '$' + pricePerNight + ' x ' + daysToReserve + ' nights'}</div>
               <div> { '$' + basePrice }</div>
           </div>
           <div className='py-1 flex justify-between'>

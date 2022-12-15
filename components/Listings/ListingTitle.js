@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-// fontawesome
+// Fontawesome
 import { faStar, faShare, faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//util
+// Util function
 import { modifyFavorites } from "../../utils/handleFavorites";
 
 export default function ListingTitle({ roomData, favorites, setFavorites }) {
   const [saved, setSaved] = useState(false);
 
+  // Determines styling for favorite heart icon
   useEffect(() => {
     if(!favorites) {return}
     

@@ -1,4 +1,5 @@
 import React from 'react'
+// Components
 import Carousel from '../Carousel/Carousel'
 import FilterButton from '../Filter/FilterButton'
 

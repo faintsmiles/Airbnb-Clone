@@ -1,6 +1,8 @@
+// Hooks
 import { useState } from "react";
-
+// Utility library to interact with Google's APIs.
 import { GoogleMap } from "@react-google-maps/api";
+// Component
 import Marker from "./Marker";
 
 export default function Map({ results, center, favorites, setFavorites }) {

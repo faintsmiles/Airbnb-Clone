@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// Utility library to interact with Google's APIs.
 import { GoogleMap, MarkerF, InfoWindowF } from "@react-google-maps/api";
 
 export default function MapSingleListing({ results, center }) {

@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from 'react'
-// componenets
+// Components
 import FitlerModalCheckBox from './FitlerModalCheckBox'
 import FilterModalMenuButtons from './FilterModalMenuButtons';
 import FilterModalMenuButtonIcon from './FilterModalMenuButtonIcon';
 import RangeSlider from './RangeSlider';
 
-// fontawesome
+// Fontawesome
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Options available within filter modal
+// Filter Modal Options
 import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../../utils/filterModalOptions'
 
 export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults}) {
- 
   // States and controls
   // Min/max price of rooms
   const [minPrice, setMinPrice] = useState(0)
@@ -35,7 +34,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
   // Objects containing the current state values and set state functions for grouped items, used to map through easily when building components
   const roomStates = [ {category: 'Bedrooms', value: bedrooms, setValue: setBedrooms}, { category: 'Beds', value: beds, setValue: setBeds}, { category: 'Bathrooms', value: bathrooms, setValue: setBathrooms} ] 
   const amenityStates = [ { value: essentials, setValue: setEssentials}, { value: features, setValue: setFeatures}, {value: safety, setValue: setSafety} ]
-
+  // Determine avg price of all listings
   useEffect(() => {
     if(!results) { return }
 
@@ -44,7 +43,7 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     setAvgPrice( (averagePrice/results.length).toFixed(2) )
   }, [])
 
-  // Reset states
+  // Reset all Filter states
   function clearFilter() {
     setMinPrice(0)
     setMaxPrice(600)

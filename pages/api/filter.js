@@ -1,3 +1,4 @@
+// Util functions to handle which filters are selected and create fetch URLs
 import { parseFilters, createFilterRequests } from '../../utils/handleFilters'
 
 export default async function handler(req, res) {
