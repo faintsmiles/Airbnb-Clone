@@ -98,8 +98,11 @@ export default function Home({data, defaultLocation }) {
 }
 // Enables SSR for index
 export async function getServerSideProps (context) {
+  // Find and Set host
+  const { req } = context
+  const host = req.headers.host
   // Retrieves listing data for the intiial load
-  const res = await fetch ( 'http://localhost:3000/api/initialize')
+  const res = await fetch ( `http://${host}/api/initialize`)
   const data = await res.json();
   return { props: { data: data.results, defaultLocation: data.defaultLocation } }
 }
