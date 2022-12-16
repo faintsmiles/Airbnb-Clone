@@ -12,6 +12,11 @@ export default function MapSingleListing({ results, center }) {
       zoom={12}
       center={center}
       mapContainerClassName="listing-page-map"
+      options={{
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      }}
     >
       <MarkerF
         position={{ lat: center.lat, lng: center.lng }}
