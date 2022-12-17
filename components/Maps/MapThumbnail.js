@@ -31,7 +31,7 @@ export default function MapThumbnail({ listing, recordID, setError, favorites, s
       </button>
       {/* Thumbnail */} 
       <div className=" bg-white h-full w-full">
-          <a target="_blank" href={`/listings/${recordID}`} onClick={()=> localStorage.setItem( recordID, JSON.stringify(listing) )} > 
+        <a target='_blank' href={`/listings/${recordID}`} onClick={()=> localStorage.setItem( recordID, JSON.stringify(listing) )} onAuxClick={()=> localStorage.setItem( recordID, JSON.stringify(listing) )}> 
               <Image
                 src={listing.xl_picture_url}
                 layout="responsive"
