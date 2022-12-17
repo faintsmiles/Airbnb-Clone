@@ -4,12 +4,6 @@ export default async function handler(req, res) {
   // Defaults
   let cityName = "&refine.city=" + "Amsterdam";
   let countryName = "&refine.country=" + "Netherlands";
-  // In the event we request/enable location based tracking. Either through the geolocation API, User's ip or Google's API
-  if (req.body) {
-    const body = JSON.parse(req.body);
-    cityName = "&refine.city=" + body.city;
-    countryName = "&refine.country=" + body.country;
-  }
 
   return fetch(apiURL + cityName)
     .then((response) => response.json())
