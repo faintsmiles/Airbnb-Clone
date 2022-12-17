@@ -1,4 +1,5 @@
 import { typeOfRoom as ROOM_TYPES } from '../utils/filterModalOptions'
+import { parseCityFromLocation } from './parseLocation'
 
 export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation}) {
     // create object to store the data, we'll be fetching
@@ -57,7 +58,7 @@ export function createFilterRequests(_filters, apiURL) {
     _filters.essentials.map(element => essentialsURL += '&refine.amenities=' + element )
     _filters.features.map(element => essentialsURL += '&refine.amenities=' + element )
     _filters.safety.map(element => essentialsURL += '&refine.amenities=' + element )
-    _filters.searchLocation ? locationURL += '&refine.city=' + _filters.searchLocation : null
+    _filters.searchLocation ? locationURL += '&refine.city=' + parseCityFromLocation(_filters.searchLocation) : null
 
     // Query for each room type selected (can only search 1 at a time through api)
     if (_filters.room.length != 0 && _filters.room.length != ROOM_TYPES.items.length){ 
