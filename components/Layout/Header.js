@@ -42,9 +42,9 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites,
       <header className="flex flex-1 justify-between  items-center h-auto">
         {/* Brand */}
         <div className="w-full hidden md:flex sm:pr-4">
-          <Link href={{ pathname: '/' }} >
+          <Link href='/'>
             <a>
-              <Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image"  />
+              <Image width={102} height={32} src='/airbnb.svg' alt="airbnb brand image" />
             </a>
           </Link>
         </div>
@@ -64,8 +64,8 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites,
             </Autocomplete>
             {/* Search Button */}
             <button className="flex absolute inset-y-0 right-0 items-center pr-2 text-center  ">
-              <div className=" bg-brand-color rounded-3xl px-2 py-1.5">
-                <FontAwesomeIcon icon={faMagnifyingGlass} className='m-auto text-white text-lg' />
+              <div className="bg-brand w-8 h-8 rounded-full">
+                <FontAwesomeIcon icon={faMagnifyingGlass} className='m-auto p-2 text-white text-base' />
               </div>
             </button>
           </div>

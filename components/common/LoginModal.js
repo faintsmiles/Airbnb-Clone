@@ -31,7 +31,7 @@ export default function LoginModal({setShowLoginModal}) {
                     <input name='login-email' type="email" placeholder='Email' className='p-3 w-full border border-gray-400 rounded' onFocus={()=> setShowEmailLabel(true)} onBlur={(e)=> { e.target.value === "" ? setShowEmailLabel(false) : null}} />
                     <label for='login-email' className={`absolute left-0 px-3 py-0.5 text-sm text-gray-400 ${showEmailLabel ? '' : 'hidden'}`}>Email</label>
                 </div>
-                <button className='p-3 text-white font-bold text-lg bg-brand-color rounded cursor-pointer' disabled>Continue</button>
+                <button className='p-3 text-white font-bold text-lg bg-brand-dark rounded cursor-pointer' disabled>Continue</button>
                 <br></br>
                 {/* or */}
                 <div className='w-full flex items-center gap-4'>
