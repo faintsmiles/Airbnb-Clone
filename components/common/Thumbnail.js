@@ -82,8 +82,13 @@ export default function Thumbnail({ listing, recordID, favorites, setFavorites }
                   </span>
                 </div>
               </div>
-              <div className='text-gray-500'>Calculate curr distance ?</div>
-              <div className='text-gray-500'>Dates Available</div>
+              <div className='text-gray-500'>
+                <span>{listing.accommodates + ( parseInt(listing.accommodates) !== 1 ? " Guests, " : " Guest, ")} </span>
+                <span>{listing.bedrooms + (parseInt(listing.bedrooms) !== 1 ? " Bedrooms, " : " Bedroom, ")}</span>
+                <span>{listing.beds + (parseInt(listing.beds) !== 1 ? " Beds, " : " Bed, ")}</span>
+                <span className='whitespace-pre'>{listing.bathrooms + (parseInt(listing.bathrooms) !== 1 ? " Baths" : " Bath") }</span>
+              </div>
+              <div className='text-gray-500'>Dates Available!</div>
               <div>
                 <span className='font-bold'>{ '$' + listing.price }</span>
                 <span> night</span>

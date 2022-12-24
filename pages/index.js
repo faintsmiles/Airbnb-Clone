@@ -5,6 +5,7 @@ import Category from '../components/Index/Category'
 import Content from '../components/Index/Content'
 import ListMapController from '../components/Index/ListMapController'
 import FilterModal from '../components/Filter/FilterModal'
+import LoginModal from '../components/common/LoginModal'
 import FavoritesModal from '../components/common/FavoritesModal'
 import FooterCondensed from '../components/Layout/FooterCondensed'
 // React hooks
@@ -33,7 +34,8 @@ export default function Home({data, defaultLocation }) {
   const [mapToggle, setMapToggle] = useState(false);
   const [favorites, setFavorites]  = useState([])
   const [showFavorites, setShowFavorites] = useState(false)
-    
+  const [showLoginModal, setShowLoginModal] = useState(false)
+
   const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
 
   useEffect(() => {
@@ -61,7 +63,10 @@ export default function Home({data, defaultLocation }) {
 
       <main>
         {/*  */}
-        <Header setSearchLocation={setSearchLocation} favorites={favorites} setShowFavorites={setShowFavorites} />
+        <Header 
+          setSearchLocation={setSearchLocation} favorites={favorites} 
+          setShowFavorites={setShowFavorites} showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} 
+        />
         {/* Carousel / Filter Section */}
         <Category
          carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus} 
@@ -86,6 +91,13 @@ export default function Home({data, defaultLocation }) {
           results={results} setResults={setResults} 
           searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
         />
+        }
+        {/* Login and Signup Modal */}
+        {
+          showLoginModal &&
+          <LoginModal
+            showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal}
+          />
         }
         {/* Favorites Modal */}
         { showFavorites && 

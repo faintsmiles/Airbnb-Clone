@@ -10,7 +10,7 @@ import { faBars, faGlobe, faHeart, faMagnifyingGlass  } from '@fortawesome/free-
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
-export default function Header({ setSearchLocation, favorites, setShowFavorites }) {
+export default function Header({ setSearchLocation, favorites, setShowFavorites, setShowLoginModal }) {
   // Limiting Google's Autocomplete API to display results for CITY names only
   let searchOptions = { types: ["(cities)"] };
   // Ref for Search Input
@@ -97,12 +97,12 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites 
             {/* Expanded onclick menu for bars + user */}
             { showMenu &&
               <div className="absolute mt-5 right-0 w-64 py-2 text-base z-50 bg-white shadow-[0_0px_16px_rgba(0,0,0,0.1)] rounded-lg">  
-                  <div className="px-4 py-2 hover:bg-gray-100">Sign Up</div>
-                  <div className="px-4 py-2 hover:bg-gray-100">Log in</div>
+                  <div className="px-4 py-2 hover:bg-gray-100" onClick={() => setShowLoginModal(true)} >Sign Up</div>
+                  <div className="px-4 py-2 hover:bg-gray-100" onClick={() => setShowLoginModal(true)} >Log in</div>
                   <div className="w-full my-2 border-b"></div>
-                  <div className="px-4 py-2 hover:bg-gray-100">Host your home</div>
-                  <div className="px-4 py-2 hover:bg-gray-100">Host an experience</div>
-                  <div className="px-4 py-2 hover:bg-gray-100">Help</div>
+                  <div className="px-4 py-2 hover:bg-gray-100" onClick={() => setShowLoginModal(true)} >Host your home</div>
+                  <div className="px-4 py-2 hover:bg-gray-100" onClick={() => setShowLoginModal(true)} >Host an experience</div>
+                  <div className="px-4 py-2 hover:bg-gray-100" onClick={() => setShowLoginModal(true)} >Help</div>
               </div>
             }
           </div>

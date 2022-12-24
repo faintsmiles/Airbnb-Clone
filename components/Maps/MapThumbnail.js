@@ -65,7 +65,10 @@ export default function MapThumbnail({ listing, recordID, setError, favorites, s
                 </div>
               </div>
               <div className="hidden md:block text-gray-500">
-                Calculate curr distance ?
+                <span className=''>{listing.accommodates + ( parseInt(listing.accommodates) !== 1 ? " Guests, " : " Guest, ")} </span>
+                <span>{listing.bedrooms + (parseInt(listing.bedrooms) !== 1 ? " Bedrooms, " : " Bedroom, ")}</span>
+                <span>{listing.beds + (parseInt(listing.beds) !== 1 ? " Beds, " : " Bed, ")}</span>
+                <span className='whitespace-pre'>{listing.bathrooms + (parseInt(listing.bathrooms) !== 1 ? " Baths" : " Bath") }</span>
               </div>
               <div className="hidden md:block text-gray-500">
                 Dates Available
