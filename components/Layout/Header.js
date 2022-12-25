@@ -12,7 +12,7 @@ import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
 export default function Header({ setSearchLocation, favorites, setShowFavorites, setShowLoginModal }) {
-  // 
+  // Determine if current route is index
   const { asPath } = useRouter()
   const isPathIndex = asPath === '/' ? true : false;
   // Limiting Google's Autocomplete API to display results for CITY names only
