@@ -1,5 +1,6 @@
 // React + Next Hooks
 import React, {useRef, useState, useEffect} from "react";
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
 // Utility library to interact with Google's APIs.
@@ -11,6 +12,9 @@ import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
 export default function Header({ setSearchLocation, favorites, setShowFavorites, setShowLoginModal }) {
+  // 
+  const { asPath } = useRouter()
+  const isPathIndex = asPath === '/' ? true : false;
   // Limiting Google's Autocomplete API to display results for CITY names only
   let searchOptions = { types: ["(cities)"] };
   // Ref for Search Input
@@ -22,7 +26,7 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites,
   // Submit handler for search input 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setSearchLocation(searchInputValue.current.value);
+    setSearchLocation(searchInputValue.current.value)
   } 
   // Close User Menu when user clicks outside the bounds of the menu options or on another target
   const closeUserMenu = (e) => {
@@ -49,11 +53,12 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites,
           </Link>
         </div>
         {/* Search bar */}
+        { isPathIndex &&
         <form className="search-container flex items-center w-full md:max-w-xs hover:shadow-lg rounded-full" onSubmit={(e) => handleSearchSubmit(e)}>
           <label htmlFor="simple-search" className="sr-only">Search</label>
           <div className="relative w-full">
             {/* Autocomplete componenet */}
-            <Autocomplete options={searchOptions} onPlaceChanged={(e)=>handleSearchSubmit(e)}>
+            <Autocomplete options={searchOptions} >
               <input 
                 type="text" id="simple-search" 
                 className="block w-full pr-10 p-2.5 text-sm rounded-2xl border bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-lg " 
@@ -70,6 +75,7 @@ export default function Header({ setSearchLocation, favorites, setShowFavorites,
             </button>
           </div>
         </form>
+        }
         {/* Options */}
         <div className="hidden w-full md:flex md:justify-end md:items-center gap-1 " >
           {/* 'Become a Host link */}
