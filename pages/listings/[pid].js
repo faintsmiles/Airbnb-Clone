@@ -11,6 +11,7 @@ import FavoritesModal from "../../components/common/FavoritesModal";
 import { useLoadScript } from "@react-google-maps/api";
 // Util function
 import { refreshFavorites } from "../../utils/handleFavorites";
+import LoginModal from "../../components/common/LoginModal";
 
 // google maps libraries
 const googleLibraries = ["places"];
@@ -28,6 +29,8 @@ export default function listingPage() {
   const [roomData, setRoomData] = useState();
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false)
+
   // Named function for event handler
   const callRefreshFavorites = () => {
     refreshFavorites(setFavorites);
@@ -60,7 +63,7 @@ export default function listingPage() {
         <link rel="icon" href="/airbnb.svg" />
       </Head>
       <main>
-        <Header favorites={favorites} setShowFavorites={setShowFavorites} />
+        <Header favorites={favorites} setShowFavorites={setShowFavorites} setShowLoginModal={setShowLoginModal} />
         <ListingContent
           roomData={roomData}
           favorites={favorites}
@@ -74,6 +77,11 @@ export default function listingPage() {
             setShowFavorites={setShowFavorites}
           />
         )}
+        {showLoginModal && (
+          <LoginModal
+            setShowLoginModal={setShowLoginModal}
+          />
+          )}
       </main>
     </>
   );
