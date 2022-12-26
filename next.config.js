@@ -6,6 +6,11 @@ const nextConfig = {
     minimumCacheTTL: 1200,
   },
   swcMinify: true,
+  experimental: {
+    images: {
+      unoptimized: true
+    }
+  }
 }
 
 module.exports = nextConfig
