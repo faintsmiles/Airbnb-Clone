@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 // Fontawesome
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -141,14 +142,39 @@ export default function Reviews({
 function createReviews(numberOfReviews) {
   const maxReviewsToShow = numberOfReviews >= 8 ? 8 : numberOfReviews;
   let names = [
-    "Max",
-    "Christy",
-    "Sam",
-    "Nicole",
-    "Jessica",
-    "Matthew",
-    "Michelle",
-    "John",
+    {
+      user: "Max",
+      picture: "/profile/pexels-andrea-piacquadio-8373581.jpg",
+    },
+    {
+      user: "Christy",
+      picture: "/profile/pexels-dominika-roseclay-11727841.jpg",
+    },
+    {
+      user: "Sammy",
+      picture: "/profile/pexels-tuấn-kiệt-jr-13827311.jpg",
+    },
+    {
+      user: "Nicole",
+      picture: "/profile/pexels-pixabay-2064341.jpg",
+    },
+    {
+      user: "Jessica",
+      picture: "/profile/pexels-marcelo-dias-20108771.jpg",
+    },
+    {
+      user: "Matthew",
+      picture: "/profile/pexels-craig-mckay-19981561.jpg",
+    },
+    {
+      user: "Michelle",
+      picture: "/profile/pexels-garon-piceli-5831241.jpg",
+    },
+    {
+      user: "John",
+      picture: "/profile/pexels-simon-robben-9053751.jpg",
+      
+    },
   ];
   const lorem =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -158,9 +184,16 @@ function createReviews(numberOfReviews) {
         return (
           <div key={"review" + i} className="mr-16">
             <div className="flex items-center">
-              <div className="h-12 w-12 rounded-full border border-blue-900 bg-slate-100"></div>
+              <div className="h-12 w-12 rounded-full border border-blue-900 bg-slate-100 overflow-hidden">
+                <Image 
+                src={names[i].picture}
+                alt=""
+                height={60}
+                width={60}
+                />
+              </div>
               <div className="pl-2 flex flex-col">
-                <div className="font-bold">{names[i]}</div>
+                <div className="font-bold">{names[i].user}</div>
                 <div className="text-sm text-slate-500">October 2022</div>
               </div>
             </div>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 
 export default function ListingDescription({ roomData }) {
   const amenityList = roomData.amenities.split(",");
+  // 
+  const [hostThumbnail, setHostThumbNail] = useState(roomData.host_thumbnail_url)
 
   return (
     <div className="w-full">
@@ -20,15 +22,17 @@ export default function ListingDescription({ roomData }) {
           </div>
         </div>
         {/* Image */}
-        <div className="h-14 w-14">
+        <div className="h-14 w-14 rounded-full border border-blue-900">
           <Image
-            src={roomData.host_thumbnail_url}
+            src={hostThumbnail}
+            alt=""
             layout="responsive"
             objectFit="cover"
             width={50}
             height={50}
             priority={true}
             className="rounded-full"
+            onError={() => setHostThumbNail("/profile/pexels-vlada-karpovich-4609046.jpg")}
           />
         </div>
       </div>

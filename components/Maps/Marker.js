@@ -51,7 +51,7 @@ export default function Marker({
         >
           <MapThumbnail
             listing={item.fields}
-            recordID={item.recordid}
+            recordID={item.fields.id}
             setError={setError}
             favorites={favorites}
             setFavorites={setFavorites}

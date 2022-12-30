@@ -20,24 +20,24 @@ export default function Thumbnail({ listing, recordID, favorites, setFavorites }
 
 
   if(error) {
-    console.log('Image could not be found')
+    // console.log('Image could not be found')
     return null;
   }
   // Fields required in thumbnail
   if (!listing.geolocation) {
-    console.log('No geolocation');
+    // console.log('No geolocation');
     return null;
   }
   if (!listing.price) {
-    console.log('No Price');
+    // console.log('No Price');
     return null;
   }
   if (!listing.xl_picture_url) {
-    console.log('No picture');
+    // console.log('No picture');
     return null;
   }
   if (!listing.smart_location) {
-    console.log('No smart location');
+    // console.log('No smart location');
     return null;
   }
   
@@ -60,7 +60,6 @@ export default function Thumbnail({ listing, recordID, favorites, setFavorites }
               width={200}
               height={200}
               className='bg-gray-100 rounded-lg'
-              priority={true}
               alt='Loading...'
               onError={() => setError(true)}
             />

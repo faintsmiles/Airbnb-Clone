@@ -39,7 +39,6 @@ export default function MapThumbnail({ listing, recordID, setError, favorites, s
                 width={340}
                 height={220}
                 className=""
-                priority={true}
                 alt="Loading"
                 onError={() => setError(true)}
               />

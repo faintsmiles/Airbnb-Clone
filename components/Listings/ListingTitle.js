@@ -22,7 +22,7 @@ export default function ListingTitle({ roomData, favorites, setFavorites }) {
   return (
     <div className=" my-0 mx-auto flex flex-col md:p-8 lg:flex-col-reverse">
       {/* Hosts' picture */}
-      <div className="bg-blue-50">
+      <div className="lg:rounded-lg">
         <Image
           src={roomData.xl_picture_url}
           alt=""
