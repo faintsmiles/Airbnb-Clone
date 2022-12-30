@@ -1,7 +1,7 @@
 import { typeOfRoom as ROOM_TYPES } from '../utils/filterModalOptions'
 import { parseCityFromLocation } from './parseLocation'
 
-export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation}) {
+export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bathrooms, property, essentials, features, safety, searchLocation, pagination}) {
     // create object to store the data, we'll be fetching
      const _filters = {
       minPrice: '',
@@ -15,7 +15,8 @@ export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bath
       essentials: [],
       features: [],
       safety: [],
-      searchLocation
+      searchLocation,
+      pagination: "",
     }
     // 0 is false and 'Any' means filtering isnt necessary
     _filters.minPrice = minPrice
@@ -29,6 +30,7 @@ export function parseFilters({minPrice, maxPrice, roomType, bedrooms, beds, bath
     features.length ? _filters.features = [...features] : null
     safety.length ? _filters.safety = [...safety] : null
     searchLocation ? _filters.searchLocation = searchLocation : null
+    pagination ? _filters.pagination = pagination : null
 
     return _filters
   }
@@ -43,6 +45,7 @@ export function createFilterRequests(_filters, apiURL) {
     let roomURL = ''
     let essentialsURL = ''
     let locationURL = '' 
+    const pagination = _filters.pagination ? "&start=" + _filters.pagination : ""
     // Requests we'll be calling
     const fetchRequests = []
 
@@ -66,7 +69,7 @@ export function createFilterRequests(_filters, apiURL) {
       _filters.room.map(element => {
         roomURL = '&refine.room_type=' + element
         fetchRequests.push(
-         fetch((apiURL + queriesURL + priceURL + rows + propertyURL + roomURL + essentialsURL + locationURL).replace(/ /g, '+'))
+         fetch((apiURL + queriesURL + priceURL + rows + propertyURL + roomURL + essentialsURL + locationURL + pagination).replace(/ /g, '+'))
          .then(response => response.json())
          .then(response => response.records)
         )
@@ -74,7 +77,7 @@ export function createFilterRequests(_filters, apiURL) {
     }
     else {
       fetchRequests.push(
-        fetch((apiURL + queriesURL + priceURL + rows + propertyURL + essentialsURL + locationURL).replace(/ /g, '+'))
+        fetch((apiURL + queriesURL + priceURL + rows + propertyURL + essentialsURL + locationURL + pagination).replace(/ /g, '+'))
         .then(response => response.json())
         .then(response => response.records)
       )

@@ -8,7 +8,7 @@ import CarouselItem from "./CarouselItem";
 // Carousel options available
 import { categories } from "../../utils/carouselOptions";
 
-export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults, }) {
+export default function Carousel({ carouselFocus, setCarouselFocus, searchLocation, setResults, setCurrentFetch }) {
   const ref = useRef();
   const [leftButtonVisibility, setLeftButtonVisibility] = useState("hidden");
   const [rightButtonVisibility, setRightButtonVisibility] = useState("hidden md:block");
@@ -31,6 +31,15 @@ export default function Carousel({ carouselFocus, setCarouselFocus, searchLocati
     if (!carouselFocus) { return }
     // Get new results by search location and carousel item property type
     fetchNewResults (searchLocation, carouselFocus, setResults)
+    // Change api call and criteria for infinite scroll fetch 
+    setCurrentFetch({
+      api: '/api/property', 
+      criteria: {
+        searchLocation: searchLocation,
+        filters: "",
+        propertyType: carouselFocus, 
+      }, 
+    })
   }, [carouselFocus]);
 
   return (

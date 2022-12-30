@@ -35,6 +35,15 @@ export default function Home({data, defaultLocation }) {
   const [favorites, setFavorites]  = useState([])
   const [showFavorites, setShowFavorites] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
+  // Current API call being used for the data shown and it's criteria. Used to fetch more results for infinite scroll
+  const [currentFetch, setCurrentFetch] = useState({
+    api: '/api/location', 
+    criteria: {
+      searchLocation: defaultLocation,
+      filters: "",
+      propertyType: "", 
+    }, 
+  })
 
   const callRefreshFavorites = () => { refreshFavorites(setFavorites)}
 
@@ -64,19 +73,21 @@ export default function Home({data, defaultLocation }) {
       <main>
         {/*  */}
         <Header 
-          setSearchLocation={setSearchLocation} favorites={favorites} 
+          setSearchLocation={setSearchLocation} favorites={favorites} setCarouselFocus={setCarouselFocus}
           setShowFavorites={setShowFavorites} showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} 
         />
         {/* Carousel / Filter Section */}
         <Category
          carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus} 
          searchLocation={searchLocation} setResults={setResults} setShowFilterModal={setShowFilterModal} 
+         setCurrentFetch={setCurrentFetch}
         />
         {/* Main content */}
         <Content 
           results={results} setResults={setResults} 
           searchLocation={searchLocation} showMap={mapToggle} 
           favorites={favorites} setFavorites={setFavorites}
+          currentFetch={currentFetch} setCurrentFetch={setCurrentFetch}
         />
         {/* Button that controls which content type is shown (List/Map) */}
         <ListMapController isMapActive={mapToggle} toggleMap={setMapToggle} />
@@ -90,6 +101,7 @@ export default function Home({data, defaultLocation }) {
           carouselFocus={carouselFocus} setCarouselFocus={setCarouselFocus}
           results={results} setResults={setResults} 
           searchLocation={searchLocation} setShowFilterModal={setShowFilterModal}
+          setCurrentFetch={setCurrentFetch}
         />
         }
         {/* Login and Signup Modal */}

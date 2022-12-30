@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Filter Modal Options
 import { roomOptions, propertyOptions, typeOfRoom, amenities } from '../../utils/filterModalOptions'
 
-export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults}) {
+export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFilterModal, searchLocation, results, setResults, setCurrentFetch}) {
   // States and controls
   // Min/max price of rooms
   const [minPrice, setMinPrice] = useState(0)
@@ -67,6 +67,11 @@ export default function FilterModal({ carouselFocus, setCarouselFocus, setShowFi
     .then((response) => response.json())
     .then(results => setResults(results))
     .catch((err) => alert(err));
+    // Change api call and criteria for infinite scroll fetch 
+    setCurrentFetch({
+      api: '/api/filter', 
+      criteria: _filters
+    })
   }
   
   return (

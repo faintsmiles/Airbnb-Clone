@@ -11,7 +11,7 @@ import { faBars, faGlobe, faHeart, faMagnifyingGlass  } from '@fortawesome/free-
 import {  faUser } from '@fortawesome/free-regular-svg-icons'
 
 
-export default function Header({ setSearchLocation, favorites, setShowFavorites, setShowLoginModal }) {
+export default function Header({ setSearchLocation, favorites, setShowFavorites, setShowLoginModal, setCarouselFocus }) {
   // Determine if current route is index
   const { asPath } = useRouter()
   const isPathIndex = asPath === '/' ? true : false;

@@ -4,7 +4,6 @@ import { parseFilters, createFilterRequests } from '../../utils/handleFilters'
 export default async function handler(req, res) {
 
   const _filters = parseFilters(JSON.parse(req.body))
-
   const fetchRequests = createFilterRequests(_filters, 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=airbnb-listings&q=')
 
   return Promise.all(fetchRequests)

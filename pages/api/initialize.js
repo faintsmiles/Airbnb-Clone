@@ -3,7 +3,7 @@ const apiURL = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=
 export default async function handler(req, res) {
   // Defaults
   let cityName = "&refine.city=" + "Amsterdam";
-  let countryName = "&refine.country=" + "Netherlands";
+  //let countryName = "&refine.country=" + "Netherlands";
 
   return fetch(apiURL + cityName)
     .then((response) => response.json())

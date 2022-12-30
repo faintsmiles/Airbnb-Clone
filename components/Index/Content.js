@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "./Grid";
 import Map from "../Maps/Map";
 
-export default function Content({ results, setResults, searchLocation, showMap, favorites, setFavorites }) {
+export default function Content({ results, setResults, searchLocation, showMap, favorites, setFavorites, currentFetch, setCurrentFetch }) {
   // Set map center to the first result's location or ~Amsterdam if not available
   const lng = 4.92
   const lat = 52.35
@@ -20,7 +20,7 @@ export default function Content({ results, setResults, searchLocation, showMap, 
       return;
     }
     // Call google.maps.Geocoder for new coords, set new map center, and update results
-    updateResultsByLocation(searchLocation, setCenter, setResults)
+    updateResultsByLocation(searchLocation, setCenter, setResults, setCurrentFetch)
 
   }, [searchLocation]);
 
@@ -46,12 +46,12 @@ export default function Content({ results, setResults, searchLocation, showMap, 
     );
     // Display Grid view
   return (
-    <Grid results={results} favorites={favorites} setFavorites={setFavorites} />
+      <Grid results={results} setResults={setResults} favorites={favorites} setFavorites={setFavorites} currentFetch={currentFetch} />
   );
 }
 
 // User modified location, call geocoder for coords
-function updateResultsByLocation (searchLocation, setCenter, setResults) {
+function updateResultsByLocation (searchLocation, setCenter, setResults, setCurrentFetch) {
   const geocoder = new google.maps.Geocoder();
   // Gets the coordinates for the address inside of search
   geocoder.geocode({ address: searchLocation }, (_results, status) => {
@@ -60,7 +60,7 @@ function updateResultsByLocation (searchLocation, setCenter, setResults) {
       const lng = _results[0].geometry.location.lng();
       setCenter({ lat: lat, lng: lng });
       _results = parseGeocoder(_results);
-      fetchNewResults(_results, setResults);
+      fetchNewResults(_results, setResults, setCurrentFetch);
     } else {
       alert("Geocode returned with the following error: " + status);
     }
@@ -75,16 +75,15 @@ function parseGeocoder (results) {
       tempCountryHelper = element.long_name;
   });
   //removes leading/trailing whitespaces and then replaces remaining whitespaces with '+' symbol
+  let city = tempCityHelper[0].trim().replace(/\s/g, "+")
+  let country = tempCountryHelper ? tempCountryHelper.trim().replace(/\s/g, "+") : tempCityHelper[tempHelper.length - 1].trim().replace(/\s/g, "+")
   const body = {
-    city: tempCityHelper[0].trim().replace(/\s/g, "+"),
-    country: tempCountryHelper
-      ? tempCountryHelper.trim().replace(/\s/g, "+")
-      : tempCityHelper[tempHelper.length - 1].trim().replace(/\s/g, "+"),
+    searchLocation: city + ', ' + country
   };
   return body;
 };
 // Update listing data
-function fetchNewResults (body, setResults) {
+function fetchNewResults (body, setResults, setCurrentFetch) {
   fetch("/api/location", {
     method: "POST",
     body: JSON.stringify(body),
@@ -96,4 +95,13 @@ function fetchNewResults (body, setResults) {
         "There was a problem getting listing data. Please try again, or change destination"
       )
     );
+    // Change api call and criteria for infinite scroll fetch 
+    setCurrentFetch({
+      api: '/api/location', 
+      criteria: {
+        searchLocation: body.searchLocation,
+        filters: "",
+        propertyType: "", 
+      }, 
+    })
 };
