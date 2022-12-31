@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/runtime": "^7.20.7",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
@@ -16,19 +17,32 @@
     "@react-google-maps/api": "^2.12.2",
     "@tailwindcss/line-clamp": "^0.4.2",
     "axios": "^0.27.2",
+    "babel": "^6.23.0",
     "next": "12.2.5",
     "react": "^18.2.0",
     "react-dates": "^21.8.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "sharp": "^0.30.7",
+    "tsconfig-paths": "^4.1.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
-    "eslint": "8.22.0",
-    "eslint-config-next": "^12.0.4",
+    "eslint": "^8.30.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
-  }
+  },
+  "description": "Airbnb Clone built with [NextJS](https://nextjs.org/), [TailwindCSS](https://tailwindcss.com/), and [Google Maps Platform](https://mapsplatform.google.com/).  <br />  Listing data provided by [Opendatasoft](https://opendatasoft.com/) <br/>",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FaintSmiles/Airbnb-Clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FaintSmiles/Airbnb-Clone/issues"
+  },
+  "homepage": "https://github.com/FaintSmiles/Airbnb-Clone#readme"
 }
