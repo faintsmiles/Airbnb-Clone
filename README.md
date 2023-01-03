@@ -4,6 +4,10 @@ Airbnb Clone built with [NextJS](https://nextjs.org/), [TailwindCSS](https://tai
 Listing data provided by [Opendatasoft](https://opendatasoft.com/)
 <br/>
 
+## Showcase 
+
+https://airbnb-clone-faintsmiles.vercel.app/
+
 ## Getting Started
 
 Clone project
@@ -27,7 +31,8 @@ or
 ```bash
 yarn dev
 ```
-Navigate to ```localhost:3000```
+Navigate to 
+```http://localhost:3000```
 <br />
 
 # Tech Stack 
